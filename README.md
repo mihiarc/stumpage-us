@@ -1,36 +1,86 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# US Timber Prices — stumpage.us frontend
 
-## Getting Started
+A public catalog and explorer of US stumpage and delivered timber prices from
+public sources — the community successor to the retired USDA Forest Service SRS
+[Timber Price Information and Contacts](https://www.srs.fs.usda.gov/econ/timberprices/)
+site.
 
-First, run the development server:
+Three pillars:
+
+1. **Price explorer** (`/explore`) — filter and chart ~49.5k harmonized price
+   records (3.5k series, 1959→present) from six public datasets.
+2. **Directory** (`/directory`) — every US price reporting service we know of,
+   with liveness + data-provenance flags (including which "free" reports are
+   licensed TimberMart-South redistributions).
+3. **Bulk downloads** (`/data`) — the full dataset as Parquet / CSV with a data
+   dictionary and per-record source attribution.
+
+## Stack
+
+Next.js (App Router, **static export** — no server), TypeScript, Tailwind +
+shadcn/radix, visx charts, MapLibre map, nuqs URL state. Package manager: bun.
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+bun install
+bun run dev     # dev server
+bun run build   # static export -> out/
+bun run lint
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Serve `out/` from any static host (Netlify, GitHub Pages, …).
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+## Data pipeline
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+All data under `public/data/` is **generated** — never edit it by hand. It is
+exported from the private [`mihiarc/timber-prices`](https://github.com/mihiarc/timber-prices)
+dbt-duckdb project, whose `v_public_prices` view is the license-clean surface
+(licensed TimberMart-South/North rows are excluded by construction and proven
+by a dbt test + an allowlist gate in the export script).
 
-## Learn More
+### Quarterly refresh runbook
 
-To learn more about Next.js, take a look at the following resources:
+```bash
+cd ~/Github/mihiarc/data/timber-prices
+uv run python scripts/etl_usfs_cutsold.py     # + any other source refreshes
+uv run python scripts/export_public.py        # runs dbt build (tests) first
+cp -r export/* ~/Github/mihiarc/frontend/frontend-stumpage-us/public/data/
+cd ~/Github/mihiarc/frontend/frontend-stumpage-us
+bun run build                                  # sanity-check the export
+git add public/data && git commit -m "data: refresh public export"
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+`public/data/manifest.json` records the build timestamp and row counts.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Artifact layout
 
-## Deploy on Vercel
+| File | Purpose |
+|---|---|
+| `public_prices.parquet`, `public_prices.csv.gz` | full bulk downloads |
+| `series_index.json` | one entry per series (the explorer's index) |
+| `prices/{source}.json` | per-source record chunks, lazy-loaded for charts |
+| `latest_by_state.json`, `annual_by_state.json` | state-level pre-aggregates |
+| `dims.json`, `manifest.json`, `data_dictionary.md` | metadata & docs |
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+`public/geo/us-states.json` is a slimmed Census 20m states GeoJSON (lon/lat,
+3-decimal coords) for the MapLibre map.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+## Content
+
+- `src/content/directory.ts` — the state-by-state directory (seeded from the
+  timber-prices repo's `docs/PUBLIC_SOURCE_CATALOGUE.md`, web-verified
+  2026-06-25). Update entries there; each carries status + provenance.
+- `src/content/source-notes.ts` / `source-links.ts` — per-dataset method notes
+  and official links shown on `/sources/*`.
+
+## Deliberate design points
+
+- **Geography is not state-only.** Series exist at state, sub-state (MI FMU,
+  OR district, MT land office), USFS-region, national-forest, and multi-state
+  grains. `src/lib/geo.ts` maps USFS regions / multi-state regions to member
+  states; **national-forest series are not attributed to states** (no
+  forest→state map yet — they're browsable via their USFS region instead).
+- **Licensed data never enters this repo.** Only run the export script to
+  update data; it hard-fails on any non-allowlisted source.
+- Charts follow the dataviz-method specs (validated palette in `globals.css`
+  `--viz-*` tokens, both themes; crosshair tooltip; harmonized $/ton with a
+  published-unit toggle).
