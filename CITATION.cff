@@ -1,0 +1,27 @@
+cff-version: 1.2.0
+message: >-
+  If you use this dataset, please cite it as below, and credit the original
+  publishing agency (carried on every record as source_name) for any specific
+  price you quote.
+title: "US public timber stumpage & delivered price data (stumpage.us)"
+type: dataset
+authors:
+  - family-names: Mihiar
+    given-names: Chris
+repository-code: "https://github.com/mihiarc/stumpage-us"
+url: "https://mihiarc.github.io/stumpage-us/"
+license: CC-BY-4.0
+abstract: >-
+  A harmonized, license-clean compilation of US timber price observations
+  (stumpage and delivered) from six independent public sources — USFS
+  Cut-and-Sold reports, the USFS PNW Research Station PPET series, Michigan
+  DNR state-forest sales, Oregon ODF state-forest auctions, Montana DNRC
+  trust-land sales, and the University of Montana BBER delivered-price
+  survey — 1959–present, carried losslessly in published units with cited,
+  scale-explicit conversions to dollars per green ton, and machine-readable
+  expert caveats (candor blocks) per source.
+keywords:
+  - timber prices
+  - stumpage
+  - forest economics
+  - open data

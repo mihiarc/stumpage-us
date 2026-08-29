@@ -32,6 +32,7 @@ import {
   MARKET_LABELS,
 } from "@/lib/format";
 import { REGION_TYPE_LABELS, STATE_NAMES, seriesStates } from "@/lib/geo";
+import { asset } from "@/lib/asset";
 
 const MAX_PLOTTED = 5;
 const ALL = "all";
@@ -44,7 +45,7 @@ function loadChunk(source: string): Promise<PriceChunk> {
   if (!chunkCache.has(source)) {
     chunkCache.set(
       source,
-      fetch(`/data/prices/${source}.json`).then((r) => {
+      fetch(asset(`/data/prices/${source}.json`)).then((r) => {
         if (!r.ok) throw new Error(`failed to load ${source}`);
         return r.json();
       }),
@@ -56,8 +57,8 @@ function loadChunk(source: string): Promise<PriceChunk> {
 function loadIndex() {
   if (!indexCache) {
     indexCache = Promise.all([
-      fetch("/data/series_index.json").then((r) => r.json()),
-      fetch("/data/dims.json").then((r) => r.json()),
+      fetch(asset("/data/series_index.json")).then((r) => r.json()),
+      fetch(asset("/data/dims.json")).then((r) => r.json()),
     ]).then(([index, dims]) => ({ index, dims }));
   }
   return indexCache;

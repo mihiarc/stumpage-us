@@ -29,6 +29,21 @@ bun run lint
 
 Serve `out/` from any static host (Netlify, GitHub Pages, …).
 
+## Deployment
+
+Pushes to `main` deploy to GitHub Pages via `.github/workflows/deploy.yml`
+(live at <https://mihiarc.github.io/stumpage-us/>). The workflow builds with
+`NEXT_PUBLIC_BASE_PATH=/stumpage-us`, which sets Next's `basePath` and the
+`asset()` helper prefix — when the `stumpage.us` custom domain is attached,
+remove that env var from the workflow and redeploy.
+
+## Licenses
+
+- **Code:** MIT (`LICENSE`).
+- **Data** (`public/data/`): CC BY 4.0 (`LICENSE-DATA.md`); cite per
+  `CITATION.cff` and credit the original publishing agency for specific
+  prices.
+
 ## Data pipeline
 
 All data under `public/data/` is **generated** — never edit it by hand. It is
@@ -43,8 +58,8 @@ by a dbt test + an allowlist gate in the export script).
 cd ~/Github/mihiarc/data/timber-prices
 uv run python scripts/etl_usfs_cutsold.py     # + any other source refreshes
 uv run python scripts/export_public.py        # runs dbt build (tests) first
-cp -r export/* ~/Github/mihiarc/frontend/frontend-stumpage-us/public/data/
-cd ~/Github/mihiarc/frontend/frontend-stumpage-us
+cp -r export/* ~/Github/mihiarc/frontend/stumpage-us/public/data/
+cd ~/Github/mihiarc/frontend/stumpage-us
 bun run build                                  # sanity-check the export
 git add public/data && git commit -m "data: refresh public export"
 ```
@@ -60,6 +75,7 @@ git add public/data && git commit -m "data: refresh public export"
 | `prices/{source}.json` | per-source record chunks, lazy-loaded for charts |
 | `latest_by_state.json`, `annual_by_state.json` | state-level pre-aggregates |
 | `dims.json`, `manifest.json`, `data_dictionary.md` | metadata & docs |
+| `candor.json` | machine-readable expert caveats per source (CANDID-core five-categories blocks), rendered on `/sources/*` |
 
 `public/geo/us-states.json` is a slimmed Census 20m states GeoJSON (lon/lat,
 3-decimal coords) for the MapLibre map.

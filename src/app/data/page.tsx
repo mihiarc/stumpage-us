@@ -4,6 +4,7 @@ import { Download, FileText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getManifest } from "@/lib/data";
+import { asset } from "@/lib/asset";
 
 export const metadata: Metadata = {
   title: "Download the data",
@@ -52,7 +53,7 @@ export default function DataPage() {
               pandas, polars, R (arrow).
             </p>
             <Button asChild size="sm">
-              <a href="/data/public_prices.parquet" download>
+              <a href={asset("/data/public_prices.parquet")} download>
                 <Download className="mr-1 size-4" /> public_prices.parquet
               </a>
             </Button>
@@ -68,7 +69,7 @@ export default function DataPage() {
               compressed).
             </p>
             <Button asChild size="sm">
-              <a href="/data/public_prices.csv.gz" download>
+              <a href={asset("/data/public_prices.csv.gz")} download>
                 <Download className="mr-1 size-4" /> public_prices.csv.gz
               </a>
             </Button>
@@ -78,16 +79,23 @@ export default function DataPage() {
 
       <div className="mt-4 flex flex-wrap gap-3 text-sm">
         <a
-          href="/data/data_dictionary.md"
+          href={asset("/data/data_dictionary.md")}
           className="inline-flex items-center gap-1 underline underline-offset-2"
         >
           <FileText className="size-4" /> Full data dictionary (markdown)
         </a>
         <a
-          href="/data/manifest.json"
+          href={asset("/data/manifest.json")}
           className="inline-flex items-center gap-1 underline underline-offset-2"
         >
           <FileText className="size-4" /> Build manifest (JSON)
+        </a>
+        <a
+          href={asset("/data/candor.json")}
+          className="inline-flex items-center gap-1 underline underline-offset-2"
+        >
+          <FileText className="size-4" /> Candor blocks — machine-readable
+          caveats (JSON)
         </a>
       </div>
 
@@ -113,6 +121,30 @@ export default function DataPage() {
         <h2 className="text-lg font-semibold text-foreground">
           Terms & attribution
         </h2>
+        <p>
+          The compiled dataset is licensed under{" "}
+          <a
+            href="https://creativecommons.org/licenses/by/4.0/"
+            className="underline underline-offset-2 text-foreground"
+          >
+            CC&nbsp;BY&nbsp;4.0
+          </a>
+          {" "}— free to share and adapt with attribution. See{" "}
+          <a
+            href="https://github.com/mihiarc/stumpage-us/blob/main/LICENSE-DATA.md"
+            className="underline underline-offset-2 text-foreground"
+          >
+            LICENSE-DATA
+          </a>{" "}
+          and{" "}
+          <a
+            href="https://github.com/mihiarc/stumpage-us/blob/main/CITATION.cff"
+            className="underline underline-offset-2 text-foreground"
+          >
+            CITATION.cff
+          </a>
+          .
+        </p>
         <p>{manifest.license_note}</p>
         <p>
           Suggested citation: cite the <em>original publishing agency</em> for

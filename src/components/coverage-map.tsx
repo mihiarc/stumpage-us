@@ -10,6 +10,7 @@ import { useTheme } from "next-themes";
 import Map, { Layer, Source, type MapLayerMouseEvent } from "react-map-gl/maplibre";
 import type { ExpressionSpecification } from "maplibre-gl";
 import { FIPS_TO_USPS } from "@/lib/geo";
+import { asset } from "@/lib/asset";
 import "maplibre-gl/dist/maplibre-gl.css";
 
 export interface StateCoverage {
@@ -107,7 +108,7 @@ export function CoverageMap({ coverage, height = 420 }: CoverageMapProps) {
         }}
         style={{ width: "100%", height: "100%", background: "transparent" }}
       >
-        <Source id="states" type="geojson" data="/geo/us-states.json">
+        <Source id="states" type="geojson" data={asset("/geo/us-states.json")}>
           <Layer
             id="states-fill"
             type="fill"
