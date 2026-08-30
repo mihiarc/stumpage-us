@@ -3,7 +3,7 @@
   "description": "Who publishes US timber prices, state by state, how current each report is and whose data it is — joined against the price series actually present in the stumpage.us dataset. Includes states searched with no source found, recorded as a positive finding.",
   "format_version": 1,
   "version": "2026-08-30+data.2026-07-06",
-  "generated_at": "2026-08-30T17:14:19.380Z",
+  "generated_at": "2026-08-30T17:17:20.149Z",
   "directory_as_of": "2026-08-30",
   "directory_floor_verified": "2026-06-25",
   "prices_built_at": "2026-07-06T13:19:40+00:00",

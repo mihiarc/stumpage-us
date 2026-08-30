@@ -4,6 +4,7 @@
 import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import type { Dims, Manifest, LatestByState, AnnualByState, SeriesIndex } from "./types";
+import type { CoverageRecord } from "./coverage-record";
 
 // Candor blocks: machine-readable expert caveats per source (plus a
 // dataset-level block), following the five CANDID-core categories. Authored
@@ -34,6 +35,9 @@ export interface CandorFile {
 }
 
 const DATA_DIR = join(process.cwd(), "public", "data");
+// Generated in this repo by scripts/export-coverage.ts, unlike public/data/
+// which comes from upstream. `bun run build` regenerates it before next build.
+const COVERAGE_DIR = join(process.cwd(), "public", "coverage");
 
 function readJson<T>(name: string): T {
   return JSON.parse(readFileSync(join(DATA_DIR, name), "utf-8")) as T;
@@ -46,6 +50,7 @@ const cache: {
   latestByState?: LatestByState;
   annualByState?: AnnualByState;
   candor?: CandorFile;
+  coverage?: CoverageRecord;
 } = {};
 
 export function getDims(): Dims {
@@ -70,4 +75,10 @@ export function getAnnualByState(): AnnualByState {
 
 export function getCandor(): CandorFile {
   return (cache.candor ??= readJson<CandorFile>("candor.json"));
+}
+
+export function getCoverage(): CoverageRecord {
+  return (cache.coverage ??= JSON.parse(
+    readFileSync(join(COVERAGE_DIR, "coverage.json"), "utf-8"),
+  ) as CoverageRecord);
 }

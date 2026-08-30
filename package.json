@@ -4,7 +4,7 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
-    "build": "next build",
+    "build": "bun run export:coverage && next build",
     "start": "next start",
     "lint": "eslint",
     "export:coverage": "bun run scripts/export-coverage.ts"

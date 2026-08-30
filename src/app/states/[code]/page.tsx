@@ -29,10 +29,13 @@ interface Params {
 }
 
 export function generateStaticParams(): Params[] {
-  // pages for every state with data coverage OR a directory entry
+  // A page for every state with price coverage, a directory entry, or a
+  // research record. The last case is the point: a state we searched and found
+  // nothing in still gets a page, because "we looked, there is nothing" is an
+  // answer and a 404 is not. /coverage links every state here.
   const covered = new Set(getCoveredStates());
   for (const st of Object.keys(STATE_NAMES)) {
-    if (directoryForState(st).length > 0) covered.add(st);
+    if (directoryForState(st).length > 0 || researchForState(st)) covered.add(st);
   }
   return [...covered].sort().map((code) => ({ code: code.toLowerCase() }));
 }

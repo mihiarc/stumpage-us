@@ -28,6 +28,12 @@ import {
   type EntryStatus,
   type Provenance,
 } from "../src/content/directory";
+import type {
+  CoverageRecord,
+  CoverageSource,
+  CoverageStateRecord,
+  Evidence,
+} from "../src/lib/coverage-record";
 import { getManifest, getSeriesIndex } from "../src/lib/data";
 import { STATE_NAMES, seriesStates } from "../src/lib/geo";
 import type { Series } from "../src/lib/types";
@@ -35,43 +41,7 @@ import type { Series } from "../src/lib/types";
 const OUT_DIR = join(process.cwd(), "public", "coverage");
 const FORMAT_VERSION = 1;
 
-/** How well the price dataset actually speaks to a given state. */
-type Evidence = "state-series" | "regional-only" | "none";
-
-interface StateRecord {
-  state: string;
-  state_name: string;
-  research: {
-    searched: string | null;
-    outcome: "found" | "none-known" | "not-searched";
-    checked: string[];
-    note: string | null;
-  };
-  directory: {
-    entries: number;
-    by_status: Record<EntryStatus, number>;
-    by_provenance: Record<Provenance, number>;
-    /** A live report the state itself can be cited for, not a TMS reprint. */
-    has_live_independent: boolean;
-    has_live_any: boolean;
-    last_verified: string | null;
-    sources: ReturnType<typeof serializeEntry>[];
-  };
-  prices: {
-    evidence: Evidence;
-    series: number;
-    series_direct: number;
-    series_regional: number;
-    observations: number;
-    year_min: number | null;
-    year_max: number | null;
-    sources: string[];
-    products: string[];
-    markets: string[];
-  };
-}
-
-function serializeEntry(e: DirectoryEntry) {
+function serializeEntry(e: DirectoryEntry): CoverageSource {
   return {
     org: e.org,
     report: e.report,
@@ -102,7 +72,10 @@ function uniqSorted(xs: string[]): string[] {
   return [...new Set(xs)].sort();
 }
 
-function buildStateRecord(state: string, seriesByState: Map<string, Series[]>): StateRecord {
+function buildStateRecord(
+  state: string,
+  seriesByState: Map<string, Series[]>,
+): CoverageStateRecord {
   const entries = DIRECTORY.filter((e) => e.state === state);
   const research = STATE_RESEARCH.find((r) => r.state === state);
   const series = seriesByState.get(state) ?? [];
@@ -191,7 +164,7 @@ function main() {
 
   const nationalEntries = DIRECTORY.filter((e) => e.state === "US" || e.state === "INTL");
 
-  const record = {
+  const record: CoverageRecord = {
     name: "US timber price coverage record",
     description:
       "Who publishes US timber prices, state by state, how current each report is and whose data it is — joined against the price series actually present in the stumpage.us dataset. Includes states searched with no source found, recorded as a positive finding.",
