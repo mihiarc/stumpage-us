@@ -131,8 +131,13 @@ Designed for desk and phone simultaneously, not reflowed afterward.
 - [ ] Regional unit leads; $/ton one click away with the conversion and its source
 - [ ] Home: map plus a search field
 - [ ] Place pages rebuilt around the ladder
-- [ ] Per-series pages, linked from each rung — the historical register's new home
-- [ ] **Delete the explorer** — only after series pages ship (see risk below)
+- [x] Per-series pages — the historical register's new home. All 3,490 series
+      have a permalink at `/series/[id]`, linked from the `/states/[code]` and
+      `/sources/[code]` tables. Built on the build-time data path, not the
+      explorer's chunk fetch. They will link from each rung once the ladder
+      exists; the ladder is blocked on data, these were not.
+- [ ] **Delete the explorer** — series pages have now shipped, so the
+      prerequisite is met, but look at them together before pulling it
 
 > **Gate:** a forester reaches their full ladder in two clicks from home, on
 > either device.
@@ -166,8 +171,11 @@ The phase most likely to overrun, which is why it sits third.
 - [ ] Caveat pass across all sources against the candor blocks
 - [ ] Contribution form that reaches the maintainer — no accounts, no moderation
       queue, no infrastructure
-- [ ] Automated link-rot check for directory liveness (not a quarterly promise to
-      re-read 44 entries)
+- [x] Automated link-rot check for directory liveness (not a quarterly promise to
+      re-read 44 entries). `scripts/check-links.ts` plus a monthly workflow,
+      classifying three ways — `ok` / `unverifiable` / `dead` — because two of
+      six sampled *live* sites refuse robots outright. Reports into one issue,
+      never fails, never writes to `status` or `verified`.
 - [ ] Accessibility pass; mobile verified rather than retrofitted
 
 > **Gate:** every number can be traced, cited and exported, and anyone can report
@@ -227,6 +235,17 @@ Designed in v1.0, inert until the export carries what they need.
   estimates plus asset managers means figures that end up in valuation marks.
   The resolved-place line, evidence chip, range and citation are what make that
   safe to ship. They are not overhead.
+- **Static-export size.** Series pages took the export from 68 pages / 25 MB to
+  3,558 pages / 518 MB apparent (657 MB on disk, 66 MB as the gzipped Pages
+  artifact, 32,050 files). Build time is a non-issue — 5s to 11s locally — but
+  GitHub Pages caps a published site at 1 GB, and the pending 8-source refresh
+  takes 3,490 series to 4,945, projecting ~730 MB. It fits; it does not fit
+  twice. About 37% of the bytes are Next's per-route RSC segment prefetch
+  files, which are emitted per route with no config to suppress them
+  (`experimental.cachedNavigations: false` was tested and has no effect on
+  16.2.10). Watch this at the next refresh; the lever if it is ever needed is
+  page content, not page count.
+
 - **Maintenance arithmetic.** Unfunded, one maintainer, already carrying a
   quarterly refresh, directory re-verification, per-source candor notes and now an
   inbound form.
