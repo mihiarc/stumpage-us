@@ -1242,7 +1242,7 @@
             "latest_known": "Timber Tales Vol. 26 No. 1 (2026)",
             "verified": "2026-08-30",
             "in_dataset": null,
-            "notes": "Statewide averages for six products, with the quarter compared against the South-wide average. Free to read, but licensed data: “The sawtimber and pulpwood price data included in this newsletter are published with permission from TimberMart-South Athens, Georgia.” For license-clean Louisiana prices use the LDAF quarterly instead. Verified from the publisher’s index rather than a direct fetch, which failed on a TLS chain error."
+            "notes": "Statewide averages for six products, with the quarter compared against the South-wide average. Free to read, but licensed data: “The sawtimber and pulpwood price data included in this newsletter are published with permission from TimberMart-South Athens, Georgia.” For license-clean Louisiana prices use the LDAF quarterly instead."
           }
         ]
       },

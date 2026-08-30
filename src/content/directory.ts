@@ -237,7 +237,7 @@ export const DIRECTORY: DirectoryEntry[] = [
     frequency: "Quarterly",
     units: "$/ton",
     notes:
-      "Statewide averages for six products, with the quarter compared against the South-wide average. Free to read, but licensed data: \u201cThe sawtimber and pulpwood price data included in this newsletter are published with permission from TimberMart-South Athens, Georgia.\u201d For license-clean Louisiana prices use the LDAF quarterly instead. Verified from the publisher\u2019s index rather than a direct fetch, which failed on a TLS chain error.",
+      "Statewide averages for six products, with the quarter compared against the South-wide average. Free to read, but licensed data: \u201cThe sawtimber and pulpwood price data included in this newsletter are published with permission from TimberMart-South Athens, Georgia.\u201d For license-clean Louisiana prices use the LDAF quarterly instead.",
     latestKnown: "Timber Tales Vol. 26 No. 1 (2026)",
     verified: "2026-08-30",
   },
