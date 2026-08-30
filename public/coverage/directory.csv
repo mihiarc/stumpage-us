@@ -1,7 +1,7 @@
 state,org,report,url,status,provenance,frequency,units,latest_known,verified,in_dataset
 US,USDA Forest Service,"Cut-and-Sold reports (National Forest timber sales, all 9 regions)",https://www.fs.usda.gov/forestmanagement/products/cut-sold/,live,independent,Quarterly,$/MBF (derived value ÷ volume),,2026-06-25,usfs_cutsold
 US,USDA Forest Service PNW Research Station,"Production, Prices, Employment & Trade in NW Forest Industries (1958–2023)",https://research.fs.usda.gov/pnw/products/dataandtools/tools/production-prices-employment-and-trade-northwest-forest-industries-all,live,independent,Annual,$/MBF Scribner,,2026-06-25,pnw
-US,USDA Forest Service Southern Research Station,Timber Price Information and Contacts (Forest Economics & Policy),https://research.fs.usda.gov/srs/centers/fep,live,independent,,,,2026-08-30,
+US,USDA Forest Service Southern Research Station,Timber Price Information and Contacts (Forest Economics & Policy),https://research.fs.usda.gov/srs/centers/fep,stale,independent,,,,2026-08-30,
 US,ResourceWise (Forest2Market),Stumpage 360 / TimberMart-South commercial services,https://www.resourcewise.com/timber-prices/stumpage-prices,paywalled,commercial,,,,2026-06-25,
 TX,Texas A&M Forest Service,Timber Price Trends,https://tfsweb.tamu.edu/forest-land/forest-industry-economics/timber-price-trends/,live,independent,Bimonthly,$/ton and $/MBF Doyle,Nov–Dec 2025,2026-06-25,
 GA,Georgia Department of Revenue,Owner Harvest Timber Values,https://dor.georgia.gov/local-government-services/digest-compliance/owner-harvest-timber-values,live,independent,Annual,$/ton (weighted average of actual sale filings),2026,2026-06-25,

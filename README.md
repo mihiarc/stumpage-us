@@ -50,13 +50,16 @@ Pushes to `main` deploy to GitHub Pages via `.github/workflows/deploy.yml`
 regenerated from `src/content/directory.ts` before the site is built. Never
 commit a hand-edited file there.
 
-### Attaching the stumpage.us domain
+### Attaching the stumpage.us domain (deferred)
 
-Checked 2026-08-30: `stumpage.us` has **no DNS records at all** — no A, no
-CNAME. Until that changes, doing any of the steps below takes the live site
-down, because the basePath and the domain have to move together.
+**The site stays on <https://mihiarc.github.io/stumpage-us/> for now.** The
+custom domain is not being pursued this phase; `stumpage.us` had no DNS records
+at all when checked on 2026-08-30. Anything citing the site should cite the
+github.io URL.
 
-Do them in this order, in one commit, once `dig +short stumpage.us` returns the
+Kept here because the flip is easy to get wrong: the basePath and the domain
+have to move in the same commit, or every raw asset URL 404s. When you do want
+it, do these in order, in one commit, once `dig +short stumpage.us` returns the
 four GitHub Pages A records:
 
 1. At the registrar, point the apex at GitHub Pages

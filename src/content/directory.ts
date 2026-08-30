@@ -82,10 +82,10 @@ export const DIRECTORY: DirectoryEntry[] = [
     org: "USDA Forest Service Southern Research Station",
     report: "Timber Price Information and Contacts (Forest Economics & Policy)",
     url: "https://research.fs.usda.gov/srs/centers/fep",
-    status: "live",
+    status: "stale",
     provenance: "independent",
     notes:
-      "Not dead — relocated. The directory moved from srs.fs.usda.gov/econ/timberprices to research.fs.usda.gov and carries a per-state page for all 50 states (/srs/centers/fep/timber{xx}); index last updated 2025-06-02. Mostly agency contacts rather than prices: of the 13 states we swept through it, only Nebraska and Maryland/Delaware named a price report. Carries a federal website-review notice effective 2025-05-30, so these URLs may move again.",
+      "Relocated but not maintained. The directory moved from srs.fs.usda.gov/econ/timberprices to research.fs.usda.gov, where it still carries a per-state page for all 50 states (/srs/centers/fep/timber{xx}) with an index date of 2025-06-02 and several state pages dated 2024-08-13. The dates overstate it: of the 13 states we swept through it, 11 listed only agency phone contacts and no price report at all, and its Maryland page still presents UMD Extension as a Maryland price source when that page publishes no Maryland prices and links out of state. Useful for finding a state forester; not reliable for finding out who reports prices. A federal website-review notice effective 2025-05-30 means these URLs may move again.",
     verified: "2026-08-30",
   },
   {

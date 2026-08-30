@@ -3,7 +3,7 @@
   "description": "Who publishes US timber prices, state by state, how current each report is and whose data it is — joined against the price series actually present in the stumpage.us dataset. Includes states searched with no source found, recorded as a positive finding.",
   "format_version": 1,
   "version": "2026-08-30+data.2026-07-06",
-  "generated_at": "2026-08-30T17:25:27.457Z",
+  "generated_at": "2026-08-30T17:31:17.309Z",
   "directory_as_of": "2026-08-30",
   "directory_floor_verified": "2026-06-25",
   "prices_built_at": "2026-07-06T13:19:40+00:00",
@@ -52,8 +52,8 @@
     },
     "directory_entries": 50,
     "directory_entries_by_status": {
-      "live": 39,
-      "stale": 6,
+      "live": 38,
+      "stale": 7,
       "dead": 3,
       "paywalled": 2,
       "unverified": 0
@@ -103,14 +103,14 @@
       "org": "USDA Forest Service Southern Research Station",
       "report": "Timber Price Information and Contacts (Forest Economics & Policy)",
       "url": "https://research.fs.usda.gov/srs/centers/fep",
-      "status": "live",
+      "status": "stale",
       "provenance": "independent",
       "frequency": null,
       "units": null,
       "latest_known": null,
       "verified": "2026-08-30",
       "in_dataset": null,
-      "notes": "Not dead — relocated. The directory moved from srs.fs.usda.gov/econ/timberprices to research.fs.usda.gov and carries a per-state page for all 50 states (/srs/centers/fep/timber{xx}); index last updated 2025-06-02. Mostly agency contacts rather than prices: of the 13 states we swept through it, only Nebraska and Maryland/Delaware named a price report. Carries a federal website-review notice effective 2025-05-30, so these URLs may move again."
+      "notes": "Relocated but not maintained. The directory moved from srs.fs.usda.gov/econ/timberprices to research.fs.usda.gov, where it still carries a per-state page for all 50 states (/srs/centers/fep/timber{xx}) with an index date of 2025-06-02 and several state pages dated 2024-08-13. The dates overstate it: of the 13 states we swept through it, 11 listed only agency phone contacts and no price report at all, and its Maryland page still presents UMD Extension as a Maryland price source when that page publishes no Maryland prices and links out of state. Useful for finding a state forester; not reliable for finding out who reports prices. A federal website-review notice effective 2025-05-30 means these URLs may move again."
     },
     {
       "scope": "US",
