@@ -28,12 +28,14 @@ export default function DirectoryPage() {
         Timber price report directory
       </h1>
       <p className="mt-1 max-w-3xl text-sm text-muted-foreground">
-        Every price reporting service we know of, with two flags the legacy SRS
-        directory never had: whether the report is still <em>alive</em>, and
-        whose data it actually is. Several &ldquo;free&rdquo; state reports are
+        Every price reporting service we can find, with two flags that are
+        usually missing: whether the report is still <em>alive</em>, and whose
+        data it actually is. Several &ldquo;free&rdquo; state reports are
         licensed <strong>TimberMart-South redistributions</strong> — fine to
         read, but the numbers are copyrighted survey data, not public data.
-        Verified {DIRECTORY_VERIFIED_DATE}; corrections welcome.
+        Entries were checked at least as recently as{" "}
+        {DIRECTORY_VERIFIED_DATE}; many carry a later date of their own.
+        Corrections welcome.
       </p>
       <nav className="my-6 flex flex-wrap gap-1.5 text-sm">
         {states.map((st) => (
@@ -84,15 +86,14 @@ export default function DirectoryPage() {
       </section>
 
       <p className="text-xs text-muted-foreground">
-        States not listed here have no price reporting service we know of; the{" "}
-        <a
-          href="https://www.srs.fs.usda.gov/econ/timberprices/data.php"
-          className="underline underline-offset-2"
-        >
-          archived SRS directory
-        </a>{" "}
-        still lists general forestry contacts for every state. This directory
-        makes no representation as to the quality of any listed service.
+        A state missing from this page is not a claim that nothing exists
+        there. See the{" "}
+        <Link href="/coverage" className="underline underline-offset-2">
+          coverage record
+        </Link>{" "}
+        for which states we have actually searched, which we searched and found
+        nothing in, and which we have not yet reached. This directory makes no
+        representation as to the quality of any listed service.
       </p>
     </div>
   );

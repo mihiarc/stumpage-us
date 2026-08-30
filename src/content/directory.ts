@@ -1,11 +1,18 @@
-// The state-by-state directory of timber price reporting services — the
-// modern replacement for the legacy USDA SRS "Timber Price Information and
-// Contacts" pages. Seeded from the web-verified source inventory in the
+// The state-by-state catalogue of US timber price reporting services: who
+// publishes prices, whether the report is still alive, and whose data it
+// actually is. Seeded from the web-verified source inventory in the
 // timber-prices repo (docs/PUBLIC_SOURCE_CATALOGUE.md, verified 2026-06-25).
 //
-// `provenance` is the column the old site never had: many "free" state price
-// reports are licensed TimberMart-South redistributions — free to read, but
-// the numbers are copyrighted survey data, not public data.
+// `provenance` is the column that makes the catalogue usable: many "free"
+// state price reports are licensed TimberMart-South redistributions — free to
+// read, but the numbers are copyrighted survey data, not public data.
+//
+// Two exports, and the distinction between them is the point. DIRECTORY
+// records organizations. STATE_RESEARCH records the *sweep* — including
+// states searched with nothing found, which a per-organization list
+// structurally cannot express. A state absent from STATE_RESEARCH has not
+// been searched, which is a different claim from having been searched and
+// found empty. Conflating the two is what makes a coverage figure unciteable.
 
 export type EntryStatus = "live" | "stale" | "dead" | "paywalled" | "unverified";
 export type Provenance =
@@ -27,9 +34,21 @@ export interface DirectoryEntry {
   notes?: string;
   latestKnown?: string; // most recent issue seen when last verified
   inDataset?: string; // source_code if integrated into our dataset
+  verified?: string; // ISO date this entry was last individually re-checked
 }
 
+/**
+ * Floor date for the catalogue: every entry was checked at least this recently.
+ * Per-entry `verified` overrides it. Bump this only when *all* entries have
+ * been re-swept — otherwise it asserts something false about the ones that
+ * weren't. Use `entryVerified()` rather than reading either value directly.
+ */
 export const DIRECTORY_VERIFIED_DATE = "2026-06-25";
+
+/** The date an entry was last checked: its own, else the catalogue floor. */
+export function entryVerified(e: DirectoryEntry): string {
+  return e.verified ?? DIRECTORY_VERIFIED_DATE;
+}
 
 export const DIRECTORY: DirectoryEntry[] = [
   // ---- National ----
@@ -537,6 +556,24 @@ export function directoryForState(code: string): DirectoryEntry[] {
   return DIRECTORY.filter((e) => e.state === code);
 }
 
-export function legacySrsUrl(code: string): string {
-  return `https://www.srs.fs.usda.gov/econ/timberprices/data.php?location=${code}`;
+/**
+ * The research log: one record per place we have actually searched.
+ *
+ * `outcome: "none-known"` is a positive finding — we looked and found no
+ * public price source — and is only defensible because `checked` lists what
+ * was looked at. A place with no record here has not been searched at all;
+ * do not infer absence from a missing record.
+ */
+export interface StateResearch {
+  state: string | "US" | "INTL";
+  searched: string; // ISO date of the sweep
+  outcome: "found" | "none-known";
+  checked?: string[]; // organizations/sites swept — the evidence for "none-known"
+  note?: string;
+}
+
+export const STATE_RESEARCH: StateResearch[] = [];
+
+export function researchForState(code: string): StateResearch | undefined {
+  return STATE_RESEARCH.find((r) => r.state === code);
 }

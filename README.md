@@ -1,9 +1,14 @@
 # US Timber Prices — stumpage.us frontend
 
-A public catalog and explorer of US stumpage and delivered timber prices from
-public sources — the community successor to the retired USDA Forest Service SRS
-[Timber Price Information and Contacts](https://www.srs.fs.usda.gov/econ/timberprices/)
-site.
+Every public US stumpage and delivered timber price series we can find —
+harmonized, sourced, and free to reuse — plus a state-by-state record of who
+reports timber prices and where no one does.
+
+The United States has no national timber price statistic. Prices are published,
+where they are published at all, by individual state agencies, university
+extension programs, revenue departments and federal sale records, in
+incompatible units and on unrelated schedules. This site is the record of what
+exists.
 
 Three pillars:
 

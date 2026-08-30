@@ -22,7 +22,7 @@ export const metadata: Metadata = {
     template: "%s · US Timber Price Information",
   },
   description:
-    "A public catalog and explorer of US stumpage and delivered timber prices from public sources — the community successor to the USDA Forest Service SRS timber price information site.",
+    "Every public US stumpage and delivered timber price series we can find — harmonized, sourced, and free to reuse — plus a state-by-state record of who reports prices and where no one does.",
 };
 
 export default function RootLayout({
