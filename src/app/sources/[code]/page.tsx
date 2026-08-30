@@ -18,6 +18,7 @@ import {
   fmtUsd,
   marketLabel,
   ownershipLabel,
+  seriesHref,
   seriesId,
   unitLabel,
 } from "@/lib/format";
@@ -118,15 +119,13 @@ export default async function SourcePage({
             {series.length > SERIES_LISTED ? (
               <>
                 The {SERIES_LISTED} most recently updated of{" "}
-                {series.length.toLocaleString()} series from this source. Every
-                series has its own page whether or not it is listed here — the{" "}
-                <Link
-                  href={`/explore?src=${code}`}
-                  className="underline underline-offset-2"
-                >
-                  explorer
+                {series.length.toLocaleString()} series from this source. The
+                full record lives on the{" "}
+                <Link href="/regions" className="underline underline-offset-2">
+                  reporting region
                 </Link>{" "}
-                reaches the rest.
+                pages, which carry every series whether or not it is listed
+                here.
               </>
             ) : (
               <>All {series.length} series from this source.</>
@@ -150,7 +149,7 @@ export default async function SourcePage({
                     <TableRow key={seriesId(s)}>
                       <TableCell>
                         <Link
-                          href={`/series/${seriesId(s)}`}
+                          href={seriesHref(s)}
                           className="font-medium underline underline-offset-2"
                         >
                           {s.species_name} {s.product_name.toLowerCase()}

@@ -20,7 +20,14 @@ import {
 } from "@/content/directory";
 import { getCoveredStates, seriesForState } from "@/lib/coverage";
 import { getDims } from "@/lib/data";
-import { fmtPeriod, fmtUsd, seriesId, unitLabel, marketLabel } from "@/lib/format";
+import {
+  fmtPeriod,
+  fmtUsd,
+  marketLabel,
+  seriesHref,
+  seriesId,
+  unitLabel,
+} from "@/lib/format";
 import { regionTypeLabel, STATE_NAMES } from "@/lib/geo";
 import type { Series } from "@/lib/types";
 
@@ -165,7 +172,7 @@ export default async function StatePage({
                     <TableRow key={seriesId(s)}>
                       <TableCell>
                         <Link
-                          href={`/series/${seriesId(s)}`}
+                          href={seriesHref(s)}
                           className="font-medium underline underline-offset-2"
                         >
                           {s.species_name} {s.product_name.toLowerCase()}

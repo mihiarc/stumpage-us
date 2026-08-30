@@ -131,11 +131,16 @@ Designed for desk and phone simultaneously, not reflowed afterward.
 - [ ] Regional unit leads; $/ton one click away with the conversion and its source
 - [ ] Home: map plus a search field
 - [ ] Place pages rebuilt around the ladder
-- [x] Per-series pages — the historical register's new home. All 3,490 series
-      have a permalink at `/series/[id]`, linked from the `/states/[code]` and
-      `/sources/[code]` tables. Built on the build-time data path, not the
-      explorer's chunk fetch. They will link from each rung once the ladder
-      exists; the ladder is blocked on data, these were not.
+- [x] The historical register's new home — `/regions/[code]`, one page per
+      reporting region (224), each carrying every series that region reports
+      with its three registers and full observation history. A series is
+      citable as `#species~product~market`; build the URL with `seriesHref`.
+      Renders entirely without JavaScript, chart included.
+      **A region is not a place** (invariant 6): 134 of the 224 are a single
+      national forest, and these are the areas each *source* chose to report
+      at. Place resolution — someone names their own geography and we answer
+      from whatever covers it, disclosing the gap — is a separate layer over a
+      swappable crosswalk, and belongs with the ladder and phase 3.
 - [ ] **Delete the explorer** — series pages have now shipped, so the
       prerequisite is met, but look at them together before pulling it
 
@@ -235,16 +240,32 @@ Designed in v1.0, inert until the export carries what they need.
   estimates plus asset managers means figures that end up in valuation marks.
   The resolved-place line, evidence chip, range and citation are what make that
   safe to ship. They are not overhead.
-- **Static-export size.** Series pages took the export from 68 pages / 25 MB to
-  3,558 pages / 518 MB apparent (657 MB on disk, 66 MB as the gzipped Pages
-  artifact, 32,050 files). Build time is a non-issue — 5s to 11s locally — but
-  GitHub Pages caps a published site at 1 GB, and the pending 8-source refresh
-  takes 3,490 series to 4,945, projecting ~730 MB. It fits; it does not fit
-  twice. About 37% of the bytes are Next's per-route RSC segment prefetch
-  files, which are emitted per route with no config to suppress them
-  (`experimental.cachedNavigations: false` was tested and has no effect on
-  16.2.10). Watch this at the next refresh; the lever if it is ever needed is
-  page content, not page count.
+- **Static-export size, and what actually drives it.** The record costs far
+  more to *publish* than to *hold*: all 49,515 observations are 6.1 MB as JSON
+  and 580 KB gzipped, but the export is 185 MB. Two multipliers, both Next's,
+  both worth knowing before adding routes:
+
+  1. **Per-route scaffolding.** Next writes nine files per route — the HTML
+     plus eight RSC segment files — so an empty route still costs ~40 KB. There
+     is no config to suppress them; `experimental.cachedNavigations: false` was
+     tested on 16.2.10 and has no effect.
+  2. **Every server-rendered element is serialized again** into the flight
+     payload, more verbosely than the HTML, then written three more times as
+     segment files. On a table-heavy page the inline flight `<script>` is ~66%
+     of the bytes. A data-dense page costs roughly 4× its HTML.
+
+  Together those made a page-per-series untenable: 3,490 routes measured 518 MB
+  apparent / 657 MB on disk / 66 MB gzipped / 32,050 files, of which the data
+  was 6 MB. Moving the record to the region grain — 224 routes — put it at
+  **185 MB apparent / 204 MB on disk / 20 MB gzipped / 2,662 files**, with the
+  full record still in static HTML and no JavaScript. Build time was never the
+  constraint (6s).
+
+  Two consequences for later. The pending 8-source refresh takes 3,490 series
+  to 4,945, projecting ~260 MB — comfortable against the 1 GB Pages cap. And
+  when place resolution lands on a finer geography (counties would be ~3,000
+  routes), the scaffolding alone is ~120 MB before content, so place pages
+  should stay thin and defer depth to the region pages rather than repeat them.
 
 - **Maintenance arithmetic.** Unfunded, one maintainer, already carrying a
   quarterly refresh, directory re-verification, per-source candor notes and now an

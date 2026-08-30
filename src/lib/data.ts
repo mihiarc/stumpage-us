@@ -103,6 +103,33 @@ export function getSeriesById(id: string): Series | undefined {
   return seriesByIdCache.get(id);
 }
 
+let seriesByRegionCache: Map<string, Series[]> | null = null;
+
+/**
+ * Every series reported for one region — the unit a record page covers.
+ *
+ * Region codes are globally unique across sources (checked: 0 of 224 appear
+ * under more than one source), so a region determines its source and a page
+ * needs only one provenance block for all of its series.
+ */
+export function getSeriesByRegion(region: string): Series[] {
+  if (!seriesByRegionCache) {
+    seriesByRegionCache = new Map<string, Series[]>();
+    for (const s of getSeriesIndex().series) {
+      const list = seriesByRegionCache.get(s.region);
+      if (list) list.push(s);
+      else seriesByRegionCache.set(s.region, [s]);
+    }
+  }
+  return seriesByRegionCache.get(region) ?? [];
+}
+
+/** All region codes that have at least one series, sorted. */
+export function getRegionCodes(): string[] {
+  getSeriesByRegion("");
+  return [...seriesByRegionCache!.keys()].sort();
+}
+
 const rowsBySourceCache = new Map<string, Map<string, PriceRow[]>>();
 
 /**

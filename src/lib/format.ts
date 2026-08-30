@@ -103,10 +103,32 @@ export function seriesId(s: Series): string {
  * The same id as `seriesId`, built from a chunk row plus the source the chunk
  * belongs to (rows don't carry their own source). Lives next to `seriesId` so
  * the two constructions cannot drift — the id is the join key between the
- * series index and the price chunks, and the token in /series/[id].
+ * series index and the price chunks.
  */
 export function rowSeriesId(source: string, r: PriceRow): string {
   return [source, r.r, r.sp, r.p, r.m].join("~");
+}
+
+/**
+ * A series' address on the site.
+ *
+ * Series do not get their own route. The record lives at the grain the source
+ * reports it — the region — and a series is a section within that page. This
+ * is not only a size decision: 3,490 routes cost ~390 MB of per-route
+ * scaffolding before any data, while the observations themselves are 6 MB.
+ * It is also the honest grain, because a lone series is not a place and a
+ * reader arriving at one wants the other assortments beside it.
+ *
+ * Region codes are globally unique (verified across all 224), so the region
+ * alone identifies the page and the remaining three components identify the
+ * section. Keep this the only place a series URL is constructed.
+ */
+export function seriesAnchor(s: Series): string {
+  return [s.species, s.product, s.market].join("~");
+}
+
+export function seriesHref(s: Series): string {
+  return `/regions/${s.region}#${seriesAnchor(s)}`;
 }
 
 export function rowMatchesSeries(row: PriceRow, s: Series): boolean {
