@@ -3,9 +3,24 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import {
+  Table,
+  TableBody,
+  TableCell,
+  TableHead,
+  TableHeader,
+  TableRow,
+} from "@/components/ui/table";
 import { getCandor, getDims, getManifest, getSeriesIndex } from "@/lib/data";
 import { asset } from "@/lib/asset";
-import { ownershipLabel } from "@/lib/format";
+import {
+  fmtPeriod,
+  fmtUsd,
+  marketLabel,
+  ownershipLabel,
+  seriesId,
+  unitLabel,
+} from "@/lib/format";
 import { regionTypeLabel } from "@/lib/geo";
 import { SOURCE_LINKS } from "@/content/source-links";
 import { SOURCE_NOTES } from "@/content/source-notes";
@@ -13,6 +28,14 @@ import { SOURCE_NOTES } from "@/content/source-notes";
 interface Params {
   code: string;
 }
+
+/**
+ * How many series to list on a source page. usfs_cutsold has 2,554 and mi_dnr
+ * 774, so the biggest two need a bound; the other four sources list in full.
+ * Every series has a permalink regardless — this bounds the listing, not the
+ * pages.
+ */
+const SERIES_LISTED = 100;
 
 export function generateStaticParams(): Params[] {
   return getDims().sources.map((s) => ({ code: s.source_code }));
@@ -87,6 +110,79 @@ export default async function SourcePage({
           </dd>
         </div>
       </dl>
+
+      {series.length > 0 && (
+        <section className="mt-8">
+          <h2 className="mb-1 text-lg font-semibold">Series</h2>
+          <p className="mb-3 text-sm text-muted-foreground">
+            {series.length > SERIES_LISTED ? (
+              <>
+                The {SERIES_LISTED} most recently updated of{" "}
+                {series.length.toLocaleString()} series from this source. Every
+                series has its own page whether or not it is listed here — the{" "}
+                <Link
+                  href={`/explore?src=${code}`}
+                  className="underline underline-offset-2"
+                >
+                  explorer
+                </Link>{" "}
+                reaches the rest.
+              </>
+            ) : (
+              <>All {series.length} series from this source.</>
+            )}
+          </p>
+          <div className="overflow-x-auto rounded-lg border">
+            <Table>
+              <TableHeader>
+                <TableRow>
+                  <TableHead>Series</TableHead>
+                  <TableHead>Market</TableHead>
+                  <TableHead>Years</TableHead>
+                  <TableHead className="text-right">Latest</TableHead>
+                </TableRow>
+              </TableHeader>
+              <TableBody>
+                {[...series]
+                  .sort((a, b) => b.latest.y - a.latest.y || b.n - a.n)
+                  .slice(0, SERIES_LISTED)
+                  .map((s) => (
+                    <TableRow key={seriesId(s)}>
+                      <TableCell>
+                        <Link
+                          href={`/series/${seriesId(s)}`}
+                          className="font-medium underline underline-offset-2"
+                        >
+                          {s.species_name} {s.product_name.toLowerCase()}
+                        </Link>
+                        <div className="text-xs text-muted-foreground">
+                          {s.region_name}
+                        </div>
+                      </TableCell>
+                      <TableCell>{marketLabel(s.market)}</TableCell>
+                      <TableCell className="tabular-nums">
+                        {s.y0}–{s.y1}
+                      </TableCell>
+                      <TableCell className="text-right tabular-nums">
+                        {s.latest.o != null && s.latest.u ? (
+                          <>
+                            {fmtUsd(s.latest.o)}{" "}
+                            <span className="text-xs text-muted-foreground">
+                              {unitLabel(s.latest.u).replace("$/", "/")} ·{" "}
+                              {fmtPeriod(s.latest.y, s.latest.q)}
+                            </span>
+                          </>
+                        ) : (
+                          "—"
+                        )}
+                      </TableCell>
+                    </TableRow>
+                  ))}
+              </TableBody>
+            </Table>
+          </div>
+        </section>
+      )}
 
       {SOURCE_NOTES[code] && (
         <section className="mt-8">

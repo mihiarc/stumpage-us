@@ -99,6 +99,16 @@ export function seriesId(s: Series): string {
   return [s.source, s.region, s.species, s.product, s.market].join("~");
 }
 
+/**
+ * The same id as `seriesId`, built from a chunk row plus the source the chunk
+ * belongs to (rows don't carry their own source). Lives next to `seriesId` so
+ * the two constructions cannot drift — the id is the join key between the
+ * series index and the price chunks, and the token in /series/[id].
+ */
+export function rowSeriesId(source: string, r: PriceRow): string {
+  return [source, r.r, r.sp, r.p, r.m].join("~");
+}
+
 export function rowMatchesSeries(row: PriceRow, s: Series): boolean {
   return (
     row.r === s.region &&

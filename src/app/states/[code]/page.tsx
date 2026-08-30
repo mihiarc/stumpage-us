@@ -20,7 +20,7 @@ import {
 } from "@/content/directory";
 import { getCoveredStates, seriesForState } from "@/lib/coverage";
 import { getDims } from "@/lib/data";
-import { fmtPeriod, fmtUsd, unitLabel, marketLabel } from "@/lib/format";
+import { fmtPeriod, fmtUsd, seriesId, unitLabel, marketLabel } from "@/lib/format";
 import { regionTypeLabel, STATE_NAMES } from "@/lib/geo";
 import type { Series } from "@/lib/types";
 
@@ -162,11 +162,14 @@ export default async function StatePage({
                   .sort((a, b) => b.latest.y - a.latest.y || b.n - a.n)
                   .slice(0, 30)
                   .map((s) => (
-                    <TableRow key={`${s.source}${s.region}${s.species}${s.product}${s.market}`}>
+                    <TableRow key={seriesId(s)}>
                       <TableCell>
-                        <div className="font-medium">
+                        <Link
+                          href={`/series/${seriesId(s)}`}
+                          className="font-medium underline underline-offset-2"
+                        >
                           {s.species_name} {s.product_name.toLowerCase()}
-                        </div>
+                        </Link>
                         <div className="text-xs text-muted-foreground">{s.region_name}</div>
                       </TableCell>
                       <TableCell>{marketLabel(s.market)}</TableCell>
