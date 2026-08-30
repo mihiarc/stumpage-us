@@ -14,8 +14,12 @@
  * claim about what a national timber price statistic would require versus what
  * actually exists.
  *
- * Output is deterministic apart from `generated_at`: `version` is derived from
- * the inputs, so re-running without new research produces the same record.
+ * Output is fully deterministic — no wall-clock timestamp. `version`,
+ * `directory_as_of` and `prices_built_at` are all derived from the inputs, so
+ * re-running without new research reproduces the file byte for byte and
+ * `bun run build` leaves a clean working tree. A build time would say nothing
+ * those three don't say better, and would invite reading the record as
+ * "current as of" the moment it happened to be generated.
  */
 import { mkdirSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
@@ -172,7 +176,6 @@ function main() {
     // Derived from the inputs, not the clock: re-running without new research
     // or a new upstream data build reproduces this exact version string.
     version: `${directoryAsOf}+data.${dataAsOf}`,
-    generated_at: new Date().toISOString(),
     directory_as_of: directoryAsOf,
     directory_floor_verified: DIRECTORY_VERIFIED_DATE,
     prices_built_at: manifest.built_at,

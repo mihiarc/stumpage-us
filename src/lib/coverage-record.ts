@@ -85,7 +85,6 @@ export interface CoverageRecord {
   format_version: number;
   /** Derived from the inputs, not the clock — see the export script. */
   version: string;
-  generated_at: string;
   directory_as_of: string;
   directory_floor_verified: string;
   prices_built_at: string;
