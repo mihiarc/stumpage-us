@@ -39,3 +39,6 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# link-rot check output (scripts/check-links.ts)
+/.link-check/
