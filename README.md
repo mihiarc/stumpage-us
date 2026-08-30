@@ -15,6 +15,11 @@ Three pillars:
 3. **Bulk downloads** (`/data`) — the full dataset as Parquet / CSV with a data
    dictionary and per-record source attribution.
 
+> **This structure is the v0 standin.** See [`ROADMAP.md`](ROADMAP.md) for the
+> v1.0 plan — a place-first ladder of every market a stand can be sold into,
+> built for foresters and landowners rather than for the explorer. It also
+> records the design invariants that constrain the work.
+
 ## Stack
 
 Next.js (App Router, **static export** — no server), TypeScript, Tailwind +
