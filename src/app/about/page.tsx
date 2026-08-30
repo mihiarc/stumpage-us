@@ -12,24 +12,25 @@ export default function AboutPage() {
     <div className="prose prose-neutral dark:prose-invert mx-auto max-w-3xl px-4 py-8 prose-a:underline-offset-2">
       <h1>About this site</h1>
       <p>
-        For years, the USDA Forest Service Southern Research Station maintained{" "}
-        <a href="https://www.srs.fs.usda.gov/econ/timberprices/">
-          Timber Price Information and Contacts
-        </a>{" "}
-        — the place landowners and researchers went to find out who reports
-        timber prices in each state. That site is still online but no longer
-        actively maintained: links rot, reports die, and new sources appear
-        unnoticed.
+        The United States has no national timber price statistic. Prices are
+        published — where they are published at all — by individual state
+        agencies, university extension programs, revenue departments and
+        federal timber-sale records: in incompatible units, on unrelated
+        schedules, and with no shared definition of what is being priced.
+        Reports are discontinued without notice and links rot quietly.
       </p>
-      <p>This site is a community-maintained successor with two goals:</p>
+      <p>This site does two things about that:</p>
       <ul>
         <li>
-          <strong>Keep the directory alive.</strong> The{" "}
-          <Link href="/directory">directory</Link> re-verifies every known price
-          reporting service and adds two flags the original never had: whether
-          the report is still being published, and whose data it actually is
-          (several &ldquo;free&rdquo; state reports are licensed
-          TimberMart-South redistributions).
+          <strong>Keep an honest catalogue.</strong> The{" "}
+          <Link href="/directory">directory</Link> records every price
+          reporting service we can find, with two flags that are usually
+          missing: whether the report is still being published, and whose data
+          it actually is (several &ldquo;free&rdquo; state reports are licensed
+          TimberMart-South redistributions). The{" "}
+          <Link href="/coverage">coverage record</Link> goes further and states
+          where we searched and found nothing — a different claim from never
+          having looked.
         </li>
         <li>
           <strong>Make the genuinely public data usable.</strong> Prices that

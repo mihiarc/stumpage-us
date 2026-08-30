@@ -5,15 +5,9 @@ export function SiteFooter() {
     <footer className="mt-16 border-t">
       <div className="mx-auto max-w-6xl space-y-3 px-4 py-8 text-sm text-muted-foreground">
         <p>
-          A free public service for forest landowners, foresters, and
-          researchers — the community successor to the USDA Forest Service{" "}
-          <a
-            href="https://www.srs.fs.usda.gov/econ/timberprices/"
-            className="underline underline-offset-2 hover:text-foreground"
-          >
-            SRS Timber Price Information and Contacts
-          </a>{" "}
-          site, which is no longer actively maintained.
+          A free public record of US timber prices, for forest landowners,
+          foresters, and researchers. Independently maintained, unaffiliated
+          with any agency or company, and funded by no one.
         </p>
         <p>
           All price data derives exclusively from public sources; each record
@@ -24,7 +18,11 @@ export function SiteFooter() {
           <Link href="/about" className="underline underline-offset-2 hover:text-foreground">
             About
           </Link>{" "}
-          for methodology and caveats.
+          for methodology and caveats, and{" "}
+          <Link href="/privacy" className="underline underline-offset-2 hover:text-foreground">
+            Privacy
+          </Link>{" "}
+          for what this site does and does not collect.
         </p>
       </div>
     </footer>

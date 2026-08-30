@@ -13,7 +13,11 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { DirectoryEntryCard } from "@/components/directory-entry";
-import { directoryForState, legacySrsUrl } from "@/content/directory";
+import {
+  directoryForState,
+  entryVerified,
+  researchForState,
+} from "@/content/directory";
 import { getCoveredStates, seriesForState } from "@/lib/coverage";
 import { getDims } from "@/lib/data";
 import { fmtPeriod, fmtUsd, unitLabel, MARKET_LABELS } from "@/lib/format";
@@ -25,10 +29,13 @@ interface Params {
 }
 
 export function generateStaticParams(): Params[] {
-  // pages for every state with data coverage OR a directory entry
+  // A page for every state with price coverage, a directory entry, or a
+  // research record. The last case is the point: a state we searched and found
+  // nothing in still gets a page, because "we looked, there is nothing" is an
+  // answer and a 404 is not. /coverage links every state here.
   const covered = new Set(getCoveredStates());
   for (const st of Object.keys(STATE_NAMES)) {
-    if (directoryForState(st).length > 0) covered.add(st);
+    if (directoryForState(st).length > 0 || researchForState(st)) covered.add(st);
   }
   return [...covered].sort().map((code) => ({ code: code.toLowerCase() }));
 }
@@ -102,6 +109,7 @@ export default async function StatePage({
     (s) => s.region_type !== "state_avg" && s.region_type !== "statewide",
   );
   const entries = directoryForState(usps);
+  const research = researchForState(usps);
 
   return (
     <div className="mx-auto max-w-6xl px-4 py-8">
@@ -264,19 +272,41 @@ export default async function StatePage({
               <DirectoryEntryCard key={`${e.org}${e.report}`} entry={e} />
             ))}
           </div>
+        ) : research?.outcome === "none-known" ? (
+          <div className="rounded-lg border border-dashed p-4">
+            <p className="text-sm">
+              We searched {name} on {research.searched} and found no public
+              timber price reporting service.
+            </p>
+            {research.note && (
+              <p className="mt-2 text-xs text-muted-foreground">
+                {research.note}
+              </p>
+            )}
+            {research.checked && research.checked.length > 0 && (
+              <p className="mt-2 text-xs text-muted-foreground">
+                <span className="font-medium">Checked:</span>{" "}
+                {research.checked.join(" · ")}
+              </p>
+            )}
+          </div>
         ) : (
-          <p className="text-sm text-muted-foreground">
-            We don&apos;t know of a current price reporting service for {name}.
+          <div className="rounded-lg border border-dashed p-4">
+            <p className="text-sm">
+              We have not yet searched {name} for a price reporting service.
+            </p>
+            <p className="mt-2 text-xs text-muted-foreground">
+              This is a gap in our research, not a finding that none exists.
+              Know of one? Corrections are welcome.
+            </p>
+          </div>
+        )}
+        {entries.length > 0 && (
+          <p className="mt-4 text-xs text-muted-foreground">
+            Last checked{" "}
+            {[...new Set(entries.map(entryVerified))].sort().reverse()[0]}.
           </p>
         )}
-        <p className="mt-4 text-xs text-muted-foreground">
-          Legacy contacts (state agencies, extension foresters, consultant
-          directories) are still listed on the{" "}
-          <a href={legacySrsUrl(usps)} className="underline underline-offset-2">
-            archived SRS page for {name}
-          </a>
-          .
-        </p>
       </section>
     </div>
   );

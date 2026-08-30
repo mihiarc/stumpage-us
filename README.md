@@ -1,9 +1,14 @@
 # US Timber Prices — stumpage.us frontend
 
-A public catalog and explorer of US stumpage and delivered timber prices from
-public sources — the community successor to the retired USDA Forest Service SRS
-[Timber Price Information and Contacts](https://www.srs.fs.usda.gov/econ/timberprices/)
-site.
+Every public US stumpage and delivered timber price series we can find —
+harmonized, sourced, and free to reuse — plus a state-by-state record of who
+reports timber prices and where no one does.
+
+The United States has no national timber price statistic. Prices are published,
+where they are published at all, by individual state agencies, university
+extension programs, revenue departments and federal sale records, in
+incompatible units and on unrelated schedules. This site is the record of what
+exists.
 
 Three pillars:
 
@@ -14,6 +19,11 @@ Three pillars:
    licensed TimberMart-South redistributions).
 3. **Bulk downloads** (`/data`) — the full dataset as Parquet / CSV with a data
    dictionary and per-record source attribution.
+
+> **This structure is the v0 standin.** See [`ROADMAP.md`](ROADMAP.md) for the
+> v1.0 plan — a place-first ladder of every market a stand can be sold into,
+> built for foresters and landowners rather than for the explorer. It also
+> records the design invariants that constrain the work.
 
 ## Stack
 
@@ -34,15 +44,47 @@ Serve `out/` from any static host (Netlify, GitHub Pages, …).
 Pushes to `main` deploy to GitHub Pages via `.github/workflows/deploy.yml`
 (live at <https://mihiarc.github.io/stumpage-us/>). The workflow builds with
 `NEXT_PUBLIC_BASE_PATH=/stumpage-us`, which sets Next's `basePath` and the
-`asset()` helper prefix — when the `stumpage.us` custom domain is attached,
-remove that env var from the workflow and redeploy.
+`asset()` helper prefix.
+
+`bun run build` runs `export:coverage` first, so `public/coverage/` is always
+regenerated from `src/content/directory.ts` before the site is built. Never
+commit a hand-edited file there.
+
+### Attaching the stumpage.us domain (deferred)
+
+**The site stays on <https://mihiarc.github.io/stumpage-us/> for now.** The
+custom domain is not being pursued this phase; `stumpage.us` had no DNS records
+at all when checked on 2026-08-30. Anything citing the site should cite the
+github.io URL.
+
+Kept here because the flip is easy to get wrong: the basePath and the domain
+have to move in the same commit, or every raw asset URL 404s. When you do want
+it, do these in order, in one commit, once `dig +short stumpage.us` returns the
+four GitHub Pages A records:
+
+1. At the registrar, point the apex at GitHub Pages
+   (`185.199.108.153`, `.109.153`, `.110.153`, `.111.153`) and `www` at
+   `mihiarc.github.io`.
+2. Add `public/CNAME` containing exactly `stumpage.us`. It is copied verbatim
+   into `out/` and is what tells Pages to serve the custom domain.
+3. Set `NEXT_PUBLIC_BASE_PATH: ""` in `.github/workflows/deploy.yml`.
+   The value must stay in sync across three places — `next.config.ts`
+   (`basePath`), `src/lib/asset.ts` (`BASE_PATH`) and this workflow env — but
+   only the workflow needs editing, because the other two read the env var.
+4. Enable *Enforce HTTPS* in the repository's Pages settings once GitHub has
+   provisioned the certificate.
+
+Verify after deploying: every raw `fetch()`, `<a href>` and MapLibre source URL
+goes through `asset()`, so a missed prefix shows up as a 404 on
+`/coverage/coverage.json` or a blank map rather than a build failure. `next/link`
+and `next/image` handle basePath on their own and are not affected.
 
 ## Licenses
 
 - **Code:** MIT (`LICENSE`).
-- **Data** (`public/data/`): CC BY 4.0 (`LICENSE-DATA.md`); cite per
-  `CITATION.cff` and credit the original publishing agency for specific
-  prices.
+- **Data** (`public/data/`, `public/coverage/`): CC BY 4.0
+  (`LICENSE-DATA.md`); cite per `CITATION.cff` and credit the original
+  publishing agency for specific prices.
 
 ## Data pipeline
 
@@ -80,11 +122,45 @@ git add public/data && git commit -m "data: refresh public export"
 `public/geo/us-states.json` is a slimmed Census 20m states GeoJSON (lon/lat,
 3-decimal coords) for the MapLibre map.
 
+### The coverage record (`public/coverage/`)
+
+Generated **in this repo** by `scripts/export-coverage.ts` (`bun run
+export:coverage`, and automatically as part of `bun run build`), not upstream.
+It joins the catalogue in `src/content/directory.ts` against the price series
+in `public/data/`, and is what `/coverage` renders and what the green-GDP paper
+cites.
+
+| File | Purpose |
+|---|---|
+| `coverage.json` | the full record: per-state research outcome, directory entries, price rollup, plus totals, definitions and citation metadata |
+| `coverage_by_state.csv` | one flat row per state, for analysis |
+| `directory.csv` | one row per catalogued report |
+
+Shapes live in `src/lib/coverage-record.ts` and are shared by the writer (the
+script) and the reader (the page), so the page can never display numbers the
+downloadable record does not contain. `version` is derived from the inputs —
+latest sweep date plus upstream build date — so re-running without new research
+reproduces the same artifact instead of churning on a timestamp.
+
+State→series attribution goes through `seriesStates()` in `src/lib/geo.ts`, the
+same function behind the map and the state pages. Changing it changes all three
+at once.
+
 ## Content
 
-- `src/content/directory.ts` — the state-by-state directory (seeded from the
-  timber-prices repo's `docs/PUBLIC_SOURCE_CATALOGUE.md`, web-verified
-  2026-06-25). Update entries there; each carries status + provenance.
+- `src/content/directory.ts` — the hand-maintained catalogue, and the only
+  place editorial corrections belong. Two exports, and the distinction between
+  them carries real weight:
+  - `DIRECTORY` — one record per organization, each with status + provenance
+    and an optional per-entry `verified` date. `DIRECTORY_VERIFIED_DATE` is the
+    floor that applies to entries without one; read both through
+    `entryVerified()` and only bump the floor when *every* entry has been
+    re-swept.
+  - `STATE_RESEARCH` — one record per place actually searched, carrying the
+    sweep date, the outcome, and for a `none-known` finding the list of what
+    was checked. A state missing from this list has not been searched, which is
+    a different claim from having been searched and found empty. Nothing else
+    in the codebase can express that difference, so do not collapse it.
 - `src/content/source-notes.ts` / `source-links.ts` — per-dataset method notes
   and official links shown on `/sources/*`.
 

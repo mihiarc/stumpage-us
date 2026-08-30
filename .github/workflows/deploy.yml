@@ -20,8 +20,16 @@ jobs:
     env:
       # Project-pages sub-path; drop this (set to "") when the custom domain
       # (stumpage.us) is attached. Must match next.config.ts basePath and
-      # src/lib/asset.ts.
+      # src/lib/asset.ts. See "Attaching the stumpage.us domain" in README.md —
+      # the CNAME file and this value have to change in the same commit.
       NEXT_PUBLIC_BASE_PATH: /stumpage-us
+      # Cloudflare Web Analytics beacon token. A public write-only identifier,
+      # not a secret — it ships in the HTML. Empty means no analytics, and
+      # /privacy renders accordingly. To switch it on, create a Cloudflare Web
+      # Analytics site for mihiarc.github.io/stumpage-us and paste its token
+      # here. If the custom domain is ever attached, add the new hostname to
+      # the same Cloudflare site rather than starting a second one.
+      NEXT_PUBLIC_CF_BEACON_TOKEN: ""
     steps:
       - uses: actions/checkout@v4
       - uses: oven-sh/setup-bun@v2

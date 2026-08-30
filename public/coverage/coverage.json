@@ -1,0 +1,3291 @@
+{
+  "name": "US timber price coverage record",
+  "description": "Who publishes US timber prices, state by state, how current each report is and whose data it is — joined against the price series actually present in the stumpage.us dataset. Includes states searched with no source found, recorded as a positive finding.",
+  "format_version": 1,
+  "version": "2026-08-30+data.2026-07-06",
+  "generated_at": "2026-08-30T17:31:17.309Z",
+  "directory_as_of": "2026-08-30",
+  "directory_floor_verified": "2026-06-25",
+  "prices_built_at": "2026-07-06T13:19:40+00:00",
+  "license": "CC-BY-4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "cite_as": "Mihiar, C. US public timber stumpage & delivered price data (stumpage.us). CC BY 4.0. See CITATION.cff in mihiarc/stumpage-us.",
+  "source_repository": "https://github.com/mihiarc/stumpage-us",
+  "definitions": {
+    "outcome": {
+      "found": "We searched this state and catalogued at least one price reporting service, whatever its current status.",
+      "none-known": "We searched this state and found no public timber price reporting service. `checked` lists what was searched; this is a finding, not a blank.",
+      "not-searched": "We have not searched this state. Do not read this as an absence of sources."
+    },
+    "status": {
+      "live": "Currently published on its stated schedule.",
+      "stale": "Still online, but behind its stated schedule — see latest_known.",
+      "dead": "Discontinued; any archive is historical only.",
+      "paywalled": "Exists but requires a paid subscription.",
+      "unverified": "Catalogued but not confirmed at the last sweep."
+    },
+    "provenance": {
+      "independent": "The publisher collects its own survey or sale data — genuinely public.",
+      "tms": "Licensed TimberMart-South redistribution. Free to read; the numbers are copyrighted survey data, not public data, and are excluded from the price dataset by construction.",
+      "commercial": "Paid commercial service.",
+      "tax": "Administrative or tax-assessed values, not observed market transactions.",
+      "derived": "Derived from another listed source."
+    },
+    "evidence": {
+      "state-series": "The price dataset carries at least one series attributed to this state.",
+      "regional-only": "The state is covered only by multi-state or USFS-region series — no state-grain observation.",
+      "none": "No series in the price dataset covers this state at any grain."
+    }
+  },
+  "totals": {
+    "states": 50,
+    "searched": 50,
+    "not_searched": 0,
+    "searched_none_known": 12,
+    "with_any_entry": 38,
+    "with_live_source": 32,
+    "with_live_independent_source": 22,
+    "evidence": {
+      "state-series": 6,
+      "regional-only": 43,
+      "none": 1
+    },
+    "directory_entries": 50,
+    "directory_entries_by_status": {
+      "live": 38,
+      "stale": 7,
+      "dead": 3,
+      "paywalled": 2,
+      "unverified": 0
+    },
+    "directory_entries_by_provenance": {
+      "independent": 36,
+      "tms": 8,
+      "commercial": 2,
+      "tax": 4,
+      "derived": 0
+    },
+    "price_series": 3490,
+    "price_observations": 49515,
+    "price_sources": 6
+  },
+  "national_and_international": [
+    {
+      "scope": "US",
+      "org": "USDA Forest Service",
+      "report": "Cut-and-Sold reports (National Forest timber sales, all 9 regions)",
+      "url": "https://www.fs.usda.gov/forestmanagement/products/cut-sold/",
+      "status": "live",
+      "provenance": "independent",
+      "frequency": "Quarterly",
+      "units": "$/MBF (derived value ÷ volume)",
+      "latest_known": null,
+      "verified": "2026-06-25",
+      "in_dataset": "usfs_cutsold",
+      "notes": "Realized National-Forest sawtimber stumpage. Machine-readable XLSX for the current quarter; full history back to FY1977 as PDFs."
+    },
+    {
+      "scope": "US",
+      "org": "USDA Forest Service PNW Research Station",
+      "report": "Production, Prices, Employment & Trade in NW Forest Industries (1958–2023)",
+      "url": "https://research.fs.usda.gov/pnw/products/dataandtools/tools/production-prices-employment-and-trade-northwest-forest-industries-all",
+      "status": "live",
+      "provenance": "independent",
+      "frequency": "Annual",
+      "units": "$/MBF Scribner",
+      "latest_known": null,
+      "verified": "2026-06-25",
+      "in_dataset": "pnw",
+      "notes": "Western public-lands stumpage by USFS region and state × agency."
+    },
+    {
+      "scope": "US",
+      "org": "USDA Forest Service Southern Research Station",
+      "report": "Timber Price Information and Contacts (Forest Economics & Policy)",
+      "url": "https://research.fs.usda.gov/srs/centers/fep",
+      "status": "stale",
+      "provenance": "independent",
+      "frequency": null,
+      "units": null,
+      "latest_known": null,
+      "verified": "2026-08-30",
+      "in_dataset": null,
+      "notes": "Relocated but not maintained. The directory moved from srs.fs.usda.gov/econ/timberprices to research.fs.usda.gov, where it still carries a per-state page for all 50 states (/srs/centers/fep/timber{xx}) with an index date of 2025-06-02 and several state pages dated 2024-08-13. The dates overstate it: of the 13 states we swept through it, 11 listed only agency phone contacts and no price report at all, and its Maryland page still presents UMD Extension as a Maryland price source when that page publishes no Maryland prices and links out of state. Useful for finding a state forester; not reliable for finding out who reports prices. A federal website-review notice effective 2025-05-30 means these URLs may move again."
+    },
+    {
+      "scope": "US",
+      "org": "ResourceWise (Forest2Market)",
+      "report": "Stumpage 360 / TimberMart-South commercial services",
+      "url": "https://www.resourcewise.com/timber-prices/stumpage-prices",
+      "status": "paywalled",
+      "provenance": "commercial",
+      "frequency": null,
+      "units": null,
+      "latest_known": null,
+      "verified": "2026-06-25",
+      "in_dataset": null,
+      "notes": "Subscription transaction-based price services for the US South."
+    },
+    {
+      "scope": "INTL",
+      "org": "BC Ministry of Forests (Canada)",
+      "report": "Interior & Coast Log Market Reports",
+      "url": "https://www2.gov.bc.ca/gov/content/industry/forestry/competitive-forest-industry/timber-pricing/interior-timber-pricing/interior-log-market-reports",
+      "status": "live",
+      "provenance": "independent",
+      "frequency": "Rolling 3-month",
+      "units": "C$/m³",
+      "latest_known": "3 months ending 2026-01-31 (Interior)",
+      "verified": "2026-08-30",
+      "in_dataset": null,
+      "notes": "Delivered log prices, not stumpage — not comparable to US stumpage series without adjustment. Interior reports summarize arms-length log purchase transactions within the BC Interior; the Coast series reports Vancouver Log Market sales by species and grade. Timber-pricing index last updated 2026-01-27."
+    },
+    {
+      "scope": "INTL",
+      "org": "UN Economic Commission for Europe / FAO",
+      "report": "Forest Products Annual Market Review",
+      "url": "https://unece.org/forests/forest-products-annual-market-review",
+      "status": "stale",
+      "provenance": "independent",
+      "frequency": "Annual (November)",
+      "units": null,
+      "latest_known": "2023—2024 (Nov 2024)",
+      "verified": "2026-08-30",
+      "in_dataset": null,
+      "notes": "Latest edition found is 2023—2024, published November 2024; no 2024—2025 edition surfaced, so one annual cycle is unaccounted for. Marginal for this directory in any case — chiefly production, trade and housing analysis for the UNECE region, with limited roundwood price content and none specific to US states."
+    }
+  ],
+  "states": [
+    {
+      "state": "AK",
+      "state_name": "Alaska",
+      "research": {
+        "searched": "2026-06-25",
+        "outcome": "found",
+        "checked": [],
+        "note": null
+      },
+      "directory": {
+        "entries": 1,
+        "by_status": {
+          "live": 1,
+          "stale": 0,
+          "dead": 0,
+          "paywalled": 0,
+          "unverified": 0
+        },
+        "by_provenance": {
+          "independent": 1,
+          "tms": 0,
+          "commercial": 0,
+          "tax": 0,
+          "derived": 0
+        },
+        "has_live_independent": true,
+        "has_live_any": true,
+        "last_verified": "2026-06-25",
+        "sources": [
+          {
+            "org": "Alaska DNR Division of Forestry",
+            "report": "Timber Sales",
+            "url": "https://forestry.alaska.gov/timber/",
+            "status": "live",
+            "provenance": "independent",
+            "frequency": null,
+            "units": "$/MBF Scribner long-log",
+            "latest_known": null,
+            "verified": "2026-06-25",
+            "in_dataset": null,
+            "notes": "Appraised/negotiated values (not open-auction bids) — treat as minimums."
+          }
+        ]
+      },
+      "prices": {
+        "evidence": "state-series",
+        "series": 27,
+        "series_direct": 4,
+        "series_regional": 23,
+        "observations": 583,
+        "year_min": 1960,
+        "year_max": 2025,
+        "sources": [
+          "pnw",
+          "usfs_cutsold"
+        ],
+        "products": [
+          "sawtimber"
+        ],
+        "markets": [
+          "stumpage"
+        ]
+      }
+    },
+    {
+      "state": "AL",
+      "state_name": "Alabama",
+      "research": {
+        "searched": "2026-06-25",
+        "outcome": "found",
+        "checked": [],
+        "note": null
+      },
+      "directory": {
+        "entries": 1,
+        "by_status": {
+          "live": 1,
+          "stale": 0,
+          "dead": 0,
+          "paywalled": 0,
+          "unverified": 0
+        },
+        "by_provenance": {
+          "independent": 0,
+          "tms": 1,
+          "commercial": 0,
+          "tax": 0,
+          "derived": 0
+        },
+        "has_live_independent": false,
+        "has_live_any": true,
+        "last_verified": "2026-06-25",
+        "sources": [
+          {
+            "org": "Alabama Forestry Commission / Auburn ACES",
+            "report": "(no native price series — TMS-based commentary only)",
+            "url": "https://forestry.alabama.gov/",
+            "status": "live",
+            "provenance": "tms",
+            "frequency": null,
+            "units": null,
+            "latest_known": null,
+            "verified": "2026-06-25",
+            "in_dataset": null,
+            "notes": "No independent Alabama series exists; references TimberMart-South."
+          }
+        ]
+      },
+      "prices": {
+        "evidence": "regional-only",
+        "series": 34,
+        "series_direct": 0,
+        "series_regional": 34,
+        "observations": 701,
+        "year_min": 1977,
+        "year_max": 2025,
+        "sources": [
+          "usfs_cutsold"
+        ],
+        "products": [
+          "sawtimber"
+        ],
+        "markets": [
+          "stumpage"
+        ]
+      }
+    },
+    {
+      "state": "AR",
+      "state_name": "Arkansas",
+      "research": {
+        "searched": "2026-06-25",
+        "outcome": "found",
+        "checked": [],
+        "note": null
+      },
+      "directory": {
+        "entries": 1,
+        "by_status": {
+          "live": 1,
+          "stale": 0,
+          "dead": 0,
+          "paywalled": 0,
+          "unverified": 0
+        },
+        "by_provenance": {
+          "independent": 0,
+          "tms": 1,
+          "commercial": 0,
+          "tax": 0,
+          "derived": 0
+        },
+        "has_live_independent": false,
+        "has_live_any": true,
+        "last_verified": "2026-06-25",
+        "sources": [
+          {
+            "org": "University of Arkansas Cooperative Extension",
+            "report": "Timber Price Report",
+            "url": "https://www.uaex.uada.edu/environment-nature/forestry/timber-price-report.aspx",
+            "status": "live",
+            "provenance": "tms",
+            "frequency": "Quarterly",
+            "units": "$/ton",
+            "latest_known": null,
+            "verified": "2026-06-25",
+            "in_dataset": null,
+            "notes": "Free to read, but the values are licensed TimberMart-South data."
+          }
+        ]
+      },
+      "prices": {
+        "evidence": "regional-only",
+        "series": 34,
+        "series_direct": 0,
+        "series_regional": 34,
+        "observations": 701,
+        "year_min": 1977,
+        "year_max": 2025,
+        "sources": [
+          "usfs_cutsold"
+        ],
+        "products": [
+          "sawtimber"
+        ],
+        "markets": [
+          "stumpage"
+        ]
+      }
+    },
+    {
+      "state": "AZ",
+      "state_name": "Arizona",
+      "research": {
+        "searched": "2026-08-30",
+        "outcome": "none-known",
+        "checked": [
+          "USFS SRS Forest Economics & Policy state page (2025-06-02)",
+          "Arizona Dept. of Forestry and Fire Management",
+          "University of Arizona Cooperative Extension"
+        ],
+        "note": "The federal directory names a forest products specialist but no report. Arizona's commercial harvest is small and largely federal, so what volume exists shows up here through USFS Cut-and-Sold (R3)."
+      },
+      "directory": {
+        "entries": 0,
+        "by_status": {
+          "live": 0,
+          "stale": 0,
+          "dead": 0,
+          "paywalled": 0,
+          "unverified": 0
+        },
+        "by_provenance": {
+          "independent": 0,
+          "tms": 0,
+          "commercial": 0,
+          "tax": 0,
+          "derived": 0
+        },
+        "has_live_independent": false,
+        "has_live_any": false,
+        "last_verified": null,
+        "sources": []
+      },
+      "prices": {
+        "evidence": "regional-only",
+        "series": 12,
+        "series_direct": 0,
+        "series_regional": 12,
+        "observations": 305,
+        "year_min": 1977,
+        "year_max": 2025,
+        "sources": [
+          "usfs_cutsold"
+        ],
+        "products": [
+          "sawtimber"
+        ],
+        "markets": [
+          "stumpage"
+        ]
+      }
+    },
+    {
+      "state": "CA",
+      "state_name": "California",
+      "research": {
+        "searched": "2026-06-25",
+        "outcome": "found",
+        "checked": [],
+        "note": null
+      },
+      "directory": {
+        "entries": 1,
+        "by_status": {
+          "live": 1,
+          "stale": 0,
+          "dead": 0,
+          "paywalled": 0,
+          "unverified": 0
+        },
+        "by_provenance": {
+          "independent": 0,
+          "tms": 0,
+          "commercial": 0,
+          "tax": 1,
+          "derived": 0
+        },
+        "has_live_independent": false,
+        "has_live_any": true,
+        "last_verified": "2026-06-25",
+        "sources": [
+          {
+            "org": "California CDTFA",
+            "report": "Timber Yield Tax — Harvest Value Schedules",
+            "url": "https://www.cdtfa.ca.gov/taxes-and-fees/timber-yield-tax/harvest-value-and-statistics.htm",
+            "status": "live",
+            "provenance": "tax",
+            "frequency": "Semi-annual",
+            "units": "$/MBF net Scribner",
+            "latest_known": "2026 H1",
+            "verified": "2026-06-25",
+            "in_dataset": null,
+            "notes": "Survey-derived, tax-assessed harvest values by Timber Value Area — the only recurring California series."
+          }
+        ]
+      },
+      "prices": {
+        "evidence": "regional-only",
+        "series": 34,
+        "series_direct": 0,
+        "series_regional": 34,
+        "observations": 842,
+        "year_min": 1961,
+        "year_max": 2025,
+        "sources": [
+          "pnw",
+          "usfs_cutsold"
+        ],
+        "products": [
+          "sawtimber"
+        ],
+        "markets": [
+          "stumpage"
+        ]
+      }
+    },
+    {
+      "state": "CO",
+      "state_name": "Colorado",
+      "research": {
+        "searched": "2026-08-30",
+        "outcome": "none-known",
+        "checked": [
+          "USFS SRS Forest Economics & Policy state page (2025-06-02)",
+          "Colorado State Forest Service (incl. its Timber Sales pages)",
+          "Colorado State Land Board",
+          "CSU Extension"
+        ],
+        "note": "CSFS posts individual timber sales as they are offered, but publishes no recurring price series. Federal and BLM sales in Colorado reach this dataset through USFS Cut-and-Sold (R2)."
+      },
+      "directory": {
+        "entries": 0,
+        "by_status": {
+          "live": 0,
+          "stale": 0,
+          "dead": 0,
+          "paywalled": 0,
+          "unverified": 0
+        },
+        "by_provenance": {
+          "independent": 0,
+          "tms": 0,
+          "commercial": 0,
+          "tax": 0,
+          "derived": 0
+        },
+        "has_live_independent": false,
+        "has_live_any": false,
+        "last_verified": null,
+        "sources": []
+      },
+      "prices": {
+        "evidence": "regional-only",
+        "series": 22,
+        "series_direct": 0,
+        "series_regional": 22,
+        "observations": 419,
+        "year_min": 1977,
+        "year_max": 2025,
+        "sources": [
+          "usfs_cutsold"
+        ],
+        "products": [
+          "sawtimber"
+        ],
+        "markets": [
+          "stumpage"
+        ]
+      }
+    },
+    {
+      "state": "CT",
+      "state_name": "Connecticut",
+      "research": {
+        "searched": "2026-06-25",
+        "outcome": "found",
+        "checked": [],
+        "note": null
+      },
+      "directory": {
+        "entries": 1,
+        "by_status": {
+          "live": 1,
+          "stale": 0,
+          "dead": 0,
+          "paywalled": 0,
+          "unverified": 0
+        },
+        "by_provenance": {
+          "independent": 1,
+          "tms": 0,
+          "commercial": 0,
+          "tax": 0,
+          "derived": 0
+        },
+        "has_live_independent": true,
+        "has_live_any": true,
+        "last_verified": "2026-06-25",
+        "sources": [
+          {
+            "org": "UMass MassWoods",
+            "report": "Southern New England Stumpage Survey (MA/CT/RI)",
+            "url": "https://masswoods.org/southern-new-england-stumpage-survey",
+            "status": "live",
+            "provenance": "independent",
+            "frequency": "Quarterly",
+            "units": "$/MBF, $/cord, $/ton (median + range)",
+            "latest_known": null,
+            "verified": "2026-06-25",
+            "in_dataset": null,
+            "notes": null
+          }
+        ]
+      },
+      "prices": {
+        "evidence": "regional-only",
+        "series": 43,
+        "series_direct": 0,
+        "series_regional": 43,
+        "observations": 1249,
+        "year_min": 1977,
+        "year_max": 2025,
+        "sources": [
+          "usfs_cutsold"
+        ],
+        "products": [
+          "sawtimber"
+        ],
+        "markets": [
+          "stumpage"
+        ]
+      }
+    },
+    {
+      "state": "DE",
+      "state_name": "Delaware",
+      "research": {
+        "searched": "2026-08-30",
+        "outcome": "found",
+        "checked": [],
+        "note": "Searched and found only the discontinued joint Maryland/Delaware series. No current Delaware source."
+      },
+      "directory": {
+        "entries": 1,
+        "by_status": {
+          "live": 0,
+          "stale": 0,
+          "dead": 1,
+          "paywalled": 0,
+          "unverified": 0
+        },
+        "by_provenance": {
+          "independent": 1,
+          "tms": 0,
+          "commercial": 0,
+          "tax": 0,
+          "derived": 0
+        },
+        "has_live_independent": false,
+        "has_live_any": false,
+        "last_verified": "2026-08-30",
+        "sources": [
+          {
+            "org": "University of Maryland Extension",
+            "report": "Maryland/Delaware Stumpage Price Report",
+            "url": "https://extension.umd.edu/resource/timber-market-resources",
+            "status": "dead",
+            "provenance": "independent",
+            "frequency": "Biannual (while published)",
+            "units": null,
+            "latest_known": "Mid-2006 (archive)",
+            "verified": "2026-08-30",
+            "in_dataset": null,
+            "notes": "The same joint Maryland/Delaware series, covering late 1999 to mid-2006 and discontinued since. It is the only Delaware price report we found; neither the Delaware Forest Service nor UD Cooperative Extension publishes a current one."
+          }
+        ]
+      },
+      "prices": {
+        "evidence": "regional-only",
+        "series": 43,
+        "series_direct": 0,
+        "series_regional": 43,
+        "observations": 1249,
+        "year_min": 1977,
+        "year_max": 2025,
+        "sources": [
+          "usfs_cutsold"
+        ],
+        "products": [
+          "sawtimber"
+        ],
+        "markets": [
+          "stumpage"
+        ]
+      }
+    },
+    {
+      "state": "FL",
+      "state_name": "Florida",
+      "research": {
+        "searched": "2026-06-25",
+        "outcome": "found",
+        "checked": [],
+        "note": null
+      },
+      "directory": {
+        "entries": 1,
+        "by_status": {
+          "live": 1,
+          "stale": 0,
+          "dead": 0,
+          "paywalled": 0,
+          "unverified": 0
+        },
+        "by_provenance": {
+          "independent": 0,
+          "tms": 1,
+          "commercial": 0,
+          "tax": 0,
+          "derived": 0
+        },
+        "has_live_independent": false,
+        "has_live_any": true,
+        "last_verified": "2026-06-25",
+        "sources": [
+          {
+            "org": "UF/IFAS Florida Land Steward",
+            "report": "Timber Price Update (narrative)",
+            "url": "https://programs.ifas.ufl.edu/florida-land-steward/",
+            "status": "live",
+            "provenance": "tms",
+            "frequency": "Irregular",
+            "units": null,
+            "latest_known": null,
+            "verified": "2026-06-25",
+            "in_dataset": null,
+            "notes": "Commentary citing TimberMart-South; no data table."
+          }
+        ]
+      },
+      "prices": {
+        "evidence": "regional-only",
+        "series": 34,
+        "series_direct": 0,
+        "series_regional": 34,
+        "observations": 701,
+        "year_min": 1977,
+        "year_max": 2025,
+        "sources": [
+          "usfs_cutsold"
+        ],
+        "products": [
+          "sawtimber"
+        ],
+        "markets": [
+          "stumpage"
+        ]
+      }
+    },
+    {
+      "state": "GA",
+      "state_name": "Georgia",
+      "research": {
+        "searched": "2026-06-25",
+        "outcome": "found",
+        "checked": [],
+        "note": null
+      },
+      "directory": {
+        "entries": 1,
+        "by_status": {
+          "live": 1,
+          "stale": 0,
+          "dead": 0,
+          "paywalled": 0,
+          "unverified": 0
+        },
+        "by_provenance": {
+          "independent": 1,
+          "tms": 0,
+          "commercial": 0,
+          "tax": 0,
+          "derived": 0
+        },
+        "has_live_independent": true,
+        "has_live_any": true,
+        "last_verified": "2026-06-25",
+        "sources": [
+          {
+            "org": "Georgia Department of Revenue",
+            "report": "Owner Harvest Timber Values",
+            "url": "https://dor.georgia.gov/local-government-services/digest-compliance/owner-harvest-timber-values",
+            "status": "live",
+            "provenance": "independent",
+            "frequency": "Annual",
+            "units": "$/ton (weighted average of actual sale filings)",
+            "latest_known": "2026",
+            "verified": "2026-06-25",
+            "in_dataset": null,
+            "notes": "Built from county PT-283T harvest filings — actual transactions."
+          }
+        ]
+      },
+      "prices": {
+        "evidence": "regional-only",
+        "series": 34,
+        "series_direct": 0,
+        "series_regional": 34,
+        "observations": 701,
+        "year_min": 1977,
+        "year_max": 2025,
+        "sources": [
+          "usfs_cutsold"
+        ],
+        "products": [
+          "sawtimber"
+        ],
+        "markets": [
+          "stumpage"
+        ]
+      }
+    },
+    {
+      "state": "HI",
+      "state_name": "Hawaii",
+      "research": {
+        "searched": "2026-08-30",
+        "outcome": "none-known",
+        "checked": [
+          "USFS SRS Forest Economics & Policy state page (2025-06-02)",
+          "Hawaii DLNR Division of Forestry and Wildlife",
+          "University of Hawaiʻi Forestry Extension"
+        ],
+        "note": "No price series found. Hawaii's commercial forestry is small and specialised (koa, eucalyptus plantations) with no public reporting."
+      },
+      "directory": {
+        "entries": 0,
+        "by_status": {
+          "live": 0,
+          "stale": 0,
+          "dead": 0,
+          "paywalled": 0,
+          "unverified": 0
+        },
+        "by_provenance": {
+          "independent": 0,
+          "tms": 0,
+          "commercial": 0,
+          "tax": 0,
+          "derived": 0
+        },
+        "has_live_independent": false,
+        "has_live_any": false,
+        "last_verified": null,
+        "sources": []
+      },
+      "prices": {
+        "evidence": "none",
+        "series": 0,
+        "series_direct": 0,
+        "series_regional": 0,
+        "observations": 0,
+        "year_min": null,
+        "year_max": null,
+        "sources": [],
+        "products": [],
+        "markets": []
+      }
+    },
+    {
+      "state": "IA",
+      "state_name": "Iowa",
+      "research": {
+        "searched": "2026-08-30",
+        "outcome": "none-known",
+        "checked": [
+          "USFS SRS Forest Economics & Policy state page (2025-06-02)",
+          "Iowa DNR Forestry",
+          "Iowa State University Extension and Outreach Forestry"
+        ],
+        "note": "Iowa has roughly 3 million acres of forest and an active hardwood industry, but neither the DNR nor ISU Extension publishes a stumpage price series. A substantive gap rather than an empty one."
+      },
+      "directory": {
+        "entries": 0,
+        "by_status": {
+          "live": 0,
+          "stale": 0,
+          "dead": 0,
+          "paywalled": 0,
+          "unverified": 0
+        },
+        "by_provenance": {
+          "independent": 0,
+          "tms": 0,
+          "commercial": 0,
+          "tax": 0,
+          "derived": 0
+        },
+        "has_live_independent": false,
+        "has_live_any": false,
+        "last_verified": null,
+        "sources": []
+      },
+      "prices": {
+        "evidence": "regional-only",
+        "series": 43,
+        "series_direct": 0,
+        "series_regional": 43,
+        "observations": 1249,
+        "year_min": 1977,
+        "year_max": 2025,
+        "sources": [
+          "usfs_cutsold"
+        ],
+        "products": [
+          "sawtimber"
+        ],
+        "markets": [
+          "stumpage"
+        ]
+      }
+    },
+    {
+      "state": "ID",
+      "state_name": "Idaho",
+      "research": {
+        "searched": "2026-06-25",
+        "outcome": "found",
+        "checked": [],
+        "note": null
+      },
+      "directory": {
+        "entries": 1,
+        "by_status": {
+          "live": 1,
+          "stale": 0,
+          "dead": 0,
+          "paywalled": 0,
+          "unverified": 0
+        },
+        "by_provenance": {
+          "independent": 1,
+          "tms": 0,
+          "commercial": 0,
+          "tax": 0,
+          "derived": 0
+        },
+        "has_live_independent": true,
+        "has_live_any": true,
+        "last_verified": "2026-06-25",
+        "sources": [
+          {
+            "org": "Idaho Department of Lands",
+            "report": "Endowment Timber Sales (+ monthly Land Board sale reports)",
+            "url": "https://www.idl.idaho.gov/about-forestry/endowment-timber-sales/",
+            "status": "live",
+            "provenance": "independent",
+            "frequency": "Annual (FY) + monthly sale reports",
+            "units": "$/MBF Scribner (auction)",
+            "latest_known": null,
+            "verified": "2026-06-25",
+            "in_dataset": null,
+            "notes": "The Idaho Tax Commission's yield-tax schedule is derived from these sales."
+          }
+        ]
+      },
+      "prices": {
+        "evidence": "state-series",
+        "series": 77,
+        "series_direct": 4,
+        "series_regional": 73,
+        "observations": 1921,
+        "year_min": 1967,
+        "year_max": 2025,
+        "sources": [
+          "mt_bber",
+          "pnw",
+          "usfs_cutsold"
+        ],
+        "products": [
+          "sawtimber"
+        ],
+        "markets": [
+          "delivered",
+          "stumpage"
+        ]
+      }
+    },
+    {
+      "state": "IL",
+      "state_name": "Illinois",
+      "research": {
+        "searched": "2026-06-25",
+        "outcome": "found",
+        "checked": [],
+        "note": null
+      },
+      "directory": {
+        "entries": 1,
+        "by_status": {
+          "live": 1,
+          "stale": 0,
+          "dead": 0,
+          "paywalled": 0,
+          "unverified": 0
+        },
+        "by_provenance": {
+          "independent": 1,
+          "tms": 0,
+          "commercial": 0,
+          "tax": 0,
+          "derived": 0
+        },
+        "has_live_independent": true,
+        "has_live_any": true,
+        "last_verified": "2026-06-25",
+        "sources": [
+          {
+            "org": "Illinois DNR / Illinois Dept. of Agriculture",
+            "report": "Illinois Timber Prices",
+            "url": "https://dnr.illinois.gov/conservation/forestry/illinois-timber-prices.html",
+            "status": "live",
+            "provenance": "independent",
+            "frequency": "Semi-annual",
+            "units": "$/MBF Doyle (stumpage + FOB-mill)",
+            "latest_known": "Spring–Summer 2025",
+            "verified": "2026-06-25",
+            "in_dataset": null,
+            "notes": "~17 species."
+          }
+        ]
+      },
+      "prices": {
+        "evidence": "regional-only",
+        "series": 43,
+        "series_direct": 0,
+        "series_regional": 43,
+        "observations": 1249,
+        "year_min": 1977,
+        "year_max": 2025,
+        "sources": [
+          "usfs_cutsold"
+        ],
+        "products": [
+          "sawtimber"
+        ],
+        "markets": [
+          "stumpage"
+        ]
+      }
+    },
+    {
+      "state": "IN",
+      "state_name": "Indiana",
+      "research": {
+        "searched": "2026-08-30",
+        "outcome": "found",
+        "checked": [],
+        "note": null
+      },
+      "directory": {
+        "entries": 2,
+        "by_status": {
+          "live": 1,
+          "stale": 1,
+          "dead": 0,
+          "paywalled": 0,
+          "unverified": 0
+        },
+        "by_provenance": {
+          "independent": 2,
+          "tms": 0,
+          "commercial": 0,
+          "tax": 0,
+          "derived": 0
+        },
+        "has_live_independent": true,
+        "has_live_any": true,
+        "last_verified": "2026-08-30",
+        "sources": [
+          {
+            "org": "Indiana DNR Division of Forestry",
+            "report": "Indiana Forest Products Price Report and Trend Analysis",
+            "url": "https://secure.in.gov/dnr/forestry/forestry-publications-and-presentations/",
+            "status": "stale",
+            "provenance": "independent",
+            "frequency": "Semi-annual (nominal)",
+            "units": "$/MBF Doyle",
+            "latest_known": "Spring 2020",
+            "verified": "2026-08-30",
+            "in_dataset": null,
+            "notes": "Purdue FNR Extension no longer hosts this — its page now points to Indiana DNR, where the series runs spring/fall 2014—2020 and stops. DNR cautions the figures are log prices and should not be used to appraise standing timber; for Indiana stumpage see the Woodland Steward survey."
+          },
+          {
+            "org": "Indiana Woodland Steward",
+            "report": "Indiana Consulting Foresters Stumpage Timber Price Report",
+            "url": "https://www.inwoodlands.org/forest-inventory-programs/",
+            "status": "live",
+            "provenance": "independent",
+            "frequency": "Annual",
+            "units": null,
+            "latest_known": "2025",
+            "verified": "2026-08-30",
+            "in_dataset": null,
+            "notes": "An annual survey of the consulting foresters practising in Indiana, published in the Woodland Steward newsletter and running back to at least 2010. This is the live Indiana stumpage series now that the DNR report is frozen at 2020 — and unlike the DNR figures it is stumpage rather than delivered log prices."
+          }
+        ]
+      },
+      "prices": {
+        "evidence": "regional-only",
+        "series": 43,
+        "series_direct": 0,
+        "series_regional": 43,
+        "observations": 1249,
+        "year_min": 1977,
+        "year_max": 2025,
+        "sources": [
+          "usfs_cutsold"
+        ],
+        "products": [
+          "sawtimber"
+        ],
+        "markets": [
+          "stumpage"
+        ]
+      }
+    },
+    {
+      "state": "KS",
+      "state_name": "Kansas",
+      "research": {
+        "searched": "2026-08-30",
+        "outcome": "none-known",
+        "checked": [
+          "USFS SRS Forest Economics & Policy state page (2025-06-02)",
+          "Kansas Forest Service",
+          "Kansas State University Extension Forestry"
+        ],
+        "note": "The Kansas Forest Service employs a marketing and utilization forester but publishes no price report."
+      },
+      "directory": {
+        "entries": 0,
+        "by_status": {
+          "live": 0,
+          "stale": 0,
+          "dead": 0,
+          "paywalled": 0,
+          "unverified": 0
+        },
+        "by_provenance": {
+          "independent": 0,
+          "tms": 0,
+          "commercial": 0,
+          "tax": 0,
+          "derived": 0
+        },
+        "has_live_independent": false,
+        "has_live_any": false,
+        "last_verified": null,
+        "sources": []
+      },
+      "prices": {
+        "evidence": "regional-only",
+        "series": 22,
+        "series_direct": 0,
+        "series_regional": 22,
+        "observations": 419,
+        "year_min": 1977,
+        "year_max": 2025,
+        "sources": [
+          "usfs_cutsold"
+        ],
+        "products": [
+          "sawtimber"
+        ],
+        "markets": [
+          "stumpage"
+        ]
+      }
+    },
+    {
+      "state": "KY",
+      "state_name": "Kentucky",
+      "research": {
+        "searched": "2026-06-25",
+        "outcome": "found",
+        "checked": [],
+        "note": null
+      },
+      "directory": {
+        "entries": 1,
+        "by_status": {
+          "live": 1,
+          "stale": 0,
+          "dead": 0,
+          "paywalled": 0,
+          "unverified": 0
+        },
+        "by_provenance": {
+          "independent": 1,
+          "tms": 0,
+          "commercial": 0,
+          "tax": 0,
+          "derived": 0
+        },
+        "has_live_independent": true,
+        "has_live_any": true,
+        "last_verified": "2026-06-25",
+        "sources": [
+          {
+            "org": "Kentucky Division of Forestry",
+            "report": "Delivered Log Price Report",
+            "url": "https://eec.ky.gov/Natural-Resources/Forestry/resource-utilization-and-marketing/",
+            "status": "live",
+            "provenance": "independent",
+            "frequency": "Semi-annual",
+            "units": "$/MBF (DELIVERED, not stumpage)",
+            "latest_known": "Jan 2026 (H2 2025)",
+            "verified": "2026-06-25",
+            "in_dataset": null,
+            "notes": null
+          }
+        ]
+      },
+      "prices": {
+        "evidence": "regional-only",
+        "series": 34,
+        "series_direct": 0,
+        "series_regional": 34,
+        "observations": 701,
+        "year_min": 1977,
+        "year_max": 2025,
+        "sources": [
+          "usfs_cutsold"
+        ],
+        "products": [
+          "sawtimber"
+        ],
+        "markets": [
+          "stumpage"
+        ]
+      }
+    },
+    {
+      "state": "LA",
+      "state_name": "Louisiana",
+      "research": {
+        "searched": "2026-08-30",
+        "outcome": "found",
+        "checked": [],
+        "note": null
+      },
+      "directory": {
+        "entries": 2,
+        "by_status": {
+          "live": 2,
+          "stale": 0,
+          "dead": 0,
+          "paywalled": 0,
+          "unverified": 0
+        },
+        "by_provenance": {
+          "independent": 1,
+          "tms": 1,
+          "commercial": 0,
+          "tax": 0,
+          "derived": 0
+        },
+        "has_live_independent": true,
+        "has_live_any": true,
+        "last_verified": "2026-08-30",
+        "sources": [
+          {
+            "org": "Louisiana Dept. of Agriculture & Forestry, Office of Forestry",
+            "report": "Quarterly Report of Forest Products",
+            "url": "https://www.ldaf.la.gov/land/forestry/forestry-reports",
+            "status": "live",
+            "provenance": "independent",
+            "frequency": "Quarterly",
+            "units": "$/ton and $/MBF, by five reporting areas",
+            "latest_known": "Q1 2026",
+            "verified": "2026-08-30",
+            "in_dataset": null,
+            "notes": "Genuinely independent and transaction-based, which is rare in the South: prices are “total volume and total value ratios paid from bid and negotiated sales,” gathered jointly by LDAF, the Louisiana Forestry Commission, the Dept. of Revenue and Taxation and the Tax Commission. Makes no reference to TimberMart-South. Also the basis for the state severance-tax values and for forest-land use-value assessment."
+          },
+          {
+            "org": "LSU AgCenter",
+            "report": "Louisiana Stumpage Report / Timber Tales newsletter",
+            "url": "https://www.lsuagcenter.com/articles/page1685631054382",
+            "status": "live",
+            "provenance": "tms",
+            "frequency": "Quarterly",
+            "units": "$/ton",
+            "latest_known": "Timber Tales Vol. 26 No. 1 (2026)",
+            "verified": "2026-08-30",
+            "in_dataset": null,
+            "notes": "Statewide averages for six products, with the quarter compared against the South-wide average. Free to read, but licensed data: “The sawtimber and pulpwood price data included in this newsletter are published with permission from TimberMart-South Athens, Georgia.” For license-clean Louisiana prices use the LDAF quarterly instead. Verified from the publisher’s index rather than a direct fetch, which failed on a TLS chain error."
+          }
+        ]
+      },
+      "prices": {
+        "evidence": "regional-only",
+        "series": 34,
+        "series_direct": 0,
+        "series_regional": 34,
+        "observations": 701,
+        "year_min": 1977,
+        "year_max": 2025,
+        "sources": [
+          "usfs_cutsold"
+        ],
+        "products": [
+          "sawtimber"
+        ],
+        "markets": [
+          "stumpage"
+        ]
+      }
+    },
+    {
+      "state": "MA",
+      "state_name": "Massachusetts",
+      "research": {
+        "searched": "2026-06-25",
+        "outcome": "found",
+        "checked": [],
+        "note": null
+      },
+      "directory": {
+        "entries": 1,
+        "by_status": {
+          "live": 1,
+          "stale": 0,
+          "dead": 0,
+          "paywalled": 0,
+          "unverified": 0
+        },
+        "by_provenance": {
+          "independent": 1,
+          "tms": 0,
+          "commercial": 0,
+          "tax": 0,
+          "derived": 0
+        },
+        "has_live_independent": true,
+        "has_live_any": true,
+        "last_verified": "2026-06-25",
+        "sources": [
+          {
+            "org": "UMass MassWoods",
+            "report": "Southern New England Stumpage Survey (MA/CT/RI)",
+            "url": "https://masswoods.org/southern-new-england-stumpage-survey",
+            "status": "live",
+            "provenance": "independent",
+            "frequency": "Quarterly",
+            "units": "$/MBF, $/cord, $/ton (median + range)",
+            "latest_known": "Q1 2026",
+            "verified": "2026-06-25",
+            "in_dataset": null,
+            "notes": "Two regions (east/west of the Connecticut River). Also covers CT and RI."
+          }
+        ]
+      },
+      "prices": {
+        "evidence": "regional-only",
+        "series": 43,
+        "series_direct": 0,
+        "series_regional": 43,
+        "observations": 1249,
+        "year_min": 1977,
+        "year_max": 2025,
+        "sources": [
+          "usfs_cutsold"
+        ],
+        "products": [
+          "sawtimber"
+        ],
+        "markets": [
+          "stumpage"
+        ]
+      }
+    },
+    {
+      "state": "MD",
+      "state_name": "Maryland",
+      "research": {
+        "searched": "2026-08-30",
+        "outcome": "found",
+        "checked": [],
+        "note": "Searched and found only a discontinued series (1999–2006). Maryland has no current price report; the successor page links out of state."
+      },
+      "directory": {
+        "entries": 1,
+        "by_status": {
+          "live": 0,
+          "stale": 0,
+          "dead": 1,
+          "paywalled": 0,
+          "unverified": 0
+        },
+        "by_provenance": {
+          "independent": 1,
+          "tms": 0,
+          "commercial": 0,
+          "tax": 0,
+          "derived": 0
+        },
+        "has_live_independent": false,
+        "has_live_any": false,
+        "last_verified": "2026-08-30",
+        "sources": [
+          {
+            "org": "University of Maryland Extension",
+            "report": "Maryland/Delaware Stumpage Price Report",
+            "url": "https://extension.umd.edu/resource/timber-market-resources",
+            "status": "dead",
+            "provenance": "independent",
+            "frequency": "Biannual (while published)",
+            "units": null,
+            "latest_known": "Mid-2006 (archive)",
+            "verified": "2026-08-30",
+            "in_dataset": null,
+            "notes": "Discontinued: “They no longer track stumpage prices but this archive of biannual reports spans late 1999 to mid-2006.” Maryland has had no price series of its own since. The successor page publishes no Maryland numbers at all — it links out to Penn State, WVU and TimberMart-South."
+          }
+        ]
+      },
+      "prices": {
+        "evidence": "regional-only",
+        "series": 43,
+        "series_direct": 0,
+        "series_regional": 43,
+        "observations": 1249,
+        "year_min": 1977,
+        "year_max": 2025,
+        "sources": [
+          "usfs_cutsold"
+        ],
+        "products": [
+          "sawtimber"
+        ],
+        "markets": [
+          "stumpage"
+        ]
+      }
+    },
+    {
+      "state": "ME",
+      "state_name": "Maine",
+      "research": {
+        "searched": "2026-06-25",
+        "outcome": "found",
+        "checked": [],
+        "note": null
+      },
+      "directory": {
+        "entries": 1,
+        "by_status": {
+          "live": 1,
+          "stale": 0,
+          "dead": 0,
+          "paywalled": 0,
+          "unverified": 0
+        },
+        "by_provenance": {
+          "independent": 1,
+          "tms": 0,
+          "commercial": 0,
+          "tax": 0,
+          "derived": 0
+        },
+        "has_live_independent": true,
+        "has_live_any": true,
+        "last_verified": "2026-06-25",
+        "sources": [
+          {
+            "org": "Maine Forest Service (DACF)",
+            "report": "Stumpage Price Reports (annual, county-level)",
+            "url": "https://www.maine.gov/dacf/mfs/publications/annual_reports.html",
+            "status": "live",
+            "provenance": "independent",
+            "frequency": "Annual",
+            "units": "$/MBF, $/cord, $/ton by product",
+            "latest_known": "2024 data (published Dec 2025)",
+            "verified": "2026-06-25",
+            "in_dataset": null,
+            "notes": "County/unit grain — the finest-grain Northeast series."
+          }
+        ]
+      },
+      "prices": {
+        "evidence": "regional-only",
+        "series": 43,
+        "series_direct": 0,
+        "series_regional": 43,
+        "observations": 1249,
+        "year_min": 1977,
+        "year_max": 2025,
+        "sources": [
+          "usfs_cutsold"
+        ],
+        "products": [
+          "sawtimber"
+        ],
+        "markets": [
+          "stumpage"
+        ]
+      }
+    },
+    {
+      "state": "MI",
+      "state_name": "Michigan",
+      "research": {
+        "searched": "2026-06-25",
+        "outcome": "found",
+        "checked": [],
+        "note": null
+      },
+      "directory": {
+        "entries": 2,
+        "by_status": {
+          "live": 1,
+          "stale": 0,
+          "dead": 0,
+          "paywalled": 1,
+          "unverified": 0
+        },
+        "by_provenance": {
+          "independent": 1,
+          "tms": 0,
+          "commercial": 1,
+          "tax": 0,
+          "derived": 0
+        },
+        "has_live_independent": true,
+        "has_live_any": true,
+        "last_verified": "2026-06-25",
+        "sources": [
+          {
+            "org": "Michigan DNR (Forest Management)",
+            "report": "State Forest Stumpage Price Reports",
+            "url": "https://www2.dnr.state.mi.us/ftp/forestry/tsreports/StumpagePriceReports/",
+            "status": "live",
+            "provenance": "independent",
+            "frequency": "Quarterly",
+            "units": "$/MBF (Scribner & International ¼″, varies by unit) + $/cord",
+            "latest_known": "Q1 2026",
+            "verified": "2026-06-25",
+            "in_dataset": "mi_dnr",
+            "notes": "Volume-weighted bids from state-forest timber sales, by Forest Management Unit. The cleanest machine-readable state source (XLSX)."
+          },
+          {
+            "org": "Forest Data Network",
+            "report": "FDN Prime (WI/MI/MN stumpage database)",
+            "url": "https://forestdatanetwork.com/",
+            "status": "paywalled",
+            "provenance": "commercial",
+            "frequency": null,
+            "units": null,
+            "latest_known": null,
+            "verified": "2026-06-25",
+            "in_dataset": null,
+            "notes": "Commercial aggregation; legacy subscriptions discontinued."
+          }
+        ]
+      },
+      "prices": {
+        "evidence": "state-series",
+        "series": 817,
+        "series_direct": 774,
+        "series_regional": 43,
+        "observations": 10437,
+        "year_min": 1977,
+        "year_max": 2026,
+        "sources": [
+          "mi_dnr",
+          "usfs_cutsold"
+        ],
+        "products": [
+          "pulpwood",
+          "sawtimber"
+        ],
+        "markets": [
+          "stumpage"
+        ]
+      }
+    },
+    {
+      "state": "MN",
+      "state_name": "Minnesota",
+      "research": {
+        "searched": "2026-08-30",
+        "outcome": "found",
+        "checked": [],
+        "note": null
+      },
+      "directory": {
+        "entries": 1,
+        "by_status": {
+          "live": 0,
+          "stale": 1,
+          "dead": 0,
+          "paywalled": 0,
+          "unverified": 0
+        },
+        "by_provenance": {
+          "independent": 1,
+          "tms": 0,
+          "commercial": 0,
+          "tax": 0,
+          "derived": 0
+        },
+        "has_live_independent": false,
+        "has_live_any": false,
+        "last_verified": "2026-08-30",
+        "sources": [
+          {
+            "org": "Minnesota DNR",
+            "report": "Public Stumpage Price Review & Price Index",
+            "url": "https://www.dnr.state.mn.us/forestry/timbersales/stumpage.html",
+            "status": "stale",
+            "provenance": "independent",
+            "frequency": "Annual",
+            "units": "$/cord and $/MBF",
+            "latest_known": "2021",
+            "verified": "2026-08-30",
+            "in_dataset": null,
+            "notes": "Stalled, not retired: the page still describes collection in February—April and publication in late May or June, but 2021 remains the most recent review posted — five annual editions unaccounted for."
+          }
+        ]
+      },
+      "prices": {
+        "evidence": "regional-only",
+        "series": 43,
+        "series_direct": 0,
+        "series_regional": 43,
+        "observations": 1249,
+        "year_min": 1977,
+        "year_max": 2025,
+        "sources": [
+          "usfs_cutsold"
+        ],
+        "products": [
+          "sawtimber"
+        ],
+        "markets": [
+          "stumpage"
+        ]
+      }
+    },
+    {
+      "state": "MO",
+      "state_name": "Missouri",
+      "research": {
+        "searched": "2026-06-25",
+        "outcome": "found",
+        "checked": [],
+        "note": null
+      },
+      "directory": {
+        "entries": 1,
+        "by_status": {
+          "live": 1,
+          "stale": 0,
+          "dead": 0,
+          "paywalled": 0,
+          "unverified": 0
+        },
+        "by_provenance": {
+          "independent": 1,
+          "tms": 0,
+          "commercial": 0,
+          "tax": 0,
+          "derived": 0
+        },
+        "has_live_independent": true,
+        "has_live_any": true,
+        "last_verified": "2026-06-25",
+        "sources": [
+          {
+            "org": "Missouri Department of Conservation",
+            "report": "Timber Price Trends",
+            "url": "https://research.mdc.mo.gov/",
+            "status": "live",
+            "provenance": "independent",
+            "frequency": "Quarterly (rolling 12-month)",
+            "units": "$/MBF Doyle and International ¼″",
+            "latest_known": "Oct–Dec 2025",
+            "verified": "2026-06-25",
+            "in_dataset": null,
+            "notes": "Two regions (N/S)."
+          }
+        ]
+      },
+      "prices": {
+        "evidence": "regional-only",
+        "series": 43,
+        "series_direct": 0,
+        "series_regional": 43,
+        "observations": 1249,
+        "year_min": 1977,
+        "year_max": 2025,
+        "sources": [
+          "usfs_cutsold"
+        ],
+        "products": [
+          "sawtimber"
+        ],
+        "markets": [
+          "stumpage"
+        ]
+      }
+    },
+    {
+      "state": "MS",
+      "state_name": "Mississippi",
+      "research": {
+        "searched": "2026-06-25",
+        "outcome": "found",
+        "checked": [],
+        "note": null
+      },
+      "directory": {
+        "entries": 1,
+        "by_status": {
+          "live": 1,
+          "stale": 0,
+          "dead": 0,
+          "paywalled": 0,
+          "unverified": 0
+        },
+        "by_provenance": {
+          "independent": 0,
+          "tms": 1,
+          "commercial": 0,
+          "tax": 0,
+          "derived": 0
+        },
+        "has_live_independent": false,
+        "has_live_any": true,
+        "last_verified": "2026-06-25",
+        "sources": [
+          {
+            "org": "Mississippi State University Extension",
+            "report": "Timber Prices",
+            "url": "https://extension.msstate.edu/natural-resources/forestry/forest-economics/timber-prices",
+            "status": "live",
+            "provenance": "tms",
+            "frequency": "Quarterly",
+            "units": "$/ton",
+            "latest_known": null,
+            "verified": "2026-06-25",
+            "in_dataset": null,
+            "notes": "Explicit TimberMart-South agreement since 2013."
+          }
+        ]
+      },
+      "prices": {
+        "evidence": "regional-only",
+        "series": 34,
+        "series_direct": 0,
+        "series_regional": 34,
+        "observations": 701,
+        "year_min": 1977,
+        "year_max": 2025,
+        "sources": [
+          "usfs_cutsold"
+        ],
+        "products": [
+          "sawtimber"
+        ],
+        "markets": [
+          "stumpage"
+        ]
+      }
+    },
+    {
+      "state": "MT",
+      "state_name": "Montana",
+      "research": {
+        "searched": "2026-06-25",
+        "outcome": "found",
+        "checked": [],
+        "note": null
+      },
+      "directory": {
+        "entries": 2,
+        "by_status": {
+          "live": 2,
+          "stale": 0,
+          "dead": 0,
+          "paywalled": 0,
+          "unverified": 0
+        },
+        "by_provenance": {
+          "independent": 2,
+          "tms": 0,
+          "commercial": 0,
+          "tax": 0,
+          "derived": 0
+        },
+        "has_live_independent": true,
+        "has_live_any": true,
+        "last_verified": "2026-06-25",
+        "sources": [
+          {
+            "org": "University of Montana BBER",
+            "report": "Quarterly Log Prices (delivered)",
+            "url": "https://www.bber.umt.edu/fir/F_LogPrice.asp",
+            "status": "live",
+            "provenance": "independent",
+            "frequency": "Quarterly",
+            "units": "$/MBF Scribner (mill-DELIVERED)",
+            "latest_known": null,
+            "verified": "2026-06-25",
+            "in_dataset": "mt_bber",
+            "notes": null
+          },
+          {
+            "org": "Montana DNRC",
+            "report": "Trust-Land Timber Sale Bid Results",
+            "url": "https://dnrc.mt.gov/Forestry/Forest-Products/timber-sales",
+            "status": "live",
+            "provenance": "independent",
+            "frequency": "Per sale (FY2023→)",
+            "units": "$/ton (winning bids, volume-weighted)",
+            "latest_known": null,
+            "verified": "2026-06-25",
+            "in_dataset": "mt_dnrc",
+            "notes": null
+          }
+        ]
+      },
+      "prices": {
+        "evidence": "state-series",
+        "series": 91,
+        "series_direct": 47,
+        "series_regional": 44,
+        "observations": 3124,
+        "year_min": 1967,
+        "year_max": 2026,
+        "sources": [
+          "mt_bber",
+          "mt_dnrc",
+          "pnw",
+          "usfs_cutsold"
+        ],
+        "products": [
+          "sawtimber",
+          "veneer_logs"
+        ],
+        "markets": [
+          "delivered",
+          "stumpage"
+        ]
+      }
+    },
+    {
+      "state": "NC",
+      "state_name": "North Carolina",
+      "research": {
+        "searched": "2026-06-25",
+        "outcome": "found",
+        "checked": [],
+        "note": null
+      },
+      "directory": {
+        "entries": 1,
+        "by_status": {
+          "live": 1,
+          "stale": 0,
+          "dead": 0,
+          "paywalled": 0,
+          "unverified": 0
+        },
+        "by_provenance": {
+          "independent": 0,
+          "tms": 1,
+          "commercial": 0,
+          "tax": 0,
+          "derived": 0
+        },
+        "has_live_independent": false,
+        "has_live_any": true,
+        "last_verified": "2026-06-25",
+        "sources": [
+          {
+            "org": "NC State Extension Forestry",
+            "report": "Forestry Price Data",
+            "url": "https://forestry.ces.ncsu.edu/forestry-price-data/",
+            "status": "live",
+            "provenance": "tms",
+            "frequency": "Quarterly",
+            "units": "$/ton",
+            "latest_known": null,
+            "verified": "2026-06-25",
+            "in_dataset": null,
+            "notes": "Forest2Market data 2005–2014, TimberMart-South 2015→ — licensed, not original public data."
+          }
+        ]
+      },
+      "prices": {
+        "evidence": "regional-only",
+        "series": 34,
+        "series_direct": 0,
+        "series_regional": 34,
+        "observations": 701,
+        "year_min": 1977,
+        "year_max": 2025,
+        "sources": [
+          "usfs_cutsold"
+        ],
+        "products": [
+          "sawtimber"
+        ],
+        "markets": [
+          "stumpage"
+        ]
+      }
+    },
+    {
+      "state": "ND",
+      "state_name": "North Dakota",
+      "research": {
+        "searched": "2026-08-30",
+        "outcome": "none-known",
+        "checked": [
+          "USFS SRS Forest Economics & Policy state page (2025-06-02)",
+          "North Dakota Forest Service (NDSU)",
+          "NDSU Extension"
+        ],
+        "note": "No price series; North Dakota has little commercial timberland."
+      },
+      "directory": {
+        "entries": 0,
+        "by_status": {
+          "live": 0,
+          "stale": 0,
+          "dead": 0,
+          "paywalled": 0,
+          "unverified": 0
+        },
+        "by_provenance": {
+          "independent": 0,
+          "tms": 0,
+          "commercial": 0,
+          "tax": 0,
+          "derived": 0
+        },
+        "has_live_independent": false,
+        "has_live_any": false,
+        "last_verified": null,
+        "sources": []
+      },
+      "prices": {
+        "evidence": "regional-only",
+        "series": 32,
+        "series_direct": 0,
+        "series_regional": 32,
+        "observations": 1029,
+        "year_min": 1971,
+        "year_max": 2025,
+        "sources": [
+          "pnw",
+          "usfs_cutsold"
+        ],
+        "products": [
+          "sawtimber"
+        ],
+        "markets": [
+          "stumpage"
+        ]
+      }
+    },
+    {
+      "state": "NE",
+      "state_name": "Nebraska",
+      "research": {
+        "searched": "2026-08-30",
+        "outcome": "found",
+        "checked": [],
+        "note": "Found one report, and it covers mill prices rather than stumpage — Nebraska has no stumpage series."
+      },
+      "directory": {
+        "entries": 1,
+        "by_status": {
+          "live": 0,
+          "stale": 1,
+          "dead": 0,
+          "paywalled": 0,
+          "unverified": 0
+        },
+        "by_provenance": {
+          "independent": 1,
+          "tms": 0,
+          "commercial": 0,
+          "tax": 0,
+          "derived": 0
+        },
+        "has_live_independent": false,
+        "has_live_any": false,
+        "last_verified": "2026-08-30",
+        "sources": [
+          {
+            "org": "Nebraska Forest Service",
+            "report": "Timber Talk",
+            "url": "https://nfs.unl.edu/timber-talk",
+            "status": "stale",
+            "provenance": "independent",
+            "frequency": "Quarterly (March, June, September, December)",
+            "units": "$/MBF mill prices by species and grade",
+            "latest_known": "December 2025",
+            "verified": "2026-08-30",
+            "in_dataset": null,
+            "notes": "Mill/delivered prices, not stumpage. The newsletter states a quarterly schedule, but nothing after the December 2025 issue is posted — two issues unaccounted for. Full archive at digitalcommons.unl.edu/timbertalk."
+          }
+        ]
+      },
+      "prices": {
+        "evidence": "regional-only",
+        "series": 28,
+        "series_direct": 0,
+        "series_regional": 28,
+        "observations": 439,
+        "year_min": 1977,
+        "year_max": 2025,
+        "sources": [
+          "mt_bber",
+          "usfs_cutsold"
+        ],
+        "products": [
+          "sawtimber"
+        ],
+        "markets": [
+          "delivered",
+          "stumpage"
+        ]
+      }
+    },
+    {
+      "state": "NH",
+      "state_name": "New Hampshire",
+      "research": {
+        "searched": "2026-06-25",
+        "outcome": "found",
+        "checked": [],
+        "note": null
+      },
+      "directory": {
+        "entries": 1,
+        "by_status": {
+          "live": 1,
+          "stale": 0,
+          "dead": 0,
+          "paywalled": 0,
+          "unverified": 0
+        },
+        "by_provenance": {
+          "independent": 0,
+          "tms": 0,
+          "commercial": 0,
+          "tax": 1,
+          "derived": 0
+        },
+        "has_live_independent": false,
+        "has_live_any": true,
+        "last_verified": "2026-06-25",
+        "sources": [
+          {
+            "org": "NH Department of Revenue Administration",
+            "report": "Average Stumpage Value Information",
+            "url": "https://www.revenue.nh.gov/taxes-glance/timber-tax/average-stumpage-value-information",
+            "status": "live",
+            "provenance": "tax",
+            "frequency": "Semi-annual",
+            "units": "$/MBF, $/cord, $/ton (suggested low–high)",
+            "latest_known": "Oct 2025–Mar 2026",
+            "verified": "2026-06-25",
+            "in_dataset": null,
+            "notes": "Timber-tax guidance values, not market transactions."
+          }
+        ]
+      },
+      "prices": {
+        "evidence": "regional-only",
+        "series": 43,
+        "series_direct": 0,
+        "series_regional": 43,
+        "observations": 1249,
+        "year_min": 1977,
+        "year_max": 2025,
+        "sources": [
+          "usfs_cutsold"
+        ],
+        "products": [
+          "sawtimber"
+        ],
+        "markets": [
+          "stumpage"
+        ]
+      }
+    },
+    {
+      "state": "NJ",
+      "state_name": "New Jersey",
+      "research": {
+        "searched": "2026-08-30",
+        "outcome": "none-known",
+        "checked": [
+          "USFS SRS Forest Economics & Policy state page (2025-06-02)",
+          "New Jersey Forest Service",
+          "NJ State Approved Foresters"
+        ],
+        "note": "Confirms the finding this catalogue previously carried as a placeholder entry with no organisation attached: New Jersey has no public timber price series, only forestry contacts."
+      },
+      "directory": {
+        "entries": 0,
+        "by_status": {
+          "live": 0,
+          "stale": 0,
+          "dead": 0,
+          "paywalled": 0,
+          "unverified": 0
+        },
+        "by_provenance": {
+          "independent": 0,
+          "tms": 0,
+          "commercial": 0,
+          "tax": 0,
+          "derived": 0
+        },
+        "has_live_independent": false,
+        "has_live_any": false,
+        "last_verified": null,
+        "sources": []
+      },
+      "prices": {
+        "evidence": "regional-only",
+        "series": 43,
+        "series_direct": 0,
+        "series_regional": 43,
+        "observations": 1249,
+        "year_min": 1977,
+        "year_max": 2025,
+        "sources": [
+          "usfs_cutsold"
+        ],
+        "products": [
+          "sawtimber"
+        ],
+        "markets": [
+          "stumpage"
+        ]
+      }
+    },
+    {
+      "state": "NM",
+      "state_name": "New Mexico",
+      "research": {
+        "searched": "2026-08-30",
+        "outcome": "none-known",
+        "checked": [
+          "USFS SRS Forest Economics & Policy state page (2025-06-02)",
+          "New Mexico Forestry Division"
+        ],
+        "note": "No price series. New Mexico harvest is predominantly federal and appears here through USFS Cut-and-Sold (R3)."
+      },
+      "directory": {
+        "entries": 0,
+        "by_status": {
+          "live": 0,
+          "stale": 0,
+          "dead": 0,
+          "paywalled": 0,
+          "unverified": 0
+        },
+        "by_provenance": {
+          "independent": 0,
+          "tms": 0,
+          "commercial": 0,
+          "tax": 0,
+          "derived": 0
+        },
+        "has_live_independent": false,
+        "has_live_any": false,
+        "last_verified": null,
+        "sources": []
+      },
+      "prices": {
+        "evidence": "regional-only",
+        "series": 12,
+        "series_direct": 0,
+        "series_regional": 12,
+        "observations": 305,
+        "year_min": 1977,
+        "year_max": 2025,
+        "sources": [
+          "usfs_cutsold"
+        ],
+        "products": [
+          "sawtimber"
+        ],
+        "markets": [
+          "stumpage"
+        ]
+      }
+    },
+    {
+      "state": "NV",
+      "state_name": "Nevada",
+      "research": {
+        "searched": "2026-08-30",
+        "outcome": "none-known",
+        "checked": [
+          "USFS SRS Forest Economics & Policy state page (2025-06-02)",
+          "Nevada Division of Forestry",
+          "University of Nevada Cooperative Extension"
+        ],
+        "note": "No price series and effectively no commercial timber industry."
+      },
+      "directory": {
+        "entries": 0,
+        "by_status": {
+          "live": 0,
+          "stale": 0,
+          "dead": 0,
+          "paywalled": 0,
+          "unverified": 0
+        },
+        "by_provenance": {
+          "independent": 0,
+          "tms": 0,
+          "commercial": 0,
+          "tax": 0,
+          "derived": 0
+        },
+        "has_live_independent": false,
+        "has_live_any": false,
+        "last_verified": null,
+        "sources": []
+      },
+      "prices": {
+        "evidence": "regional-only",
+        "series": 35,
+        "series_direct": 0,
+        "series_regional": 35,
+        "observations": 625,
+        "year_min": 1977,
+        "year_max": 2025,
+        "sources": [
+          "pnw",
+          "usfs_cutsold"
+        ],
+        "products": [
+          "sawtimber"
+        ],
+        "markets": [
+          "stumpage"
+        ]
+      }
+    },
+    {
+      "state": "NY",
+      "state_name": "New York",
+      "research": {
+        "searched": "2026-06-25",
+        "outcome": "found",
+        "checked": [],
+        "note": null
+      },
+      "directory": {
+        "entries": 1,
+        "by_status": {
+          "live": 1,
+          "stale": 0,
+          "dead": 0,
+          "paywalled": 0,
+          "unverified": 0
+        },
+        "by_provenance": {
+          "independent": 1,
+          "tms": 0,
+          "commercial": 0,
+          "tax": 0,
+          "derived": 0
+        },
+        "has_live_independent": true,
+        "has_live_any": true,
+        "last_verified": "2026-06-25",
+        "sources": [
+          {
+            "org": "NYS Department of Environmental Conservation",
+            "report": "Stumpage Price Report",
+            "url": "https://dec.ny.gov/nature/forests-trees/private-forest-management/stumpage-price-reports",
+            "status": "live",
+            "provenance": "independent",
+            "frequency": "Semi-annual",
+            "units": "$/MBF (Doyle & International) sawtimber; $/cord pulp",
+            "latest_known": "Winter 2025 (#106)",
+            "verified": "2026-06-25",
+            "in_dataset": null,
+            "notes": "Voluntary reporting; 4 regions."
+          }
+        ]
+      },
+      "prices": {
+        "evidence": "regional-only",
+        "series": 43,
+        "series_direct": 0,
+        "series_regional": 43,
+        "observations": 1249,
+        "year_min": 1977,
+        "year_max": 2025,
+        "sources": [
+          "usfs_cutsold"
+        ],
+        "products": [
+          "sawtimber"
+        ],
+        "markets": [
+          "stumpage"
+        ]
+      }
+    },
+    {
+      "state": "OH",
+      "state_name": "Ohio",
+      "research": {
+        "searched": "2026-06-25",
+        "outcome": "found",
+        "checked": [],
+        "note": null
+      },
+      "directory": {
+        "entries": 1,
+        "by_status": {
+          "live": 1,
+          "stale": 0,
+          "dead": 0,
+          "paywalled": 0,
+          "unverified": 0
+        },
+        "by_provenance": {
+          "independent": 1,
+          "tms": 0,
+          "commercial": 0,
+          "tax": 0,
+          "derived": 0
+        },
+        "has_live_independent": true,
+        "has_live_any": true,
+        "last_verified": "2026-06-25",
+        "sources": [
+          {
+            "org": "OSU Extension + Ohio Division of Forestry",
+            "report": "Ohio Timber Price Report",
+            "url": "https://woodlandstewards.osu.edu/ohio-timber-price-report",
+            "status": "live",
+            "provenance": "independent",
+            "frequency": "Semi-annual",
+            "units": "$/MBF Doyle (stumpage + delivered)",
+            "latest_known": "Jan 2026",
+            "verified": "2026-06-25",
+            "in_dataset": null,
+            "notes": "Survey running since 1960; 3 regions."
+          }
+        ]
+      },
+      "prices": {
+        "evidence": "regional-only",
+        "series": 43,
+        "series_direct": 0,
+        "series_regional": 43,
+        "observations": 1249,
+        "year_min": 1977,
+        "year_max": 2025,
+        "sources": [
+          "usfs_cutsold"
+        ],
+        "products": [
+          "sawtimber"
+        ],
+        "markets": [
+          "stumpage"
+        ]
+      }
+    },
+    {
+      "state": "OK",
+      "state_name": "Oklahoma",
+      "research": {
+        "searched": "2026-08-30",
+        "outcome": "found",
+        "checked": [],
+        "note": null
+      },
+      "directory": {
+        "entries": 1,
+        "by_status": {
+          "live": 1,
+          "stale": 0,
+          "dead": 0,
+          "paywalled": 0,
+          "unverified": 0
+        },
+        "by_provenance": {
+          "independent": 1,
+          "tms": 0,
+          "commercial": 0,
+          "tax": 0,
+          "derived": 0
+        },
+        "has_live_independent": true,
+        "has_live_any": true,
+        "last_verified": "2026-08-30",
+        "sources": [
+          {
+            "org": "Oklahoma State University Extension",
+            "report": "Oklahoma Timber Price Report",
+            "url": "https://extension.okstate.edu/topics/environment-and-natural-resources/forestry",
+            "status": "live",
+            "provenance": "independent",
+            "frequency": "Annual",
+            "units": "$/ton",
+            "latest_known": "2025 report (2026 outlook)",
+            "verified": "2026-08-30",
+            "in_dataset": null,
+            "notes": "Statewide averages for pine, hardwood, cedar, pulpwood and chip-n-saw, published as a numbered fact sheet each year with a market outlook. Thin evidence base, and it says so: statistics are “derived from at least four and as many as nine quotes,” and some stumpage figures are extrapolated from mill-delivered/stumpage differences rather than observed."
+          }
+        ]
+      },
+      "prices": {
+        "evidence": "regional-only",
+        "series": 34,
+        "series_direct": 0,
+        "series_regional": 34,
+        "observations": 701,
+        "year_min": 1977,
+        "year_max": 2025,
+        "sources": [
+          "usfs_cutsold"
+        ],
+        "products": [
+          "sawtimber"
+        ],
+        "markets": [
+          "stumpage"
+        ]
+      }
+    },
+    {
+      "state": "OR",
+      "state_name": "Oregon",
+      "research": {
+        "searched": "2026-06-25",
+        "outcome": "found",
+        "checked": [],
+        "note": null
+      },
+      "directory": {
+        "entries": 2,
+        "by_status": {
+          "live": 1,
+          "stale": 1,
+          "dead": 0,
+          "paywalled": 0,
+          "unverified": 0
+        },
+        "by_provenance": {
+          "independent": 2,
+          "tms": 0,
+          "commercial": 0,
+          "tax": 0,
+          "derived": 0
+        },
+        "has_live_independent": true,
+        "has_live_any": true,
+        "last_verified": "2026-06-25",
+        "sources": [
+          {
+            "org": "Oregon Department of Forestry",
+            "report": "State-Forest Timber Sale Results",
+            "url": "https://apps.odf.oregon.gov/Divisions/management/asset_management/saleresults.asp",
+            "status": "live",
+            "provenance": "independent",
+            "frequency": "Rolling (~3-year window)",
+            "units": "$/MBF Scribner (winning auction bids)",
+            "latest_known": null,
+            "verified": "2026-06-25",
+            "in_dataset": "or_odf",
+            "notes": null
+          },
+          {
+            "org": "Oregon Department of Forestry",
+            "report": "Third-Party Log Prices (open data)",
+            "url": "https://data.oregon.gov/Natural-Resources/Third-Party-Log-Prices/fttw-7ukt",
+            "status": "stale",
+            "provenance": "independent",
+            "frequency": null,
+            "units": "$/MBF pond (delivered)",
+            "latest_known": null,
+            "verified": "2026-06-25",
+            "in_dataset": null,
+            "notes": "Open API but frozen at 2000–2015. The newer 'Log Prices' set is now login-gated."
+          }
+        ]
+      },
+      "prices": {
+        "evidence": "state-series",
+        "series": 90,
+        "series_direct": 45,
+        "series_regional": 45,
+        "observations": 2101,
+        "year_min": 1959,
+        "year_max": 2026,
+        "sources": [
+          "or_odf",
+          "pnw",
+          "usfs_cutsold"
+        ],
+        "products": [
+          "sawtimber"
+        ],
+        "markets": [
+          "stumpage"
+        ]
+      }
+    },
+    {
+      "state": "PA",
+      "state_name": "Pennsylvania",
+      "research": {
+        "searched": "2026-06-25",
+        "outcome": "found",
+        "checked": [],
+        "note": null
+      },
+      "directory": {
+        "entries": 1,
+        "by_status": {
+          "live": 1,
+          "stale": 0,
+          "dead": 0,
+          "paywalled": 0,
+          "unverified": 0
+        },
+        "by_provenance": {
+          "independent": 1,
+          "tms": 0,
+          "commercial": 0,
+          "tax": 0,
+          "derived": 0
+        },
+        "has_live_independent": true,
+        "has_live_any": true,
+        "last_verified": "2026-06-25",
+        "sources": [
+          {
+            "org": "Penn State Extension",
+            "report": "PA Woodlands Timber Market Report",
+            "url": "https://extension.psu.edu/timber-market-report-archives",
+            "status": "live",
+            "provenance": "independent",
+            "frequency": "Quarterly",
+            "units": "$/MBF Doyle (stumpage + delivered)",
+            "latest_known": "Q1 2026",
+            "verified": "2026-06-25",
+            "in_dataset": null,
+            "notes": "Survey since 1992; 4 regions. The most current Northeast report."
+          }
+        ]
+      },
+      "prices": {
+        "evidence": "regional-only",
+        "series": 43,
+        "series_direct": 0,
+        "series_regional": 43,
+        "observations": 1249,
+        "year_min": 1977,
+        "year_max": 2025,
+        "sources": [
+          "usfs_cutsold"
+        ],
+        "products": [
+          "sawtimber"
+        ],
+        "markets": [
+          "stumpage"
+        ]
+      }
+    },
+    {
+      "state": "RI",
+      "state_name": "Rhode Island",
+      "research": {
+        "searched": "2026-06-25",
+        "outcome": "found",
+        "checked": [],
+        "note": null
+      },
+      "directory": {
+        "entries": 1,
+        "by_status": {
+          "live": 1,
+          "stale": 0,
+          "dead": 0,
+          "paywalled": 0,
+          "unverified": 0
+        },
+        "by_provenance": {
+          "independent": 1,
+          "tms": 0,
+          "commercial": 0,
+          "tax": 0,
+          "derived": 0
+        },
+        "has_live_independent": true,
+        "has_live_any": true,
+        "last_verified": "2026-06-25",
+        "sources": [
+          {
+            "org": "UMass MassWoods",
+            "report": "Southern New England Stumpage Survey (MA/CT/RI)",
+            "url": "https://masswoods.org/southern-new-england-stumpage-survey",
+            "status": "live",
+            "provenance": "independent",
+            "frequency": "Quarterly",
+            "units": "$/MBF, $/cord, $/ton (median + range)",
+            "latest_known": null,
+            "verified": "2026-06-25",
+            "in_dataset": null,
+            "notes": null
+          }
+        ]
+      },
+      "prices": {
+        "evidence": "regional-only",
+        "series": 43,
+        "series_direct": 0,
+        "series_regional": 43,
+        "observations": 1249,
+        "year_min": 1977,
+        "year_max": 2025,
+        "sources": [
+          "usfs_cutsold"
+        ],
+        "products": [
+          "sawtimber"
+        ],
+        "markets": [
+          "stumpage"
+        ]
+      }
+    },
+    {
+      "state": "SC",
+      "state_name": "South Carolina",
+      "research": {
+        "searched": "2026-06-25",
+        "outcome": "found",
+        "checked": [],
+        "note": null
+      },
+      "directory": {
+        "entries": 1,
+        "by_status": {
+          "live": 1,
+          "stale": 0,
+          "dead": 0,
+          "paywalled": 0,
+          "unverified": 0
+        },
+        "by_provenance": {
+          "independent": 0,
+          "tms": 1,
+          "commercial": 0,
+          "tax": 0,
+          "derived": 0
+        },
+        "has_live_independent": false,
+        "has_live_any": true,
+        "last_verified": "2026-06-25",
+        "sources": [
+          {
+            "org": "South Carolina Forestry Commission",
+            "report": "Current Timber Price Report",
+            "url": "https://www.scfc.gov/",
+            "status": "live",
+            "provenance": "tms",
+            "frequency": "Quarterly",
+            "units": "$/ton",
+            "latest_known": null,
+            "verified": "2026-06-25",
+            "in_dataset": null,
+            "notes": "TimberMart-South partnership."
+          }
+        ]
+      },
+      "prices": {
+        "evidence": "regional-only",
+        "series": 34,
+        "series_direct": 0,
+        "series_regional": 34,
+        "observations": 701,
+        "year_min": 1977,
+        "year_max": 2025,
+        "sources": [
+          "usfs_cutsold"
+        ],
+        "products": [
+          "sawtimber"
+        ],
+        "markets": [
+          "stumpage"
+        ]
+      }
+    },
+    {
+      "state": "SD",
+      "state_name": "South Dakota",
+      "research": {
+        "searched": "2026-08-30",
+        "outcome": "none-known",
+        "checked": [
+          "USFS SRS Forest Economics & Policy state page (2025-06-02)",
+          "South Dakota Dept. of Agriculture — Conservation & Forestry",
+          "SDSU Extension"
+        ],
+        "note": "No state price series, which understates the gap: the Black Hills is a genuine sawtimber economy, but the sales are federal and reach this dataset only through USFS Cut-and-Sold (R2)."
+      },
+      "directory": {
+        "entries": 0,
+        "by_status": {
+          "live": 0,
+          "stale": 0,
+          "dead": 0,
+          "paywalled": 0,
+          "unverified": 0
+        },
+        "by_provenance": {
+          "independent": 0,
+          "tms": 0,
+          "commercial": 0,
+          "tax": 0,
+          "derived": 0
+        },
+        "has_live_independent": false,
+        "has_live_any": false,
+        "last_verified": null,
+        "sources": []
+      },
+      "prices": {
+        "evidence": "regional-only",
+        "series": 60,
+        "series_direct": 0,
+        "series_regional": 60,
+        "observations": 1468,
+        "year_min": 1971,
+        "year_max": 2025,
+        "sources": [
+          "mt_bber",
+          "pnw",
+          "usfs_cutsold"
+        ],
+        "products": [
+          "sawtimber"
+        ],
+        "markets": [
+          "delivered",
+          "stumpage"
+        ]
+      }
+    },
+    {
+      "state": "TN",
+      "state_name": "Tennessee",
+      "research": {
+        "searched": "2026-08-30",
+        "outcome": "found",
+        "checked": [],
+        "note": null
+      },
+      "directory": {
+        "entries": 1,
+        "by_status": {
+          "live": 0,
+          "stale": 0,
+          "dead": 1,
+          "paywalled": 0,
+          "unverified": 0
+        },
+        "by_provenance": {
+          "independent": 1,
+          "tms": 0,
+          "commercial": 0,
+          "tax": 0,
+          "derived": 0
+        },
+        "has_live_independent": false,
+        "has_live_any": false,
+        "last_verified": "2026-08-30",
+        "sources": [
+          {
+            "org": "Tennessee Division of Forestry",
+            "report": "Forest Products Bulletin",
+            "url": "https://www.tn.gov/agriculture/businesses/business-development/forest-products/tfpb.html",
+            "status": "dead",
+            "provenance": "independent",
+            "frequency": null,
+            "units": null,
+            "latest_known": "2017 (archive)",
+            "verified": "2026-08-30",
+            "in_dataset": null,
+            "notes": "Confirmed discontinued: the page states “This product is no longer in production.” A 1977—2017 archive is still posted as a single download."
+          }
+        ]
+      },
+      "prices": {
+        "evidence": "regional-only",
+        "series": 34,
+        "series_direct": 0,
+        "series_regional": 34,
+        "observations": 701,
+        "year_min": 1977,
+        "year_max": 2025,
+        "sources": [
+          "usfs_cutsold"
+        ],
+        "products": [
+          "sawtimber"
+        ],
+        "markets": [
+          "stumpage"
+        ]
+      }
+    },
+    {
+      "state": "TX",
+      "state_name": "Texas",
+      "research": {
+        "searched": "2026-06-25",
+        "outcome": "found",
+        "checked": [],
+        "note": null
+      },
+      "directory": {
+        "entries": 1,
+        "by_status": {
+          "live": 1,
+          "stale": 0,
+          "dead": 0,
+          "paywalled": 0,
+          "unverified": 0
+        },
+        "by_provenance": {
+          "independent": 1,
+          "tms": 0,
+          "commercial": 0,
+          "tax": 0,
+          "derived": 0
+        },
+        "has_live_independent": true,
+        "has_live_any": true,
+        "last_verified": "2026-06-25",
+        "sources": [
+          {
+            "org": "Texas A&M Forest Service",
+            "report": "Timber Price Trends",
+            "url": "https://tfsweb.tamu.edu/forest-land/forest-industry-economics/timber-price-trends/",
+            "status": "live",
+            "provenance": "independent",
+            "frequency": "Bimonthly",
+            "units": "$/ton and $/MBF Doyle",
+            "latest_known": "Nov–Dec 2025",
+            "verified": "2026-06-25",
+            "in_dataset": null,
+            "notes": "Independent ~60-cooperator survey of East Texas sales; history to 1984."
+          }
+        ]
+      },
+      "prices": {
+        "evidence": "regional-only",
+        "series": 34,
+        "series_direct": 0,
+        "series_regional": 34,
+        "observations": 701,
+        "year_min": 1977,
+        "year_max": 2025,
+        "sources": [
+          "usfs_cutsold"
+        ],
+        "products": [
+          "sawtimber"
+        ],
+        "markets": [
+          "stumpage"
+        ]
+      }
+    },
+    {
+      "state": "UT",
+      "state_name": "Utah",
+      "research": {
+        "searched": "2026-08-30",
+        "outcome": "none-known",
+        "checked": [
+          "USFS SRS Forest Economics & Policy state page (2025-06-02)",
+          "Utah Division of Forestry, Fire & State Lands",
+          "Utah State University Extension Forestry",
+          "BLM Utah Timber Sales"
+        ],
+        "note": "No price series. The federal directory points at BLM sale listings, which advertise sales rather than report realised prices."
+      },
+      "directory": {
+        "entries": 0,
+        "by_status": {
+          "live": 0,
+          "stale": 0,
+          "dead": 0,
+          "paywalled": 0,
+          "unverified": 0
+        },
+        "by_provenance": {
+          "independent": 0,
+          "tms": 0,
+          "commercial": 0,
+          "tax": 0,
+          "derived": 0
+        },
+        "has_live_independent": false,
+        "has_live_any": false,
+        "last_verified": null,
+        "sources": []
+      },
+      "prices": {
+        "evidence": "regional-only",
+        "series": 41,
+        "series_direct": 0,
+        "series_regional": 41,
+        "observations": 715,
+        "year_min": 1977,
+        "year_max": 2025,
+        "sources": [
+          "mt_bber",
+          "pnw",
+          "usfs_cutsold"
+        ],
+        "products": [
+          "sawtimber"
+        ],
+        "markets": [
+          "delivered",
+          "stumpage"
+        ]
+      }
+    },
+    {
+      "state": "VA",
+      "state_name": "Virginia",
+      "research": {
+        "searched": "2026-08-30",
+        "outcome": "found",
+        "checked": [],
+        "note": null
+      },
+      "directory": {
+        "entries": 1,
+        "by_status": {
+          "live": 1,
+          "stale": 0,
+          "dead": 0,
+          "paywalled": 0,
+          "unverified": 0
+        },
+        "by_provenance": {
+          "independent": 0,
+          "tms": 1,
+          "commercial": 0,
+          "tax": 0,
+          "derived": 0
+        },
+        "has_live_independent": false,
+        "has_live_any": true,
+        "last_verified": "2026-08-30",
+        "sources": [
+          {
+            "org": "Virginia Tech — Forest Landowner Education",
+            "report": "Historic Virginia Timber Stumpage Prices",
+            "url": "https://forestupdate.frec.vt.edu/resources/historic-virginia-timber-stumpage-prices.html",
+            "status": "live",
+            "provenance": "tms",
+            "frequency": "Quarterly",
+            "units": "$/ton",
+            "latest_known": null,
+            "verified": "2026-08-30",
+            "in_dataset": null,
+            "notes": "The old mixed-case URL now 404s; this is the current one. Statewide quarterly averages for six products (pine sawtimber, chip-n-saw and pulpwood; oak sawtimber, mixed hardwood sawtimber and pulpwood). The values are licensed TimberMart-South data."
+          }
+        ]
+      },
+      "prices": {
+        "evidence": "regional-only",
+        "series": 34,
+        "series_direct": 0,
+        "series_regional": 34,
+        "observations": 701,
+        "year_min": 1977,
+        "year_max": 2025,
+        "sources": [
+          "usfs_cutsold"
+        ],
+        "products": [
+          "sawtimber"
+        ],
+        "markets": [
+          "stumpage"
+        ]
+      }
+    },
+    {
+      "state": "VT",
+      "state_name": "Vermont",
+      "research": {
+        "searched": "2026-08-30",
+        "outcome": "found",
+        "checked": [],
+        "note": null
+      },
+      "directory": {
+        "entries": 1,
+        "by_status": {
+          "live": 0,
+          "stale": 1,
+          "dead": 0,
+          "paywalled": 0,
+          "unverified": 0
+        },
+        "by_provenance": {
+          "independent": 1,
+          "tms": 0,
+          "commercial": 0,
+          "tax": 0,
+          "derived": 0
+        },
+        "has_live_independent": false,
+        "has_live_any": false,
+        "last_verified": "2026-08-30",
+        "sources": [
+          {
+            "org": "VT Department of Forests, Parks & Recreation",
+            "report": "Stumpage Price Reports",
+            "url": "https://fpr.vermont.gov/stumpage-price-reports",
+            "status": "stale",
+            "provenance": "independent",
+            "frequency": "Quarterly (nominal)",
+            "units": "$/MBF International sawtimber; $/cord pulp/firewood",
+            "latest_known": "2023 Q3",
+            "verified": "2026-08-30",
+            "in_dataset": null,
+            "notes": "Quarterly by design, but nothing newer than 2023 Q3 is posted. Prices cover three state regions and are reported with the response count per species and product — unusually candid about sample size."
+          }
+        ]
+      },
+      "prices": {
+        "evidence": "regional-only",
+        "series": 43,
+        "series_direct": 0,
+        "series_regional": 43,
+        "observations": 1249,
+        "year_min": 1977,
+        "year_max": 2025,
+        "sources": [
+          "usfs_cutsold"
+        ],
+        "products": [
+          "sawtimber"
+        ],
+        "markets": [
+          "stumpage"
+        ]
+      }
+    },
+    {
+      "state": "WA",
+      "state_name": "Washington",
+      "research": {
+        "searched": "2026-06-25",
+        "outcome": "found",
+        "checked": [],
+        "note": null
+      },
+      "directory": {
+        "entries": 2,
+        "by_status": {
+          "live": 2,
+          "stale": 0,
+          "dead": 0,
+          "paywalled": 0,
+          "unverified": 0
+        },
+        "by_provenance": {
+          "independent": 1,
+          "tms": 0,
+          "commercial": 0,
+          "tax": 1,
+          "derived": 0
+        },
+        "has_live_independent": true,
+        "has_live_any": true,
+        "last_verified": "2026-06-25",
+        "sources": [
+          {
+            "org": "Washington Department of Revenue",
+            "report": "Stumpage Value Determination Tables",
+            "url": "https://dor.wa.gov/taxes-rates/other-taxes/forest-tax/stumpage-value-determination-tables",
+            "status": "live",
+            "provenance": "tax",
+            "frequency": "Semi-annual",
+            "units": "$/MBF",
+            "latest_known": "2026 H1",
+            "verified": "2026-06-25",
+            "in_dataset": null,
+            "notes": "Tax-assessed stumpage values by Stumpage Value Area; archive back to 1975."
+          },
+          {
+            "org": "Washington DNR",
+            "report": "Timber Auction Results / Bid Records",
+            "url": "https://www.dnr.wa.gov/programs-and-services/product-sales-and-leasing/timber-sales/timber-auction-results",
+            "status": "live",
+            "provenance": "independent",
+            "frequency": "Monthly auctions",
+            "units": "$/MBF Scribner (realized bids)",
+            "latest_known": null,
+            "verified": "2026-06-25",
+            "in_dataset": null,
+            "notes": "Also a monthly delivered log price survey and quarterly economic forecasts."
+          }
+        ]
+      },
+      "prices": {
+        "evidence": "state-series",
+        "series": 53,
+        "series_direct": 8,
+        "series_regional": 45,
+        "observations": 1893,
+        "year_min": 1959,
+        "year_max": 2025,
+        "sources": [
+          "pnw",
+          "usfs_cutsold"
+        ],
+        "products": [
+          "sawtimber"
+        ],
+        "markets": [
+          "stumpage"
+        ]
+      }
+    },
+    {
+      "state": "WI",
+      "state_name": "Wisconsin",
+      "research": {
+        "searched": "2026-06-25",
+        "outcome": "found",
+        "checked": [],
+        "note": null
+      },
+      "directory": {
+        "entries": 1,
+        "by_status": {
+          "live": 1,
+          "stale": 0,
+          "dead": 0,
+          "paywalled": 0,
+          "unverified": 0
+        },
+        "by_provenance": {
+          "independent": 0,
+          "tms": 0,
+          "commercial": 0,
+          "tax": 1,
+          "derived": 0
+        },
+        "has_live_independent": false,
+        "has_live_any": true,
+        "last_verified": "2026-06-25",
+        "sources": [
+          {
+            "org": "Wisconsin DNR",
+            "report": "FCL/MFL Stumpage Rates",
+            "url": "https://dnr.wisconsin.gov/",
+            "status": "live",
+            "provenance": "tax",
+            "frequency": "Annual",
+            "units": "$/cord and $/MBF",
+            "latest_known": "RY2026",
+            "verified": "2026-06-25",
+            "in_dataset": null,
+            "notes": "Administrative tax rates for Forest Crop Law / Managed Forest Law land — explicitly 'not market prices'."
+          }
+        ]
+      },
+      "prices": {
+        "evidence": "regional-only",
+        "series": 43,
+        "series_direct": 0,
+        "series_regional": 43,
+        "observations": 1249,
+        "year_min": 1977,
+        "year_max": 2025,
+        "sources": [
+          "usfs_cutsold"
+        ],
+        "products": [
+          "sawtimber"
+        ],
+        "markets": [
+          "stumpage"
+        ]
+      }
+    },
+    {
+      "state": "WV",
+      "state_name": "West Virginia",
+      "research": {
+        "searched": "2026-06-25",
+        "outcome": "found",
+        "checked": [],
+        "note": null
+      },
+      "directory": {
+        "entries": 1,
+        "by_status": {
+          "live": 1,
+          "stale": 0,
+          "dead": 0,
+          "paywalled": 0,
+          "unverified": 0
+        },
+        "by_provenance": {
+          "independent": 1,
+          "tms": 0,
+          "commercial": 0,
+          "tax": 0,
+          "derived": 0
+        },
+        "has_live_independent": true,
+        "has_live_any": true,
+        "last_verified": "2026-06-25",
+        "sources": [
+          {
+            "org": "WVU Appalachian Hardwood Center + WV Division of Forestry",
+            "report": "West Virginia Timber Prices (interactive tool)",
+            "url": "https://timberprices.wvu.edu/",
+            "status": "live",
+            "provenance": "independent",
+            "frequency": "Semi-annual",
+            "units": "$/MBF Doyle",
+            "latest_known": "Jan 2026",
+            "verified": "2026-06-25",
+            "in_dataset": null,
+            "notes": "Moved from Excel downloads to an interactive web tool; 5 regions + state average."
+          }
+        ]
+      },
+      "prices": {
+        "evidence": "regional-only",
+        "series": 43,
+        "series_direct": 0,
+        "series_regional": 43,
+        "observations": 1249,
+        "year_min": 1977,
+        "year_max": 2025,
+        "sources": [
+          "usfs_cutsold"
+        ],
+        "products": [
+          "sawtimber"
+        ],
+        "markets": [
+          "stumpage"
+        ]
+      }
+    },
+    {
+      "state": "WY",
+      "state_name": "Wyoming",
+      "research": {
+        "searched": "2026-08-30",
+        "outcome": "none-known",
+        "checked": [
+          "USFS SRS Forest Economics & Policy state page (2025-06-02)",
+          "Wyoming State Forestry Division",
+          "University of Wyoming Extension"
+        ],
+        "note": "No state price series. Wyoming harvest is largely federal and reaches this dataset through USFS Cut-and-Sold (R2/R4)."
+      },
+      "directory": {
+        "entries": 0,
+        "by_status": {
+          "live": 0,
+          "stale": 0,
+          "dead": 0,
+          "paywalled": 0,
+          "unverified": 0
+        },
+        "by_provenance": {
+          "independent": 0,
+          "tms": 0,
+          "commercial": 0,
+          "tax": 0,
+          "derived": 0
+        },
+        "has_live_independent": false,
+        "has_live_any": false,
+        "last_verified": null,
+        "sources": []
+      },
+      "prices": {
+        "evidence": "regional-only",
+        "series": 69,
+        "series_direct": 0,
+        "series_regional": 69,
+        "observations": 1154,
+        "year_min": 1977,
+        "year_max": 2025,
+        "sources": [
+          "mt_bber",
+          "pnw",
+          "usfs_cutsold"
+        ],
+        "products": [
+          "sawtimber"
+        ],
+        "markets": [
+          "delivered",
+          "stumpage"
+        ]
+      }
+    }
+  ]
+}

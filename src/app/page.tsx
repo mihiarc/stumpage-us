@@ -27,14 +27,14 @@ export default function HomePage() {
     <div className="mx-auto max-w-6xl px-4">
       <section className="py-12 md:py-16">
         <h1 className="max-w-3xl text-3xl font-bold tracking-tight md:text-5xl">
-          Public timber price data for the United States
+          Every public US timber price series we can find
         </h1>
         <p className="mt-4 max-w-2xl text-lg text-muted-foreground">
-          Stumpage and delivered log prices from public sources — federal
-          cut-and-sold reports, state timber-sale auctions, and university
-          surveys — harmonized into one free, downloadable dataset, plus a
-          directory of every price reporting service we know of. The community
-          successor to the retired USDA Forest Service SRS timber price site.
+          Stumpage and delivered log prices from federal cut-and-sold reports,
+          state timber-sale auctions, and university surveys — harmonized into
+          one free, downloadable dataset, every record carrying its source and
+          its published unit. Plus a state-by-state record of who reports
+          timber prices, and where we looked and found no one.
         </p>
         <div className="mt-6 flex flex-wrap gap-3">
           <Button asChild>
