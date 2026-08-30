@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import { ThemeProvider } from "next-themes";
 import { NuqsAdapter } from "nuqs/adapters/next/app";
 import { SiteHeader } from "@/components/site-header";
+import { Analytics } from "@/components/analytics";
 import { SiteFooter } from "@/components/site-footer";
 import "./globals.css";
 
@@ -44,6 +45,7 @@ export default function RootLayout({
             <SiteFooter />
           </NuqsAdapter>
         </ThemeProvider>
+        <Analytics />
       </body>
     </html>
   );

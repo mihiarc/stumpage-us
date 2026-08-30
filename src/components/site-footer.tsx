@@ -18,7 +18,11 @@ export function SiteFooter() {
           <Link href="/about" className="underline underline-offset-2 hover:text-foreground">
             About
           </Link>{" "}
-          for methodology and caveats.
+          for methodology and caveats, and{" "}
+          <Link href="/privacy" className="underline underline-offset-2 hover:text-foreground">
+            Privacy
+          </Link>{" "}
+          for what this site does and does not collect.
         </p>
       </div>
     </footer>
