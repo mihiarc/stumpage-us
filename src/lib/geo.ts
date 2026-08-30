@@ -1,6 +1,7 @@
 // Geography helpers: state names, USFS region membership, and the logic for
 // deciding which series "cover" a state. Series exist at many grains
 // (state, sub-state, USFS region, multi-state) — see /about.
+import { humanizeCode } from "./format";
 import type { Series } from "./types";
 
 export const STATE_NAMES: Record<string, string> = {
@@ -91,6 +92,13 @@ export function seriesStates(s: Series): string[] {
   return [];
 }
 
+/**
+ * Overrides for region_type codes. Not the vocabulary — `regionTypeLabel`
+ * falls back to humanizeCode, so a grain the export adds later (the Georgia
+ * DOR county series are the next one) reads acceptably instead of rendering
+ * as raw snake_case. Add an entry here only when the mechanical rendering is
+ * wrong or says too little.
+ */
 export const REGION_TYPE_LABELS: Record<string, string> = {
   state_avg: "State average",
   statewide: "Statewide",
@@ -104,6 +112,10 @@ export const REGION_TYPE_LABELS: Record<string, string> = {
   national_forest: "National forest",
   multi_state_avg: "Multi-state average",
 };
+
+export function regionTypeLabel(regionType: string): string {
+  return REGION_TYPE_LABELS[regionType] ?? humanizeCode(regionType);
+}
 
 /** Direct (state-grain or sub-state) vs regional (multi-state) coverage. */
 export function coverageKind(s: Series): "direct" | "regional" {

@@ -29,9 +29,9 @@ import {
   rowMatchesSeries,
   seriesId,
   unitLabel,
-  MARKET_LABELS,
+  marketLabel,
 } from "@/lib/format";
-import { REGION_TYPE_LABELS, STATE_NAMES, seriesStates } from "@/lib/geo";
+import { regionTypeLabel, STATE_NAMES, seriesStates } from "@/lib/geo";
 import { asset } from "@/lib/asset";
 
 const MAX_PLOTTED = 5;
@@ -74,7 +74,7 @@ const SOURCE_CAVEATS: Record<string, string> = {
 };
 
 function seriesLabel(s: Series): string {
-  return `${s.region_name} · ${s.species_name} ${s.product_name.toLowerCase()} (${MARKET_LABELS[s.market] ?? s.market})`;
+  return `${s.region_name} · ${s.species_name} ${s.product_name.toLowerCase()} (${marketLabel(s.market)})`;
 }
 
 export function Explorer() {
@@ -260,7 +260,7 @@ export function Explorer() {
       set: (v) => void setRegionType(v),
       options: opts.regionTypes.map((v) => ({
         value: v,
-        label: REGION_TYPE_LABELS[v] ?? v,
+        label: regionTypeLabel(v),
       })),
     },
     {
@@ -291,7 +291,7 @@ export function Explorer() {
       label: "Market",
       value: market,
       set: (v) => void setMarket(v),
-      options: opts.markets.map((v) => ({ value: v, label: MARKET_LABELS[v] ?? v })),
+      options: opts.markets.map((v) => ({ value: v, label: marketLabel(v) })),
     },
   ];
 
@@ -430,12 +430,12 @@ export function Explorer() {
                     <TableCell>
                       <div className="font-medium">{s.region_name}</div>
                       <div className="text-xs text-muted-foreground">
-                        {REGION_TYPE_LABELS[s.region_type] ?? s.region_type}
+                        {regionTypeLabel(s.region_type)}
                       </div>
                     </TableCell>
                     <TableCell>{s.species_name}</TableCell>
                     <TableCell>{s.product_name}</TableCell>
-                    <TableCell>{MARKET_LABELS[s.market] ?? s.market}</TableCell>
+                    <TableCell>{marketLabel(s.market)}</TableCell>
                     <TableCell className="tabular-nums">
                       {s.y0}–{s.y1}
                       <span className="text-xs text-muted-foreground"> ({s.n})</span>

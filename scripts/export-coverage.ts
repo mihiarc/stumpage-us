@@ -38,9 +38,20 @@ import type {
   CoverageStateRecord,
   Evidence,
 } from "../src/lib/coverage-record";
-import { getManifest, getSeriesIndex } from "../src/lib/data";
-import { STATE_NAMES, seriesStates } from "../src/lib/geo";
-import type { Series } from "../src/lib/types";
+import { getDims, getManifest, getSeriesIndex } from "../src/lib/data";
+import {
+  REGION_TYPE_LABELS,
+  STATE_NAMES,
+  regionTypeLabel,
+  seriesStates,
+} from "../src/lib/geo";
+import {
+  MARKET_LABELS,
+  OWNERSHIP_LABELS,
+  marketLabel,
+  ownershipLabel,
+} from "../src/lib/format";
+import type { Dims, Series } from "../src/lib/types";
 
 const OUT_DIR = join(process.cwd(), "public", "coverage");
 const FORMAT_VERSION = 1;
@@ -135,6 +146,46 @@ function buildStateRecord(
   };
 }
 
+/**
+ * Report export vocabulary that has no curated label and is falling back to
+ * humanizeCode. Not a failure — the fallback renders acceptably, and ROADMAP
+ * invariant 10 says degrade gracefully. The point is that new vocabulary
+ * arrives *loudly*: the last refresh introduced a `county` grain and a
+ * `private_transaction_filing` ownership basis, and the only symptom would
+ * have been raw snake_case appearing quietly in the UI.
+ */
+function reportNewVocabulary(series: Series[], dims: Dims): void {
+  const groups: [string, Set<string>, Record<string, string>, (c: string) => string][] = [
+    ["region_type", new Set(series.map((s) => s.region_type)), REGION_TYPE_LABELS, regionTypeLabel],
+    [
+      "ownership",
+      new Set([
+        ...series.map((s) => s.ownership),
+        ...dims.sources.map((d) => d.ownership_basis),
+      ]),
+      OWNERSHIP_LABELS,
+      ownershipLabel,
+    ],
+    ["market", new Set(series.map((s) => s.market)), MARKET_LABELS, marketLabel],
+  ];
+  const lines: string[] = [];
+  for (const [name, seen, overrides, label] of groups) {
+    for (const code of [...seen].sort()) {
+      if (code in overrides) continue;
+      lines.push(`    ${name}: ${code} -> "${label(code)}"`);
+    }
+  }
+  if (lines.length === 0) return;
+  console.log(
+    `  ${lines.length} code(s) with no curated label, rendering via humanizeCode:`,
+  );
+  console.log(lines.join("\n"));
+  console.log(
+    "    Add an override in REGION_TYPE_LABELS / OWNERSHIP_LABELS / MARKET_LABELS",
+  );
+  console.log("    only where the mechanical rendering says too little.");
+}
+
 function csv(rows: (string | number | boolean | null)[][]): string {
   const cell = (v: (typeof rows)[number][number]) => {
     if (v === null) return "";
@@ -147,6 +198,7 @@ function csv(rows: (string | number | boolean | null)[][]): string {
 function main() {
   const manifest = getManifest();
   const index = getSeriesIndex();
+  const dims = getDims();
 
   // Fan each series out to the states it covers, using the one canonical
   // mapping (src/lib/geo.ts). National-forest series map to no state on
@@ -315,6 +367,7 @@ function main() {
     `  price evidence: ${t.evidence["state-series"]} state-series, ` +
       `${t.evidence["regional-only"]} regional-only, ${t.evidence.none} none`,
   );
+  reportNewVocabulary(index.series, dims);
 }
 
 main();

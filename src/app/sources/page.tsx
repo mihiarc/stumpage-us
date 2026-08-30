@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getDims, getManifest } from "@/lib/data";
-import { OWNERSHIP_LABELS } from "@/lib/format";
+import { ownershipLabel } from "@/lib/format";
 import { SOURCE_LINKS } from "@/content/source-links";
 
 export const metadata: Metadata = {
@@ -43,7 +43,7 @@ export default function SourcesPage() {
                 <p className="tabular-nums">
                   {m?.n.toLocaleString()} records · {m?.y0}–{m?.y1} ·{" "}
                   {src.geographic_coverage} ·{" "}
-                  {OWNERSHIP_LABELS[src.ownership_basis] ?? src.ownership_basis}
+                  {ownershipLabel(src.ownership_basis)}
                 </p>
                 {SOURCE_LINKS[src.source_code] && (
                   <a

@@ -20,8 +20,8 @@ import {
 } from "@/content/directory";
 import { getCoveredStates, seriesForState } from "@/lib/coverage";
 import { getDims } from "@/lib/data";
-import { fmtPeriod, fmtUsd, unitLabel, MARKET_LABELS } from "@/lib/format";
-import { REGION_TYPE_LABELS, STATE_NAMES } from "@/lib/geo";
+import { fmtPeriod, fmtUsd, unitLabel, marketLabel } from "@/lib/format";
+import { regionTypeLabel, STATE_NAMES } from "@/lib/geo";
 import type { Series } from "@/lib/types";
 
 interface Params {
@@ -169,7 +169,7 @@ export default async function StatePage({
                         </div>
                         <div className="text-xs text-muted-foreground">{s.region_name}</div>
                       </TableCell>
-                      <TableCell>{MARKET_LABELS[s.market] ?? s.market}</TableCell>
+                      <TableCell>{marketLabel(s.market)}</TableCell>
                       <TableCell className="tabular-nums">
                         {s.y0}–{s.y1}
                       </TableCell>
@@ -204,7 +204,7 @@ export default async function StatePage({
                 <CardHeader>
                   <CardTitle className="text-sm">
                     {sourceName(g.source)} —{" "}
-                    {REGION_TYPE_LABELS[g.region_type] ?? g.region_type}
+                    {regionTypeLabel(g.region_type)}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="text-sm text-muted-foreground">
@@ -241,7 +241,7 @@ export default async function StatePage({
                 <CardHeader>
                   <CardTitle className="text-sm">
                     {sourceName(g.source)} —{" "}
-                    {REGION_TYPE_LABELS[g.region_type] ?? g.region_type}
+                    {regionTypeLabel(g.region_type)}
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="text-sm text-muted-foreground">

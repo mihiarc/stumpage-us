@@ -5,8 +5,8 @@ import { ArrowRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { getCandor, getDims, getManifest, getSeriesIndex } from "@/lib/data";
 import { asset } from "@/lib/asset";
-import { OWNERSHIP_LABELS } from "@/lib/format";
-import { REGION_TYPE_LABELS } from "@/lib/geo";
+import { ownershipLabel } from "@/lib/format";
+import { regionTypeLabel } from "@/lib/geo";
 import { SOURCE_LINKS } from "@/content/source-links";
 import { SOURCE_NOTES } from "@/content/source-notes";
 
@@ -77,13 +77,13 @@ export default async function SourcePage({
         <div>
           <dt className="text-muted-foreground">Ownership basis</dt>
           <dd className="font-semibold">
-            {OWNERSHIP_LABELS[src.ownership_basis] ?? src.ownership_basis}
+            {ownershipLabel(src.ownership_basis)}
           </dd>
         </div>
         <div>
           <dt className="text-muted-foreground">Geographic grains</dt>
           <dd className="font-semibold">
-            {regionTypes.map((rt) => REGION_TYPE_LABELS[rt] ?? rt).join(", ")}
+            {regionTypes.map(regionTypeLabel).join(", ")}
           </dd>
         </div>
       </dl>

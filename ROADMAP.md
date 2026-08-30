@@ -109,10 +109,22 @@ Designed for desk and phone simultaneously, not reflowed afterward.
       is one boolean and cannot express reported sale / survey mean / public
       auction / modeled. Blocks the rest of this phase.
 - [ ] Plumb evidence kind through `src/lib/types.ts`; render from data
-- [ ] Make vocabulary data-driven from the export — `UNIT_LABELS`,
-      `OWNERSHIP_LABELS`, `MARKET_LABELS` (`src/lib/format.ts`),
-      `REGION_TYPE_LABELS`, `USFS_REGION_STATES`, `MULTI_STATE_REGIONS`
-      (`src/lib/geo.ts`)
+- [~] Vocabulary. **The frontend half is done; the rest needs the export.**
+      `humanizeCode()` in `src/lib/format.ts` is now the floor under
+      `REGION_TYPE_LABELS`, `OWNERSHIP_LABELS` and `MARKET_LABELS`, which are
+      demoted to override tables — an unknown code renders as prose instead of
+      raw snake_case, and `scripts/export-coverage.ts` prints any code with no
+      curated label on every build, so new vocabulary arrives loudly.
+      **Genuinely data-driven labels are blocked upstream:** `dims.json` emits
+      `region_type`, `ownership_basis`, `market_type` and `original_unit` as
+      bare codes with no label column. Only `products` and `species` ship
+      names, which is exactly why those two never had this problem. See the
+      upstream ask below. `USFS_REGION_STATES` / `MULTI_STATE_REGIONS` are
+      geography, not vocabulary, and are untouched.
+- [ ] **Upstream (timber-prices): label columns in `dims.json`** — a display
+      name per `region_type`, `ownership_basis`, `market_type` and
+      `original_unit`, mirroring `product_name`. Without it the frontend is
+      guessing at the publisher's own vocabulary.
 - [ ] Ladder card — rungs are assortments, blocked by market basis, never averaged
 - [ ] Per rung: current figure, movement, reach of record, range + sample count,
       end market (uses the dormant `end_market` field in `dims.products`)
@@ -186,6 +198,21 @@ Designed in v1.0, inert until the export carries what they need.
 | A national statistic headline | Landowners don't care about national; it's a supplement for secondary audiences. |
 | A confidence tier or score | Rolling evidence, sample size and recency into one letter hides a judgment we'd have to defend. |
 | A finished evidence taxonomy | Ship the field and a data-driven UI, not the final vocabulary. |
+
+## Blocked
+
+- **The 8-source data refresh cannot ship.** `~/Github/mihiarc/data/timber-prices/export/`
+  holds a build dated 2026-08-30 adding Georgia (1,440 series) and Texas (15) —
+  and chip-n-saw — but its manifest records `dbt_build_ran: false`, so it never
+  passed the test gate. Rebuilding it fails `assert_no_source_losing_data`:
+  `usfs_cutsold` is a `current_snapshot` source with `loss_horizon_periods: 1`,
+  our coverage ends 2025-12-31, and the probe observed FY2026 Q3 upstream on
+  2026-08-30 — `periods_until_loss` is already 0. USFS posts machine-readable
+  XLSX for the live quarter only, so every quarter not ingested drops to
+  PDF-only permanently. **The fix is to run `scripts/etl_usfs_cutsold.py`
+  upstream, not to widen the rule**; the test's own comment says so. Verified
+  with the fixture: shipping that export would move state-series coverage from
+  6 states to 8.
 
 ## Risks
 
