@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "export:coverage": "bun run scripts/export-coverage.ts"
   },
   "dependencies": {
     "@visx/axis": "^4.0.0",
