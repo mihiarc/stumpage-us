@@ -5,6 +5,7 @@ import { parseAsArrayOf, parseAsString, useQueryState } from "nuqs";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { Checkbox } from "@/components/ui/checkbox";
 import {
   Select,
   SelectContent,
@@ -75,6 +76,14 @@ const SOURCE_CAVEATS: Record<string, string> = {
     "USFS Cut-and-Sold: since FY2019 Q3, Good Neighbor sale volumes are included without their values, biasing derived $/unit low in affected regions (R1/R6 especially).",
 };
 
+// What the two price types actually measure. The distinction is the one readers
+// get wrong most often, so it belongs at the point of choosing, not only in the
+// caveats under a chart they have already built.
+const PRICE_TYPE_NOTES: Record<string, string> = {
+  stumpage: "Standing timber, as paid to the owner at the sale.",
+  delivered: "Logs at the mill gate, with harvest and haul included.",
+};
+
 function seriesLabel(s: Series): string {
   return `${s.region_name} · ${s.species_name} ${s.product_name.toLowerCase()} (${marketLabel(s.market)})`;
 }
@@ -92,7 +101,10 @@ export function Explorer() {
   const [speciesGroup, setSpeciesGroup] = useQueryState("sg", parseAsString.withDefault(ALL));
   const [species, setSpecies] = useQueryState("sp", parseAsString.withDefault(ALL));
   const [product, setProduct] = useQueryState("p", parseAsString.withDefault(ALL));
-  const [market, setMarket] = useQueryState("m", parseAsString.withDefault(ALL));
+  const [priceTypes, setPriceTypes] = useQueryState(
+    "m",
+    parseAsArrayOf(parseAsString).withDefault([]),
+  );
   const [selected, setSelected] = useQueryState(
     "sel",
     parseAsArrayOf(parseAsString).withDefault([]),
@@ -119,7 +131,7 @@ export function Explorer() {
     return m;
   }, [allSeries]);
 
-  const filtered = useMemo(() => {
+  const beforePriceType = useMemo(() => {
     return allSeries.filter((s) => {
       if (source !== ALL && s.source !== source) return false;
       if (regionType !== ALL && s.region_type !== regionType) return false;
@@ -127,10 +139,29 @@ export function Explorer() {
       if (speciesGroup !== ALL && s.species_group !== speciesGroup) return false;
       if (species !== ALL && s.species !== species) return false;
       if (product !== ALL && s.product !== product) return false;
-      if (market !== ALL && s.market !== market) return false;
       return true;
     });
-  }, [allSeries, source, regionType, state, speciesGroup, species, product, market]);
+  }, [allSeries, source, regionType, state, speciesGroup, species, product]);
+
+  // An empty selection means no price-type filter, so a fresh view shows both.
+  const filtered = useMemo(
+    () =>
+      priceTypes.length === 0
+        ? beforePriceType
+        : beforePriceType.filter((s) => priceTypes.includes(s.market)),
+    [beforePriceType, priceTypes],
+  );
+
+  // Counted before the price-type filter is applied, so the numbers say what
+  // each box would give you rather than what is already showing.
+  const priceTypeOpts = useMemo(() => {
+    const counts = new Map<string, number>();
+    for (const s of beforePriceType)
+      counts.set(s.market, (counts.get(s.market) ?? 0) + 1);
+    return [...counts.entries()]
+      .sort((a, b) => b[1] - a[1])
+      .map(([market, n]) => ({ market, n }));
+  }, [beforePriceType]);
 
   // dependent option lists come from the filtered set so menus never dead-end
   const opts = useMemo(() => {
@@ -145,7 +176,6 @@ export function Explorer() {
         (a, b) => a[1].localeCompare(b[1]),
       ),
       products: [...new Map(filtered.map((s) => [s.product, s.product_name])).entries()].sort(),
-      markets: uniq(filtered.map((s) => s.market)),
     };
   }, [allSeries, filtered]);
 
@@ -241,6 +271,23 @@ export function Explorer() {
 
   const shown = filtered.slice(0, 250);
 
+  // [] in the URL means "no filter", which shows every price type; expand it
+  // here so the boxes render checked and the toggle has a concrete set to edit
+  const allMarkets = priceTypeOpts.map((o) => o.market);
+  const activeTypes =
+    priceTypes.length === 0
+      ? allMarkets
+      : priceTypes.filter((m) => allMarkets.includes(m));
+
+  function togglePriceType(market: string) {
+    const next = activeTypes.includes(market)
+      ? activeTypes.filter((m) => m !== market)
+      : [...activeTypes, market];
+    if (next.length === 0) return;
+    // collapse "everything selected" back to the canonical empty param
+    setPriceTypes(next.length === allMarkets.length ? [] : next);
+  }
+
   // one lookup for a source's full name, read by both the Source filter's
   // options and the Source column's hover title
   const sourceName = (code: string) =>
@@ -301,12 +348,6 @@ export function Explorer() {
       set: (v) => void setProduct(v),
       options: opts.products.map(([code, name]) => ({ value: code, label: name })),
     },
-    {
-      label: "Market",
-      value: market,
-      set: (v) => void setMarket(v),
-      options: opts.markets.map((v) => ({ value: v, label: marketLabel(v) })),
-    },
   ];
 
   return (
@@ -340,11 +381,58 @@ export function Explorer() {
             setSpeciesGroup(ALL);
             setSpecies(ALL);
             setProduct(ALL);
-            setMarket(ALL);
+            setPriceTypes([]);
           }}
         >
           Reset
         </Button>
+      </div>
+
+      <div className="rounded-lg border bg-card p-4">
+        <div className="text-sm font-semibold">Price type</div>
+        <p className="mt-0.5 text-sm text-muted-foreground">
+          Both are dollars per unit, but they are not the same measurement.
+        </p>
+        <div className="mt-3 grid gap-3 sm:grid-cols-2">
+          {priceTypeOpts.map(({ market, n }) => {
+            const checked = activeTypes.includes(market);
+            // one has to stay on: unchecking the last would leave a table with
+            // nothing in it and no obvious way back
+            const lockedOn = checked && activeTypes.length === 1;
+            return (
+              <label
+                key={market}
+                className="flex items-start gap-2.5 rounded-md border bg-background/60 p-3 has-disabled:cursor-default has-[button:not([disabled])]:cursor-pointer"
+              >
+                <Checkbox
+                  checked={checked}
+                  disabled={lockedOn}
+                  onCheckedChange={() => togglePriceType(market)}
+                  className="mt-0.5"
+                  aria-label={`${marketLabel(market)} prices`}
+                />
+                <span className="min-w-0 flex-1">
+                  <span className="flex items-baseline justify-between gap-2">
+                    <span className="text-sm font-medium text-foreground">
+                      {marketLabel(market)}
+                    </span>
+                    <span className="text-xs tabular-nums text-muted-foreground">
+                      {n.toLocaleString()} series
+                    </span>
+                  </span>
+                  <span className="mt-0.5 block text-xs leading-relaxed text-muted-foreground">
+                    {PRICE_TYPE_NOTES[market] ?? null}
+                  </span>
+                </span>
+              </label>
+            );
+          })}
+        </div>
+        <p className="mt-3 border-t pt-3 text-xs leading-relaxed text-muted-foreground">
+          The two are not comparable: the gap between them is the cost of
+          getting wood out of the woods. Montana BBER is the only source here
+          that reports delivered prices.
+        </p>
       </div>
 
       {selectedSeries.length > 0 && (
