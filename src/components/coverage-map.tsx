@@ -71,6 +71,17 @@ function bucketColor(total: number, colors: Record<string, string>): string {
   return color;
 }
 
+// The lower 48. Fitting bounds rather than naming a zoom is what makes the map
+// fill whatever box it is given: at the old fixed zoom 3 the world is 2048px
+// wide, so CONUS's 57.8 degrees of longitude drew 329px inside a 1118px card —
+// under a third of it. Alaska and Hawaii are in the GeoJSON and both carry
+// coverage, but they sit outside this frame.
+const CONUS_BOUNDS: [[number, number], [number, number]] = [
+  [-125.0, 24.4],
+  [-66.9, 49.4],
+];
+const FIT_PADDING = 16;
+
 const EMPTY_STYLE = {
   version: 8 as const,
   sources: {},
@@ -121,10 +132,22 @@ export function CoverageMap({ coverage, height = 420 }: CoverageMapProps) {
       <Map
         mapStyle={EMPTY_STYLE}
         initialViewState={{
-          longitude: -98.5,
-          latitude: 38.8,
-          zoom: 3,
+          bounds: CONUS_BOUNDS,
+          fitBoundsOptions: { padding: FIT_PADDING },
         }}
+        // refit when the box changes, so a window resize or a phone rotating
+        // does not leave the country mis-framed inside its card
+        onResize={(e) =>
+          e.target.fitBounds(CONUS_BOUNDS, {
+            padding: FIT_PADDING,
+            duration: 0,
+          })
+        }
+        // A choropleth this size has nothing to gain from zoom or rotation, and
+        // a map that swallows the wheel mid-page traps the reader's scroll.
+        scrollZoom={false}
+        dragRotate={false}
+        touchZoomRotate={false}
         attributionControl={false}
         interactiveLayerIds={["states-fill"]}
         onMouseMove={onMove}
