@@ -69,12 +69,13 @@ export function humanizeCode(code: string): string {
  * the two co-exist on a state page without a reader having to guess whether an
  * orange pill means "Montana BBER" or "licensed redistribution".
  *
- * The explorer is the one place that shows a source without a swatch: there the
- * chart assigns each of up to five selections a --viz-series-* colour by slot,
- * so the same hues already answer "which selection is this". Giving them a
- * second meaning in that viewport actively misleads — a Michigan series can
- * hold the blue slot while blue is USFS Cut-and-Sold's identity. The Source
- * column there gets `sourceShortLabel` alone.
+ * The explorer draws from these same hues for a second purpose — each of up to
+ * five plotted series takes a --viz-series-* colour by selection slot — so a
+ * plotted Michigan row would show a green identity dot while its line is drawn
+ * in slot 1's blue. The fix is not to drop the dot but to give the other
+ * channel its own form: see `plotColor` in explorer.tsx, where a plotted row
+ * carries a bar down its edge in its line's colour. A round dot beside a name
+ * is an identity; a bar down a row is that row's line.
  *
  * Slots 4 and 6 are deliberately unused: 4 is a second green too close to
  * mi_dnr's, and 6 is the red that --destructive and "Discontinued" already own.

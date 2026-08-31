@@ -21,6 +21,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { PriceChart, type ChartSeries, type ChartPoint } from "@/components/price-chart";
+import { SourceMark } from "@/components/source-mark";
 import type { Dims, PriceChunk, Series, SeriesIndex } from "@/lib/types";
 import {
   fmtPeriod,
@@ -245,6 +246,16 @@ export function Explorer() {
   const sourceName = (code: string) =>
     data.dims.sources.find((d) => d.source_code === code)?.source_name ?? code;
 
+  // Which line in the chart a plotted row owns. The table carries two colour
+  // channels and they answer different questions, so each gets its own form:
+  // the round dot in the Source column is the dataset's identity (stable for
+  // the life of the site), and this bar down the edge of a plotted row is that
+  // row's line in the chart above (assigned per selection). Without the bar the
+  // two contradict each other — a Michigan row shows a green dot while its line
+  // is drawn in the blue of selection slot 1 — and with five series plotted
+  // nothing else in the table says which row is which line.
+  const plotColor = new Map(chartSeries.map((c) => [c.id, c.colorVar]));
+
   const filterDefs: {
     label: string;
     value: string;
@@ -420,7 +431,13 @@ export function Explorer() {
                 const isSel = selected.includes(id);
                 return (
                   <TableRow key={id} data-state={isSel ? "selected" : undefined}>
-                    <TableCell>
+                    <TableCell
+                      style={
+                        isSel
+                          ? { boxShadow: `inset 3px 0 0 ${plotColor.get(id)}` }
+                          : undefined
+                      }
+                    >
                       <Button
                         variant={isSel ? "secondary" : "outline"}
                         size="sm"
@@ -461,12 +478,11 @@ export function Explorer() {
                         "—"
                       )}
                     </TableCell>
-                    {/* No SourceMark here — see sourceColorVar. On this page
-                        the palette already means "which of your selections is
-                        this", so a dataset swatch would give the same hues a
-                        second, contradictory meaning in one viewport. */}
                     <TableCell className="text-xs" title={sourceName(s.source)}>
-                      {sourceShortLabel(s.source)}
+                      <span className="flex items-center gap-1.5">
+                        <SourceMark code={s.source} className="size-2" />
+                        {sourceShortLabel(s.source)}
+                      </span>
                     </TableCell>
                   </TableRow>
                 );
