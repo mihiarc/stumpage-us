@@ -32,7 +32,7 @@ export default function StatesPage() {
         sub-state regions); &ldquo;regional&rdquo; series cover the state as
         part of a USFS region or multi-state average.
       </p>
-      <CoverageMap coverage={coverage} />
+      <CoverageMap coverage={coverage} className="max-h-[560px]" />
       <div className="mt-8 overflow-x-auto rounded-lg border">
         <Table>
           <TableHeader>

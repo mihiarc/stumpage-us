@@ -8,8 +8,10 @@ import { useMemo, useState, useSyncExternalStore } from "react";
 import { useRouter } from "next/navigation";
 import Map, { Layer, Source, type MapLayerMouseEvent } from "react-map-gl/maplibre";
 import type { ExpressionSpecification } from "maplibre-gl";
-import { FIPS_TO_USPS } from "@/lib/geo";
+import Link from "next/link";
+import { FIPS_TO_USPS, STATE_NAMES } from "@/lib/geo";
 import { asset } from "@/lib/asset";
+import { cn } from "@/lib/utils";
 import "maplibre-gl/dist/maplibre-gl.css";
 
 export interface StateCoverage {
@@ -20,8 +22,24 @@ export interface StateCoverage {
 
 interface CoverageMapProps {
   coverage: Record<string, StateCoverage>;
-  height?: number;
+  /** Extra classes for the map frame, appended to the default aspect ratio. */
+  className?: string;
 }
+
+/**
+ * The frame is given an aspect ratio rather than a pixel height so it scales
+ * with its column. 1.7 sits just under CONUS's true 1.82:1 in Web Mercator,
+ * which leaves the fit width-bound: the country spans the full width and the
+ * slack falls top and bottom, where the legend needs room anyway.
+ *
+ * Narrow screens get a taller box. At 1.7 a phone-width card is barely 210px
+ * tall and the legend and tiles eat most of it, leaving the country about 60px
+ * high — the chrome crowding out the thing it annotates.
+ */
+const DEFAULT_FRAME = "aspect-[1.15] sm:aspect-[1.4] md:aspect-[1.7]";
+
+/** In the GeoJSON and carrying coverage, but outside CONUS_BOUNDS. */
+const OFF_FRAME = ["AK", "HI"] as const;
 
 // Sequential blue ramp (dataviz reference palette), bucketed by series count.
 // The colors live in globals.css like every other chart here: the legend
@@ -65,10 +83,15 @@ function useTokenColors(): Record<string, string> | null {
   }, [packed]);
 }
 
+/** Which ramp token a state's series count falls in. */
+function bucketToken(total: number): string {
+  let token = NONE_TOKEN;
+  for (const b of BUCKETS) if (total >= b.min) token = b.token;
+  return token;
+}
+
 function bucketColor(total: number, colors: Record<string, string>): string {
-  let color = colors[NONE_TOKEN];
-  for (const b of BUCKETS) if (total >= b.min) color = colors[b.token];
-  return color;
+  return colors[bucketToken(total)];
 }
 
 // The lower 48. Fitting bounds rather than naming a zoom is what makes the map
@@ -88,7 +111,7 @@ const EMPTY_STYLE = {
   layers: [],
 };
 
-export function CoverageMap({ coverage, height = 420 }: CoverageMapProps) {
+export function CoverageMap({ coverage, className }: CoverageMapProps) {
   const router = useRouter();
   const paint = useTokenColors();
   const [hovered, setHovered] = useState<{
@@ -128,7 +151,13 @@ export function CoverageMap({ coverage, height = 420 }: CoverageMapProps) {
   const hoveredCov = hovered ? coverage[hovered.usps] : null;
 
   return (
-    <div className="relative overflow-hidden rounded-lg border" style={{ height }}>
+    <div
+      className={cn(
+        "relative overflow-hidden rounded-lg border",
+        DEFAULT_FRAME,
+        className,
+      )}
+    >
       <Map
         mapStyle={EMPTY_STYLE}
         initialViewState={{
@@ -197,24 +226,50 @@ export function CoverageMap({ coverage, height = 420 }: CoverageMapProps) {
           )}
         </div>
       )}
-      <div className="absolute bottom-2 left-2 flex items-center gap-3 rounded-md border bg-background/90 px-2.5 py-1.5 text-[11px] text-muted-foreground backdrop-blur">
-        <span className="flex items-center gap-1">
-          <span
-            className="inline-block size-3 rounded-sm border"
-            style={{ background: `var(${NONE_TOKEN})` }}
-          />
-          none
-        </span>
-        {BUCKETS.map((b) => (
-          <span key={b.min} className="flex items-center gap-1">
+      {/* Bottom chrome: ramp legend, and tiles for the two states the CONUS
+          frame cannot show. One wrapping row so the two never collide on a
+          narrow card. */}
+      <div className="absolute inset-x-2 bottom-2 flex flex-wrap items-end justify-between gap-1.5">
+        <div className="flex flex-wrap items-center gap-x-3 gap-y-1 rounded-md border bg-background/90 px-2.5 py-1.5 text-[11px] text-muted-foreground backdrop-blur">
+          <span className="flex items-center gap-1">
             <span
-              className="inline-block size-3 rounded-sm"
-              style={{ background: `var(${b.token})` }}
+              className="inline-block size-3 rounded-sm border"
+              style={{ background: `var(${NONE_TOKEN})` }}
             />
-            {b.label}
+            none
           </span>
-        ))}
-        <span className="ml-1">series covering the state</span>
+          {BUCKETS.map((b) => (
+            <span key={b.min} className="flex items-center gap-1">
+              <span
+                className="inline-block size-3 rounded-sm"
+                style={{ background: `var(${b.token})` }}
+              />
+              {b.label}
+            </span>
+          ))}
+          <span className="ml-1 hidden sm:inline">
+            series covering the state
+          </span>
+        </div>
+        <div className="flex gap-1.5">
+          {OFF_FRAME.map((usps) => {
+            const total = coverage[usps]?.total ?? 0;
+            return (
+              <Link
+                key={usps}
+                href={`/states/${usps.toLowerCase()}/`}
+                title={`${STATE_NAMES[usps]} — ${total.toLocaleString()} price series (outside the map frame)`}
+                className="flex items-center gap-1 rounded-md border bg-background/90 px-1.5 py-1.5 text-[11px] font-medium text-muted-foreground backdrop-blur transition-colors hover:text-foreground"
+              >
+                <span
+                  className="inline-block size-3 rounded-sm border"
+                  style={{ background: `var(${bucketToken(total)})` }}
+                />
+                {usps}
+              </Link>
+            );
+          })}
+        </div>
       </div>
     </div>
   );
