@@ -2,18 +2,39 @@ import Link from "next/link";
 import { ArrowRight, Database, Map as MapIcon, ScrollText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import { CoverageMap } from "@/components/coverage-map";
-import { getManifest, getDims, getCoverage } from "@/lib/data";
-import { getStateCoverage } from "@/lib/coverage";
+import { getManifest, getDims, getCoverage, getSeriesIndex } from "@/lib/data";
+import { regionTypeLabel } from "@/lib/geo";
 import { SOURCE_LINKS } from "@/content/source-links";
 import { SourceMark } from "@/components/source-mark";
 
 export default function HomePage() {
   const manifest = getManifest();
   const dims = getDims();
-  const coverage = getStateCoverage();
   const t = getCoverage().totals;
   const built = new Date(manifest.built_at);
+
+  // The record described at the grain each source actually reports at, rather
+  // than re-cut to a boundary nobody published against. This is the honest
+  // answer to "where is the data": at forests and management units, hardly ever
+  // at a state.
+  const byGrain = new Map<string, { regions: Set<string>; n: number }>();
+  for (const series of getSeriesIndex().series) {
+    const g = byGrain.get(series.region_type) ?? { regions: new Set(), n: 0 };
+    g.regions.add(series.region);
+    g.n += 1;
+    byGrain.set(series.region_type, g);
+  }
+  const grains = [...byGrain.entries()]
+    .map(([type, g]) => ({
+      type,
+      label: regionTypeLabel(type),
+      regions: g.regions.size,
+      n: g.n,
+    }))
+    .sort((a, b) => b.n - a.n);
+  const widest = grains[0].n;
+  const stateGrained =
+    (byGrain.get("state_avg")?.n ?? 0) + (byGrain.get("statewide")?.n ?? 0);
 
   // The finding, counted in states. Each is a share of the same 50, so the bars
   // are comparable to each other — which is the point: the reader should see
@@ -82,21 +103,65 @@ export default function HomePage() {
             .
           </p>
         </div>
-        <div>
-          <CoverageMap coverage={coverage} />
-          <p className="mt-2 text-xs leading-relaxed text-muted-foreground">
-            Every price series covering each state — state-level, sub-state and
-            multi-state (USFS region) series all count, so most states inherit
-            their count from a USFS region. Click a state for its series.
+        <div className="rounded-lg border bg-card p-4 md:p-5">
+          <h2 className="text-sm font-semibold">
+            Where the record lives
+          </h2>
+          <p className="mt-0.5 text-xs leading-relaxed text-muted-foreground">
+            Every series, counted at the geography its publisher chose. Each row
+            is a reporting grain, not a place.
+          </p>
+          <ul className="mt-4 space-y-2.5">
+            {grains.map((g) => (
+              <li key={g.type}>
+                <div className="flex items-baseline justify-between gap-3 text-xs">
+                  <span className="truncate font-medium">{g.label}</span>
+                  <span className="shrink-0 tabular-nums text-muted-foreground">
+                    {g.regions} {g.regions === 1 ? "region" : "regions"} ·{" "}
+                    <span className="font-medium text-foreground">
+                      {g.n.toLocaleString()}
+                    </span>
+                  </span>
+                </div>
+                <div
+                  aria-hidden
+                  className="mt-1 h-1 overflow-hidden rounded-full bg-muted"
+                >
+                  <div
+                    className="h-full rounded-full bg-primary"
+                    style={{ width: `${Math.max(0.8, (g.n / widest) * 100)}%` }}
+                  />
+                </div>
+              </li>
+            ))}
+          </ul>
+          <p className="mt-4 border-t pt-3 text-xs leading-relaxed text-muted-foreground">
+            Only {stateGrained} of the{" "}
+            {manifest.series_count.toLocaleString()}{" "}series are reported at state
+            grain, which is why there is no national price map here yet: drawing
+            one means assigning a forest&rsquo;s price to a boundary nobody
+            published it against. Browse by{" "}
+            <Link
+              href="/regions"
+              className="text-foreground underline underline-offset-2"
+            >
+              reporting region
+            </Link>{" "}
+            or by{" "}
+            <Link
+              href="/states"
+              className="text-foreground underline underline-offset-2"
+            >
+              state
+            </Link>
+            .
           </p>
         </div>
       </section>
 
       <section className="border-t py-8">
         <div className="rounded-lg border bg-card p-5 md:p-6">
-          <h2 className="text-base font-semibold">
-            Where the record stands
-          </h2>
+          <h2 className="text-base font-semibold">What the search found</h2>
           <p className="mt-0.5 text-sm text-muted-foreground">
             All {t.states} states searched. Every bar below is a share of the
             same {t.states}, so they can be read against each other.

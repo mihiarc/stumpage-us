@@ -31,8 +31,11 @@ mixing them up is the most common mistake here:
    anywhere in a server component; never importable from a `"use client"` file.
 2. **Client-time** (`src/components/explorer.tsx`, `coverage-map.tsx`): `fetch()` of the same
    files over HTTP, with module-level promise caches so chunks survive route changes. The
-   1.7 MB `series_index.json` and the per-source `prices/{source}.json` chunks are only loaded
-   this way — never import them into a server page.
+   1.7 MB `series_index.json` and the per-source `prices/{source}.json` chunks reach the
+   *browser* only this way. Server pages do read `series_index.json` at build time through
+   `getSeriesIndex`/`getSeriesByRegion` (`/sources/[code]`, `/regions`, `/regions/[code]`,
+   `coverage.ts`) — that is free, since nothing is sent to the client. The rule is that
+   neither file may be pulled into a client bundle, not that server code must avoid them.
 
 Every dynamic route (`states/[code]`, `sources/[code]`) must export `generateStaticParams`;
 a static export has no fallback rendering.
