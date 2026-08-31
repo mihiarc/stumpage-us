@@ -1,0 +1,64 @@
+{
+  "version": "c46baa19550d",
+  "source": "USFS EDW ForestSystemBoundaries, Administrative Forest Boundaries (national extent)",
+  "fetch_params": {
+    "forests": {
+      "where": "1=1",
+      "returnGeometry": "true",
+      "outSR": "4326",
+      "geometryPrecision": "3",
+      "f": "geojson",
+      "outFields": "region,forestnumber,forestname",
+      "maxAllowableOffset": "0.05"
+    },
+    "regions": {
+      "where": "1=1",
+      "returnGeometry": "true",
+      "outSR": "4326",
+      "geometryPrecision": "3",
+      "f": "geojson",
+      "outFields": "region,regionname",
+      "maxAllowableOffset": "0.02"
+    }
+  },
+  "min_ring_km2": 5,
+  "layers": [
+    {
+      "id": "usfs_region",
+      "name": "USFS regions",
+      "unit": "region",
+      "file": "usfs-regions.json",
+      "key_prop": "key",
+      "name_prop": "name",
+      "region_types": [
+        "usfs_region"
+      ],
+      "features": 9
+    },
+    {
+      "id": "national_forest",
+      "name": "National forests",
+      "unit": "forest",
+      "file": "usfs-forests.json",
+      "key_prop": "key",
+      "name_prop": "name",
+      "region_types": [
+        "national_forest"
+      ],
+      "features": 112
+    },
+    {
+      "id": "state",
+      "name": "States",
+      "unit": "state",
+      "file": "us-states.json",
+      "key_prop": "fips",
+      "name_prop": "name",
+      "region_types": [
+        "state_avg",
+        "statewide"
+      ],
+      "features": 51
+    }
+  ]
+}

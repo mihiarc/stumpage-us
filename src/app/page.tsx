@@ -2,7 +2,9 @@ import Link from "next/link";
 import { ArrowRight, Database, Map as MapIcon, ScrollText } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { BoundaryMap } from "@/components/boundary-map";
 import { getManifest, getDims, getCoverage, getSeriesIndex } from "@/lib/data";
+import { buildBoundaryLayers } from "@/lib/geo-layers";
 import { regionTypeLabel } from "@/lib/geo";
 import { SOURCE_LINKS } from "@/content/source-links";
 import { SourceMark } from "@/components/source-mark";
@@ -11,6 +13,7 @@ export default function HomePage() {
   const manifest = getManifest();
   const dims = getDims();
   const t = getCoverage().totals;
+  const boundaryLayers = buildBoundaryLayers();
   const built = new Date(manifest.built_at);
 
   // The record described at the grain each source actually reports at, rather
@@ -103,15 +106,17 @@ export default function HomePage() {
             .
           </p>
         </div>
+        <BoundaryMap layers={boundaryLayers} />
+      </section>
+
+      <section className="border-t py-8">
         <div className="rounded-lg border bg-card p-4 md:p-5">
-          <h2 className="text-sm font-semibold">
-            Where the record lives
-          </h2>
+          <h2 className="text-sm font-semibold">Where the record lives</h2>
           <p className="mt-0.5 text-xs leading-relaxed text-muted-foreground">
             Every series, counted at the geography its publisher chose. Each row
             is a reporting grain, not a place.
           </p>
-          <ul className="mt-4 space-y-2.5">
+          <ul className="mt-4 grid gap-x-8 gap-y-2.5 sm:grid-cols-2">
             {grains.map((g) => (
               <li key={g.type}>
                 <div className="flex items-baseline justify-between gap-3 text-xs">
@@ -159,7 +164,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      <section className="border-t py-8">
+      <section className="py-8">
         <div className="rounded-lg border bg-card p-5 md:p-6">
           <h2 className="text-base font-semibold">What the search found</h2>
           <p className="mt-0.5 text-sm text-muted-foreground">
