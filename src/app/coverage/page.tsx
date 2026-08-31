@@ -23,15 +23,15 @@ export const metadata: Metadata = {
 const EVIDENCE: Record<Evidence, { label: string; className: string }> = {
   "state-series": {
     label: "State series",
-    className: "bg-emerald-600/15 text-emerald-700 dark:text-emerald-400",
+    className: "bg-status-live/15 text-status-live",
   },
   "regional-only": {
     label: "Regional only",
-    className: "bg-amber-500/15 text-amber-700 dark:text-amber-400",
+    className: "bg-status-stale/15 text-status-stale",
   },
   none: {
     label: "None",
-    className: "bg-red-600/15 text-red-700 dark:text-red-400",
+    className: "bg-status-dead/15 text-status-dead",
   },
 };
 
@@ -192,7 +192,7 @@ export default function CoveragePage() {
                     </TableCell>
                     <TableCell>
                       {s.directory.has_live_independent ? (
-                        <span className="text-emerald-700 dark:text-emerald-400">
+                        <span className="text-status-live">
                           Yes
                         </span>
                       ) : (

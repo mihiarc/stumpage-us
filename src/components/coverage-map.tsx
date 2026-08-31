@@ -4,9 +4,8 @@
 // public price series cover them (directly or via a multi-state/USFS-region
 // series); clicking a state opens its page. Self-contained: no external tile
 // service — the only layer is the bundled states GeoJSON.
-import { useMemo, useState } from "react";
+import { useMemo, useState, useSyncExternalStore } from "react";
 import { useRouter } from "next/navigation";
-import { useTheme } from "next-themes";
 import Map, { Layer, Source, type MapLayerMouseEvent } from "react-map-gl/maplibre";
 import type { ExpressionSpecification } from "maplibre-gl";
 import { FIPS_TO_USPS } from "@/lib/geo";
@@ -24,17 +23,51 @@ interface CoverageMapProps {
   height?: number;
 }
 
-// sequential blue ramp (dataviz reference palette), bucketed by series count
-const BUCKETS: { min: number; color: string; label: string }[] = [
-  { min: 1, color: "#cde2fb", label: "1–24" },
-  { min: 25, color: "#86b6ef", label: "25–99" },
-  { min: 100, color: "#3987e5", label: "100–499" },
-  { min: 500, color: "#1c5cab", label: "500+" },
+// Sequential blue ramp (dataviz reference palette), bucketed by series count.
+// The colors live in globals.css like every other chart here: the legend
+// swatches below reference the tokens straight from CSS, and useTokenColors
+// resolves them for MapLibre, which paints on a WebGL canvas and so is the one
+// consumer in the repo that cannot read a CSS custom property itself.
+const NONE_TOKEN = "--viz-seq-none";
+const LINE_TOKEN = "--viz-baseline";
+const BUCKETS: { min: number; token: string; label: string }[] = [
+  { min: 1, token: "--viz-seq-100", label: "1–24" },
+  { min: 25, token: "--viz-seq-250", label: "25–99" },
+  { min: 100, token: "--viz-seq-400", label: "100–499" },
+  { min: 500, token: "--viz-seq-550", label: "500+" },
 ];
+const PAINT_TOKENS = [NONE_TOKEN, LINE_TOKEN, ...BUCKETS.map((b) => b.token)];
 
-function bucketColor(total: number, zeroColor: string): string {
-  let color = zeroColor;
-  for (const b of BUCKETS) if (total >= b.min) color = b.color;
+// The <html> class list is the external store here: whoever flips the theme,
+// next-themes or otherwise, the observer fires and the tokens are re-read.
+// Joined into one string so getSnapshot returns a stable primitive.
+function subscribeToTheme(onChange: () => void) {
+  const observer = new MutationObserver(onChange);
+  observer.observe(document.documentElement, {
+    attributes: true,
+    attributeFilter: ["class", "style"],
+  });
+  return () => observer.disconnect();
+}
+
+function readPaintTokens() {
+  const cs = getComputedStyle(document.documentElement);
+  return PAINT_TOKENS.map((t) => cs.getPropertyValue(t).trim()).join("|");
+}
+
+// Null while prerendering — the values only exist once there is a document.
+function useTokenColors(): Record<string, string> | null {
+  const packed = useSyncExternalStore(subscribeToTheme, readPaintTokens, () => null);
+  return useMemo(() => {
+    if (!packed) return null;
+    const values = packed.split("|");
+    return Object.fromEntries(PAINT_TOKENS.map((t, i) => [t, values[i]]));
+  }, [packed]);
+}
+
+function bucketColor(total: number, colors: Record<string, string>): string {
+  let color = colors[NONE_TOKEN];
+  for (const b of BUCKETS) if (total >= b.min) color = colors[b.token];
   return color;
 }
 
@@ -46,8 +79,7 @@ const EMPTY_STYLE = {
 
 export function CoverageMap({ coverage, height = 420 }: CoverageMapProps) {
   const router = useRouter();
-  const { resolvedTheme } = useTheme();
-  const dark = resolvedTheme === "dark";
+  const paint = useTokenColors();
   const [hovered, setHovered] = useState<{
     usps: string;
     name: string;
@@ -55,17 +87,15 @@ export function CoverageMap({ coverage, height = 420 }: CoverageMapProps) {
     y: number;
   } | null>(null);
 
-  const zeroColor = dark ? "#262624" : "#eeede8";
-  const lineColor = dark ? "#383835" : "#c3c2b7";
-
-  const fillColor = useMemo<ExpressionSpecification>(() => {
+  const fillColor = useMemo<ExpressionSpecification | null>(() => {
+    if (!paint) return null;
     const expr: unknown[] = ["match", ["get", "fips"]];
     for (const [fips, usps] of Object.entries(FIPS_TO_USPS)) {
-      expr.push(fips, bucketColor(coverage[usps]?.total ?? 0, zeroColor));
+      expr.push(fips, bucketColor(coverage[usps]?.total ?? 0, paint));
     }
-    expr.push(zeroColor);
+    expr.push(paint[NONE_TOKEN]);
     return expr as ExpressionSpecification;
-  }, [coverage, zeroColor]);
+  }, [coverage, paint]);
 
   function onMove(e: MapLayerMouseEvent) {
     const f = e.features?.[0];
@@ -109,16 +139,20 @@ export function CoverageMap({ coverage, height = 420 }: CoverageMapProps) {
         style={{ width: "100%", height: "100%", background: "transparent" }}
       >
         <Source id="states" type="geojson" data={asset("/geo/us-states.json")}>
-          <Layer
-            id="states-fill"
-            type="fill"
-            paint={{ "fill-color": fillColor, "fill-opacity": 0.9 }}
-          />
-          <Layer
-            id="states-line"
-            type="line"
-            paint={{ "line-color": lineColor, "line-width": 1 }}
-          />
+          {fillColor && (
+            <Layer
+              id="states-fill"
+              type="fill"
+              paint={{ "fill-color": fillColor, "fill-opacity": 0.9 }}
+            />
+          )}
+          {paint && (
+            <Layer
+              id="states-line"
+              type="line"
+              paint={{ "line-color": paint[LINE_TOKEN], "line-width": 1 }}
+            />
+          )}
         </Source>
       </Map>
       {hovered && (
@@ -142,12 +176,18 @@ export function CoverageMap({ coverage, height = 420 }: CoverageMapProps) {
       )}
       <div className="absolute bottom-2 left-2 flex items-center gap-3 rounded-md border bg-background/90 px-2.5 py-1.5 text-[11px] text-muted-foreground backdrop-blur">
         <span className="flex items-center gap-1">
-          <span className="inline-block size-3 rounded-sm border" style={{ background: zeroColor }} />
+          <span
+            className="inline-block size-3 rounded-sm border"
+            style={{ background: `var(${NONE_TOKEN})` }}
+          />
           none
         </span>
         {BUCKETS.map((b) => (
           <span key={b.min} className="flex items-center gap-1">
-            <span className="inline-block size-3 rounded-sm" style={{ background: b.color }} />
+            <span
+              className="inline-block size-3 rounded-sm"
+              style={{ background: `var(${b.token})` }}
+            />
             {b.label}
           </span>
         ))}

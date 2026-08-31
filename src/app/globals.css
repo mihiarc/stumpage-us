@@ -5,132 +5,13 @@
 
 @custom-variant dark (&:is(.dark *));
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-sans);
-  --font-mono: var(--font-geist-mono);
-  --font-heading: var(--font-sans);
-  --color-sidebar-ring: var(--sidebar-ring);
-  --color-sidebar-border: var(--sidebar-border);
-  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
-  --color-sidebar-accent: var(--sidebar-accent);
-  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
-  --color-sidebar-primary: var(--sidebar-primary);
-  --color-sidebar-foreground: var(--sidebar-foreground);
-  --color-sidebar: var(--sidebar);
-  --color-chart-5: var(--chart-5);
-  --color-chart-4: var(--chart-4);
-  --color-chart-3: var(--chart-3);
-  --color-chart-2: var(--chart-2);
-  --color-chart-1: var(--chart-1);
-  --color-ring: var(--ring);
-  --color-input: var(--input);
-  --color-border: var(--border);
-  --color-destructive: var(--destructive);
-  --color-accent-foreground: var(--accent-foreground);
-  --color-accent: var(--accent);
-  --color-muted-foreground: var(--muted-foreground);
-  --color-muted: var(--muted);
-  --color-secondary-foreground: var(--secondary-foreground);
-  --color-secondary: var(--secondary);
-  --color-primary-foreground: var(--primary-foreground);
-  --color-primary: var(--primary);
-  --color-popover-foreground: var(--popover-foreground);
-  --color-popover: var(--popover);
-  --color-card-foreground: var(--card-foreground);
-  --color-card: var(--card);
-  --radius-sm: calc(var(--radius) * 0.6);
-  --radius-md: calc(var(--radius) * 0.8);
-  --radius-lg: var(--radius);
-  --radius-xl: calc(var(--radius) * 1.4);
-  --radius-2xl: calc(var(--radius) * 1.8);
-  --radius-3xl: calc(var(--radius) * 2.2);
-  --radius-4xl: calc(var(--radius) * 2.6);
-}
+/* ============================================================================
+   1. DATA PALETTE — the source of truth for every color on this site.
+   Both modes hand-selected and contrast-checked (the dataviz method); these are
+   NOT auto-flipped lightness inversions. The UI chrome in section 2 derives
+   from these values rather than introducing hues of its own.
+   ============================================================================ */
 
-:root {
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-  --card: oklch(1 0 0);
-  --card-foreground: oklch(0.145 0 0);
-  --popover: oklch(1 0 0);
-  --popover-foreground: oklch(0.145 0 0);
-  --primary: oklch(0.205 0 0);
-  --primary-foreground: oklch(0.985 0 0);
-  --secondary: oklch(0.97 0 0);
-  --secondary-foreground: oklch(0.205 0 0);
-  --muted: oklch(0.97 0 0);
-  --muted-foreground: oklch(0.556 0 0);
-  --accent: oklch(0.97 0 0);
-  --accent-foreground: oklch(0.205 0 0);
-  --destructive: oklch(0.577 0.245 27.325);
-  --border: oklch(0.922 0 0);
-  --input: oklch(0.922 0 0);
-  --ring: oklch(0.708 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0);
-  --sidebar-foreground: oklch(0.145 0 0);
-  --sidebar-primary: oklch(0.205 0 0);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.97 0 0);
-  --sidebar-accent-foreground: oklch(0.205 0 0);
-  --sidebar-border: oklch(0.922 0 0);
-  --sidebar-ring: oklch(0.708 0 0);
-}
-
-.dark {
-  --background: oklch(0.145 0 0);
-  --foreground: oklch(0.985 0 0);
-  --card: oklch(0.205 0 0);
-  --card-foreground: oklch(0.985 0 0);
-  --popover: oklch(0.205 0 0);
-  --popover-foreground: oklch(0.985 0 0);
-  --primary: oklch(0.922 0 0);
-  --primary-foreground: oklch(0.205 0 0);
-  --secondary: oklch(0.269 0 0);
-  --secondary-foreground: oklch(0.985 0 0);
-  --muted: oklch(0.269 0 0);
-  --muted-foreground: oklch(0.708 0 0);
-  --accent: oklch(0.269 0 0);
-  --accent-foreground: oklch(0.985 0 0);
-  --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(1 0 0 / 10%);
-  --input: oklch(1 0 0 / 15%);
-  --ring: oklch(0.556 0 0);
-  --chart-1: oklch(0.87 0 0);
-  --chart-2: oklch(0.556 0 0);
-  --chart-3: oklch(0.439 0 0);
-  --chart-4: oklch(0.371 0 0);
-  --chart-5: oklch(0.269 0 0);
-  --sidebar: oklch(0.205 0 0);
-  --sidebar-foreground: oklch(0.985 0 0);
-  --sidebar-primary: oklch(0.488 0.243 264.376);
-  --sidebar-primary-foreground: oklch(0.985 0 0);
-  --sidebar-accent: oklch(0.269 0 0);
-  --sidebar-accent-foreground: oklch(0.985 0 0);
-  --sidebar-border: oklch(1 0 0 / 10%);
-  --sidebar-ring: oklch(0.556 0 0);
-}
-
-@layer base {
-  * {
-    @apply border-border outline-ring/50;
-  }
-  body {
-    @apply bg-background text-foreground;
-  }
-  html {
-    @apply font-sans;
-  }
-}
-/* ---- data-viz tokens (reference palette from the dataviz method; both modes
-   selected + validated, not auto-flipped) ---- */
 :root {
   --viz-surface: #fcfcfb;
   --viz-ink: #0b0b0b;
@@ -152,7 +33,10 @@
   --viz-seq-400: #3987e5;
   --viz-seq-550: #1c5cab;
   --viz-seq-700: #0d366b;
+  /* choropleth "no data" fill — a state we looked at and found nothing for */
+  --viz-seq-none: #eeede8;
 }
+
 .dark {
   --viz-surface: #1a1a19;
   --viz-ink: #ffffff;
@@ -168,4 +52,153 @@
   --viz-series-6: #e66767;
   --viz-series-7: #d55181;
   --viz-series-8: #d95926;
+  --viz-seq-none: #262624;
+}
+
+/* ============================================================================
+   2. UI TOKENS
+
+   Two rules keep the interface and the charts from fighting each other:
+
+   a. Chrome and data may share a hue, but never a chroma band. Every chrome
+      color stays below 0.07 chroma; every data color above 0.14. That is why
+      the deep conifer --primary cannot be mistaken for --viz-series-4, the
+      bright green a chart line would use.
+   b. Neutrals sit at hue ~100-106 — the same warm gray family as --viz-grid
+      and --viz-surface — so a chart no longer reads as cream paper laid on a
+      pure-gray page. Where the two systems mean the same thing they share one
+      value outright: a card IS chart paper, a hairline IS a gridline.
+   ============================================================================ */
+
+:root {
+  /* warm paper; cards sit a shade brighter than the page they rest on */
+  --background: oklch(0.978 0.004 105);
+  --foreground: oklch(0.155 0.003 106);
+  --card: var(--viz-surface);
+  --card-foreground: oklch(0.155 0.003 106);
+  --popover: var(--viz-surface);
+  --popover-foreground: oklch(0.155 0.003 106);
+
+  /* identity: deep conifer green, the header's tree mark taken to chrome depth */
+  --primary: oklch(0.385 0.05 158);
+  --primary-foreground: oklch(0.985 0.004 106);
+
+  --secondary: oklch(0.966 0.006 106);
+  --secondary-foreground: oklch(0.235 0.008 106);
+  --muted: oklch(0.966 0.006 106);
+  --muted-foreground: oklch(0.552 0.008 100);
+  --accent: oklch(0.958 0.013 158);
+  --accent-foreground: oklch(0.28 0.038 158);
+
+  --destructive: oklch(0.585 0.19 25);
+
+  --border: var(--viz-grid);
+  --input: var(--viz-grid);
+  --ring: oklch(0.55 0.065 158);
+
+  --radius: 0.625rem;
+
+  /* chart tokens for any shadcn Chart component — aliased, never duplicated,
+     so they follow the data palette into dark mode on their own */
+  --chart-1: var(--viz-series-1);
+  --chart-2: var(--viz-series-2);
+  --chart-3: var(--viz-series-3);
+  --chart-4: var(--viz-series-4);
+  --chart-5: var(--viz-series-5);
+
+  /* source status + provenance. Hues borrowed from the data palette so a badge
+     and a series line speak the same vocabulary; each value is dark enough to
+     serve as text on --background and tints to a surface at /15. */
+  --status-independent: oklch(0.5 0.14 255);
+  --status-live: oklch(0.5 0.13 162);
+  --status-stale: oklch(0.535 0.125 70);
+  --status-dead: oklch(0.545 0.19 25);
+  --status-licensed: oklch(0.555 0.17 41);
+  --status-tax: oklch(0.48 0.15 284);
+}
+
+.dark {
+  --background: oklch(0.172 0.002 106);
+  --foreground: oklch(0.985 0.001 106);
+  --card: var(--viz-surface);
+  --card-foreground: oklch(0.985 0.001 106);
+  --popover: var(--viz-surface);
+  --popover-foreground: oklch(0.985 0.001 106);
+
+  --primary: oklch(0.845 0.055 158);
+  --primary-foreground: oklch(0.225 0.03 158);
+
+  --secondary: oklch(0.272 0.004 106);
+  --secondary-foreground: oklch(0.985 0.001 106);
+  --muted: oklch(0.272 0.004 106);
+  --muted-foreground: oklch(0.712 0.008 100);
+  --accent: oklch(0.284 0.014 158);
+  --accent-foreground: oklch(0.955 0.008 158);
+
+  --destructive: oklch(0.712 0.17 25);
+
+  --border: var(--viz-grid);
+  --input: oklch(0.318 0.005 107);
+  --ring: oklch(0.62 0.07 158);
+
+  --status-independent: oklch(0.74 0.13 255);
+  --status-live: oklch(0.78 0.14 162);
+  --status-stale: oklch(0.8 0.14 75);
+  --status-dead: oklch(0.72 0.17 25);
+  --status-licensed: oklch(0.76 0.16 45);
+  --status-tax: oklch(0.75 0.13 284);
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-sans);
+  --font-mono: var(--font-geist-mono);
+  --font-heading: var(--font-sans);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --color-status-independent: var(--status-independent);
+  --color-status-live: var(--status-live);
+  --color-status-stale: var(--status-stale);
+  --color-status-dead: var(--status-dead);
+  --color-status-licensed: var(--status-licensed);
+  --color-status-tax: var(--status-tax);
+  --radius-sm: calc(var(--radius) * 0.6);
+  --radius-md: calc(var(--radius) * 0.8);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) * 1.4);
+  --radius-2xl: calc(var(--radius) * 1.8);
+  --radius-3xl: calc(var(--radius) * 2.2);
+  --radius-4xl: calc(var(--radius) * 2.6);
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+  html {
+    @apply font-sans;
+  }
 }

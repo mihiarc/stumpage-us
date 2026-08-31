@@ -40,7 +40,7 @@ export function SiteHeader() {
     <header className="sticky top-0 z-40 border-b bg-background/90 backdrop-blur">
       <div className="mx-auto flex h-14 max-w-6xl items-center gap-6 px-4">
         <Link href="/" className="flex items-center gap-2 font-semibold">
-          <TreePine className="size-5 text-emerald-700 dark:text-emerald-500" />
+          <TreePine className="size-5 text-primary" />
           <span className="whitespace-nowrap">US Timber Prices</span>
         </Link>
         <nav className="flex flex-1 items-center gap-1 overflow-x-auto text-sm">
