@@ -6,6 +6,7 @@ import { CoverageMap } from "@/components/coverage-map";
 import { getManifest, getDims } from "@/lib/data";
 import { getStateCoverage } from "@/lib/coverage";
 import { SOURCE_LINKS } from "@/content/source-links";
+import { SourceMark } from "@/components/source-mark";
 
 export default function HomePage() {
   const manifest = getManifest();
@@ -76,7 +77,10 @@ export default function HomePage() {
             return (
               <Card key={src.source_code}>
                 <CardHeader>
-                  <CardTitle className="text-base">{src.source_name}</CardTitle>
+                  <CardTitle className="flex items-center gap-2 text-base">
+                    <SourceMark code={src.source_code} />
+                    {src.source_name}
+                  </CardTitle>
                 </CardHeader>
                 <CardContent className="space-y-2 text-sm text-muted-foreground">
                   <p className="line-clamp-3">{src.description}</p>

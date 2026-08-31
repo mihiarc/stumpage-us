@@ -8,6 +8,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { getDims, getRegionCodes, getSeriesByRegion } from "@/lib/data";
 import { regionTypeLabel, STATE_NAMES, seriesStates } from "@/lib/geo";
+import { SourceMark } from "@/components/source-mark";
 
 export const metadata: Metadata = {
   title: "Reporting regions",
@@ -68,7 +69,8 @@ export default function RegionsPage() {
 
       {[...bySource.entries()].map(([src, list]) => (
         <section key={src} className="mt-8">
-          <h2 className="mb-3 text-lg font-semibold">
+          <h2 className="mb-3 flex items-center gap-2 text-lg font-semibold">
+            <SourceMark code={src} />
             <Link
               href={`/sources/${src}`}
               className="underline underline-offset-2"

@@ -57,6 +57,69 @@ export function humanizeCode(code: string): string {
     .join(" ");
 }
 
+/**
+ * Identity colour per dataset, as an index into the --viz-series-* palette.
+ *
+ * Colour on this site answers a question rather than decorating: this one
+ * answers "which dataset is this number from?", and it answers it the same way
+ * on the home cards, /sources, a source page, and the explorer's Source column.
+ * Drawn from the chart palette so no new hues enter the system, and rendered
+ * only ever as a solid swatch beside the name — a legend key. That keeps it a
+ * different kind of object from the filled --status-* pills, which is what lets
+ * the two co-exist on a state page without a reader having to guess whether an
+ * orange pill means "Montana BBER" or "licensed redistribution".
+ *
+ * The explorer is the one place that shows a source without a swatch: there the
+ * chart assigns each of up to five selections a --viz-series-* colour by slot,
+ * so the same hues already answer "which selection is this". Giving them a
+ * second meaning in that viewport actively misleads — a Michigan series can
+ * hold the blue slot while blue is USFS Cut-and-Sold's identity. The Source
+ * column there gets `sourceShortLabel` alone.
+ *
+ * Slots 4 and 6 are deliberately unused: 4 is a second green too close to
+ * mi_dnr's, and 6 is the red that --destructive and "Discontinued" already own.
+ * The two federal series sit next to each other in the palette (blue, purple)
+ * because they are the same kind of thing.
+ */
+const SOURCE_SERIES_SLOT: Record<string, number> = {
+  usfs_cutsold: 1, // blue   — National Forest Cut-and-Sold, the largest
+  mi_dnr: 2, // green  — Michigan DNR, the largest state source
+  or_odf: 3, // amber  — Oregon ODF
+  pnw: 5, // purple — PNW Research Station, the other federal series
+  mt_dnrc: 7, // pink   — Montana DNRC trust land
+  mt_bber: 8, // orange — Montana BBER delivered survey
+};
+
+/**
+ * The CSS variable holding a dataset's identity colour. Returns a var()
+ * reference rather than a value so it follows the palette into dark mode on its
+ * own; a source the export adds tomorrow renders muted rather than throwing.
+ */
+export function sourceColorVar(code: string): string {
+  const slot = SOURCE_SERIES_SLOT[code];
+  return slot ? `var(--viz-series-${slot})` : "var(--viz-ink-muted)";
+}
+
+/**
+ * Short names for the datasets, for places too narrow for `source_name` (which
+ * runs 34-55 characters) — the explorer's Source column above all, which
+ * otherwise leaks the raw `mi_dnr` code into the UI. An override map over
+ * `humanizeCode`, exactly like MARKET_LABELS and OWNERSHIP_LABELS below: a
+ * source the export adds tomorrow renders acceptably instead of breaking.
+ */
+export const SOURCE_SHORT_LABELS: Record<string, string> = {
+  mi_dnr: "Michigan DNR",
+  mt_bber: "Montana BBER",
+  mt_dnrc: "Montana DNRC",
+  or_odf: "Oregon ODF",
+  pnw: "USFS PNW",
+  usfs_cutsold: "USFS Cut-and-Sold",
+};
+
+export function sourceShortLabel(code: string): string {
+  return SOURCE_SHORT_LABELS[code] ?? humanizeCode(code);
+}
+
 export const UNIT_LABELS: Record<string, string> = {
   ton: "$/green ton",
   cord: "$/cord",

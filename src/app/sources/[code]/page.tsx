@@ -24,6 +24,7 @@ import {
 } from "@/lib/format";
 import { regionTypeLabel } from "@/lib/geo";
 import { SOURCE_LINKS } from "@/content/source-links";
+import { SourceMark } from "@/components/source-mark";
 import { SOURCE_NOTES } from "@/content/source-notes";
 
 interface Params {
@@ -74,7 +75,10 @@ export default async function SourcePage({
         </Link>{" "}
         /
       </div>
-      <h1 className="text-2xl font-bold tracking-tight">{src.source_name}</h1>
+      <h1 className="flex items-center gap-2.5 text-2xl font-bold tracking-tight">
+        <SourceMark code={code} className="size-3.5" />
+        {src.source_name}
+      </h1>
       <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
         {src.description}
       </p>

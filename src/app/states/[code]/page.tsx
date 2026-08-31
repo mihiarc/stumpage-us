@@ -13,6 +13,7 @@ import {
   TableRow,
 } from "@/components/ui/table";
 import { DirectoryEntryCard } from "@/components/directory-entry";
+import { SourceMark } from "@/components/source-mark";
 import {
   directoryForState,
   entryVerified,
@@ -212,9 +213,11 @@ export default async function StatePage({
             {summarize(finer).map((g) => (
               <Card key={`${g.source}${g.region_type}`}>
                 <CardHeader>
-                  <CardTitle className="text-sm">
-                    {sourceName(g.source)} —{" "}
-                    {regionTypeLabel(g.region_type)}
+                  <CardTitle className="flex items-center gap-2 text-sm">
+                    <SourceMark code={g.source} className="size-2" />
+                    <span>
+                      {sourceName(g.source)} — {regionTypeLabel(g.region_type)}
+                    </span>
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="text-sm text-muted-foreground">
@@ -249,9 +252,11 @@ export default async function StatePage({
             {summarize(regional).map((g) => (
               <Card key={`${g.source}${g.region_type}`}>
                 <CardHeader>
-                  <CardTitle className="text-sm">
-                    {sourceName(g.source)} —{" "}
-                    {regionTypeLabel(g.region_type)}
+                  <CardTitle className="flex items-center gap-2 text-sm">
+                    <SourceMark code={g.source} className="size-2" />
+                    <span>
+                      {sourceName(g.source)} — {regionTypeLabel(g.region_type)}
+                    </span>
                   </CardTitle>
                 </CardHeader>
                 <CardContent className="text-sm text-muted-foreground">

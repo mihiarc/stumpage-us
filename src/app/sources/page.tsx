@@ -4,6 +4,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { getDims, getManifest } from "@/lib/data";
 import { ownershipLabel } from "@/lib/format";
 import { SOURCE_LINKS } from "@/content/source-links";
+import { SourceMark } from "@/components/source-mark";
 
 export const metadata: Metadata = {
   title: "Data sources",
@@ -30,7 +31,8 @@ export default function SourcesPage() {
           return (
             <Card key={src.source_code}>
               <CardHeader>
-                <CardTitle className="text-base">
+                <CardTitle className="flex items-center gap-2 text-base">
+                  <SourceMark code={src.source_code} />
                   <Link
                     href={`/sources/${src.source_code}`}
                     className="underline underline-offset-2"

@@ -28,6 +28,7 @@ import {
   periodX,
   rowMatchesSeries,
   seriesId,
+  sourceShortLabel,
   unitLabel,
   marketLabel,
 } from "@/lib/format";
@@ -239,6 +240,11 @@ export function Explorer() {
 
   const shown = filtered.slice(0, 250);
 
+  // one lookup for a source's full name, read by both the Source filter's
+  // options and the Source column's hover title
+  const sourceName = (code: string) =>
+    data.dims.sources.find((d) => d.source_code === code)?.source_name ?? code;
+
   const filterDefs: {
     label: string;
     value: string;
@@ -249,10 +255,7 @@ export function Explorer() {
       label: "Source",
       value: source,
       set: (v) => void setSource(v),
-      options: opts.sources.map((v) => ({
-        value: v,
-        label: data.dims.sources.find((d) => d.source_code === v)?.source_name ?? v,
-      })),
+      options: opts.sources.map((v) => ({ value: v, label: sourceName(v) })),
     },
     {
       label: "Geography",
@@ -458,7 +461,13 @@ export function Explorer() {
                         "—"
                       )}
                     </TableCell>
-                    <TableCell className="text-xs">{s.source}</TableCell>
+                    {/* No SourceMark here — see sourceColorVar. On this page
+                        the palette already means "which of your selections is
+                        this", so a dataset swatch would give the same hues a
+                        second, contradictory meaning in one viewport. */}
+                    <TableCell className="text-xs" title={sourceName(s.source)}>
+                      {sourceShortLabel(s.source)}
+                    </TableCell>
                   </TableRow>
                 );
               })}
