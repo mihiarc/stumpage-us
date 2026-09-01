@@ -14,8 +14,13 @@ bun run dev                                    # dev server (basePath empty)
 bun run build                                  # static export -> out/ (also typechecks)
 bun run lint                                   # eslint (flat config, next core-web-vitals + ts)
 bunx tsc --noEmit                              # typecheck alone, faster than a build
+bun run build:geo                              # refetch map boundary layers (network; not part of build)
 NEXT_PUBLIC_BASE_PATH=/stumpage-us bun run build   # reproduce the CI/Pages build exactly
 ```
+
+Do not run `bun run build` while `bun run dev` is live: both write `.next`, and the dev
+server then serves stale CSS — new Tailwind utilities and new custom properties resolve
+empty until you kill it, `rm -rf .next`, and restart.
 
 `README.md` holds the quarterly data-refresh runbook and the deployment story — read it
 before touching `public/data/` or the Pages workflow.
@@ -73,11 +78,32 @@ counts, and the explorer's state filter at once.
 
 ### Content vs. data
 
-`public/data/**` is generated and must never be hand-edited. `src/content/*.ts` is the opposite:
-hand-maintained prose that the pipeline does not produce — the state-by-state
+Three categories, not two. `public/data/**` is generated **upstream** and must never be
+hand-edited. `public/coverage/**` and `public/geo/**` are generated **here** — by
+`bun run export:coverage` (deterministic, runs inside `bun run build`) and
+`bun run build:geo` (fetches two USFS ArcGIS services, so it is deliberately *outside*
+`build` to keep builds reproducible; commit its output). `src/content/*.ts` is the opposite of all
+three: hand-maintained prose that no pipeline produces — the state-by-state
 `directory.ts` (with `status` + `provenance` flags marking which "free" reports are licensed
 TimberMart-South redistributions), plus per-source method notes and official links. Editorial
 corrections go there; numeric corrections go upstream in the timber-prices repo.
+
+### Map layers
+
+The map (`src/components/boundary-map.tsx`) switches geography rather than re-cutting the
+data: each layer draws its own boundaries and fills the units that have prices. This matters
+because only 56 of 3,490 series are state-grained — 2,316 are per national forest — so a
+state choropleth would assign a forest's price to a boundary nobody published it against.
+
+The layer set is data (`public/geo/layers.json`), per ROADMAP invariant 5, and
+`src/lib/geo-layers.ts` does the build-time join. A Cut-and-Sold code carries its USFS org
+code (`cs_r1_f02` = region 01, forest 02 = `0102`), which is the boundary layer's own key, so
+forests join with no hand-built mapping. Units the join cannot place — 25 pre-merger forests,
+plus anything outside the CONUS frame — are counted under the map rather than dropped.
+
+`src/components/coverage-map.tsx` is the older state choropleth, still used by `/states`; it
+colours by a fanned-out per-state count and carries the overstatement `seriesStates` warns
+about.
 
 ### Charts and URL state
 
