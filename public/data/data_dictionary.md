@@ -11,7 +11,7 @@ timber-prices dbt-duckdb project.
 | `year`, `quarter` | Calendar period. `quarter` is NULL for annual-cadence rows. |
 | `period_label` | Display label (`2024` or `2024 Q3`). |
 | `macro_region_code/_name` | Coarse region (`west`, `south`, `lake_states`, ...). |
-| `state_code/state_name` | USPS state, ONLY when the region maps to a single state; NULL for multi-state / USFS-region / national-forest grains. |
+| `state_code/state_name` | USPS state, ONLY when the region maps to a single state; NULL for multi-state grains — every `usfs_region`, and the 20 of 134 national forests that straddle a state line (Ouachita, Land Between the Lakes, ...). A national forest is attributed when >=95% of its Forest-Service acres are in one state. |
 | `region_code/_name/_type` | The price region and its grain: `state_avg`, `statewide`, `sub_state`, `peninsula`, `state_forest`, `management_unit` (MI FMU), `district` (OR ODF), `land_office` (MT DNRC), `usfs_region`, `national_forest`, `multi_state_avg`. Nested grains overlap — filter to ONE region_type before aggregating. |
 | `species_code/_name/species_group` | Species (or species aggregate); group is `softwood`/`hardwood`/`all`. |
 | `product_code/_name/timber_class/grade/end_market` | Product (sawtimber, pulpwood, ...) and its predominant end market. |

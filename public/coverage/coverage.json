@@ -2,10 +2,10 @@
   "name": "US timber price coverage record",
   "description": "Who publishes US timber prices, state by state, how current each report is and whose data it is — joined against the price series actually present in the stumpage.us dataset. Includes states searched with no source found, recorded as a positive finding.",
   "format_version": 1,
-  "version": "2026-08-30+data.2026-07-06",
+  "version": "2026-08-30+data.2026-09-28",
   "directory_as_of": "2026-08-30",
   "directory_floor_verified": "2026-06-25",
-  "prices_built_at": "2026-07-06T13:19:40+00:00",
+  "prices_built_at": "2026-09-28T13:26:52+00:00",
   "license": "CC-BY-4.0",
   "license_url": "https://creativecommons.org/licenses/by/4.0/",
   "cite_as": "Mihiar, C. US public timber stumpage & delivered price data (stumpage.us). CC BY 4.0. See CITATION.cff in mihiarc/stumpage-us.",
@@ -45,8 +45,8 @@
     "with_live_source": 32,
     "with_live_independent_source": 22,
     "evidence": {
-      "state-series": 6,
-      "regional-only": 43,
+      "state-series": 34,
+      "regional-only": 15,
       "none": 1
     },
     "directory_entries": 50,
@@ -64,9 +64,9 @@
       "tax": 4,
       "derived": 0
     },
-    "price_series": 3490,
-    "price_observations": 49515,
-    "price_sources": 6
+    "price_series": 4776,
+    "price_observations": 56764,
+    "price_sources": 8
   },
   "national_and_international": [
     {
@@ -201,10 +201,10 @@
       },
       "prices": {
         "evidence": "state-series",
-        "series": 27,
-        "series_direct": 4,
+        "series": 69,
+        "series_direct": 46,
         "series_regional": 23,
-        "observations": 583,
+        "observations": 990,
         "year_min": 1960,
         "year_max": 2025,
         "sources": [
@@ -264,11 +264,11 @@
         ]
       },
       "prices": {
-        "evidence": "regional-only",
-        "series": 34,
-        "series_direct": 0,
+        "evidence": "state-series",
+        "series": 43,
+        "series_direct": 9,
         "series_regional": 34,
-        "observations": 701,
+        "observations": 805,
         "year_min": 1977,
         "year_max": 2025,
         "sources": [
@@ -327,11 +327,11 @@
         ]
       },
       "prices": {
-        "evidence": "regional-only",
-        "series": 34,
-        "series_direct": 0,
+        "evidence": "state-series",
+        "series": 55,
+        "series_direct": 21,
         "series_regional": 34,
-        "observations": 701,
+        "observations": 1014,
         "year_min": 1977,
         "year_max": 2025,
         "sources": [
@@ -380,11 +380,11 @@
         "sources": []
       },
       "prices": {
-        "evidence": "regional-only",
-        "series": 12,
-        "series_direct": 0,
+        "evidence": "state-series",
+        "series": 59,
+        "series_direct": 47,
         "series_regional": 12,
-        "observations": 305,
+        "observations": 900,
         "year_min": 1977,
         "year_max": 2025,
         "sources": [
@@ -443,11 +443,11 @@
         ]
       },
       "prices": {
-        "evidence": "regional-only",
-        "series": 34,
-        "series_direct": 0,
+        "evidence": "state-series",
+        "series": 308,
+        "series_direct": 274,
         "series_regional": 34,
-        "observations": 842,
+        "observations": 4535,
         "year_min": 1961,
         "year_max": 2025,
         "sources": [
@@ -498,11 +498,11 @@
         "sources": []
       },
       "prices": {
-        "evidence": "regional-only",
-        "series": 22,
-        "series_direct": 0,
+        "evidence": "state-series",
+        "series": 159,
+        "series_direct": 137,
         "series_regional": 22,
-        "observations": 419,
+        "observations": 1946,
         "year_min": 1977,
         "year_max": 2025,
         "sources": [
@@ -687,11 +687,11 @@
         ]
       },
       "prices": {
-        "evidence": "regional-only",
-        "series": 34,
-        "series_direct": 0,
+        "evidence": "state-series",
+        "series": 41,
+        "series_direct": 7,
         "series_regional": 34,
-        "observations": 701,
+        "observations": 758,
         "year_min": 1977,
         "year_max": 2025,
         "sources": [
@@ -750,17 +750,24 @@
         ]
       },
       "prices": {
-        "evidence": "regional-only",
-        "series": 34,
-        "series_direct": 0,
+        "evidence": "state-series",
+        "series": 1498,
+        "series_direct": 1464,
         "series_regional": 34,
-        "observations": 701,
+        "observations": 9646,
         "year_min": 1977,
-        "year_max": 2025,
+        "year_max": 2026,
         "sources": [
+          "ga_dor",
           "usfs_cutsold"
         ],
         "products": [
+          "cns",
+          "firewood",
+          "fuelchips",
+          "poles",
+          "posts",
+          "pulpwood",
           "sawtimber"
         ],
         "markets": [
@@ -914,10 +921,10 @@
       },
       "prices": {
         "evidence": "state-series",
-        "series": 77,
-        "series_direct": 4,
+        "series": 198,
+        "series_direct": 125,
         "series_regional": 73,
-        "observations": 1921,
+        "observations": 3635,
         "year_min": 1967,
         "year_max": 2025,
         "sources": [
@@ -979,11 +986,11 @@
         ]
       },
       "prices": {
-        "evidence": "regional-only",
-        "series": 43,
-        "series_direct": 0,
+        "evidence": "state-series",
+        "series": 64,
+        "series_direct": 21,
         "series_regional": 43,
-        "observations": 1249,
+        "observations": 1420,
         "year_min": 1977,
         "year_max": 2025,
         "sources": [
@@ -1055,11 +1062,11 @@
         ]
       },
       "prices": {
-        "evidence": "regional-only",
-        "series": 43,
-        "series_direct": 0,
+        "evidence": "state-series",
+        "series": 83,
+        "series_direct": 40,
         "series_regional": 43,
-        "observations": 1249,
+        "observations": 1484,
         "year_min": 1977,
         "year_max": 2025,
         "sources": [
@@ -1171,11 +1178,11 @@
         ]
       },
       "prices": {
-        "evidence": "regional-only",
-        "series": 34,
-        "series_direct": 0,
+        "evidence": "state-series",
+        "series": 59,
+        "series_direct": 25,
         "series_regional": 34,
-        "observations": 701,
+        "observations": 1045,
         "year_min": 1977,
         "year_max": 2025,
         "sources": [
@@ -1247,11 +1254,11 @@
         ]
       },
       "prices": {
-        "evidence": "regional-only",
-        "series": 34,
-        "series_direct": 0,
+        "evidence": "state-series",
+        "series": 41,
+        "series_direct": 7,
         "series_regional": 34,
-        "observations": 701,
+        "observations": 795,
         "year_min": 1977,
         "year_max": 2025,
         "sources": [
@@ -1436,11 +1443,11 @@
         ]
       },
       "prices": {
-        "evidence": "regional-only",
-        "series": 43,
-        "series_direct": 0,
+        "evidence": "state-series",
+        "series": 58,
+        "series_direct": 15,
         "series_regional": 43,
-        "observations": 1249,
+        "observations": 1278,
         "year_min": 1977,
         "year_max": 2025,
         "sources": [
@@ -1513,10 +1520,10 @@
       },
       "prices": {
         "evidence": "state-series",
-        "series": 817,
-        "series_direct": 774,
+        "series": 925,
+        "series_direct": 882,
         "series_regional": 43,
-        "observations": 10437,
+        "observations": 12164,
         "year_min": 1977,
         "year_max": 2026,
         "sources": [
@@ -1577,11 +1584,11 @@
         ]
       },
       "prices": {
-        "evidence": "regional-only",
-        "series": 43,
-        "series_direct": 0,
+        "evidence": "state-series",
+        "series": 93,
+        "series_direct": 50,
         "series_regional": 43,
-        "observations": 1249,
+        "observations": 1906,
         "year_min": 1977,
         "year_max": 2025,
         "sources": [
@@ -1640,11 +1647,11 @@
         ]
       },
       "prices": {
-        "evidence": "regional-only",
-        "series": 43,
-        "series_direct": 0,
+        "evidence": "state-series",
+        "series": 63,
+        "series_direct": 20,
         "series_regional": 43,
-        "observations": 1249,
+        "observations": 1492,
         "year_min": 1977,
         "year_max": 2025,
         "sources": [
@@ -1703,11 +1710,11 @@
         ]
       },
       "prices": {
-        "evidence": "regional-only",
-        "series": 34,
-        "series_direct": 0,
+        "evidence": "state-series",
+        "series": 47,
+        "series_direct": 13,
         "series_regional": 34,
-        "observations": 701,
+        "observations": 906,
         "year_min": 1977,
         "year_max": 2025,
         "sources": [
@@ -1780,10 +1787,10 @@
       },
       "prices": {
         "evidence": "state-series",
-        "series": 91,
-        "series_direct": 47,
+        "series": 210,
+        "series_direct": 166,
         "series_regional": 44,
-        "observations": 3124,
+        "observations": 4984,
         "year_min": 1967,
         "year_max": 2026,
         "sources": [
@@ -1847,11 +1854,11 @@
         ]
       },
       "prices": {
-        "evidence": "regional-only",
-        "series": 34,
-        "series_direct": 0,
+        "evidence": "state-series",
+        "series": 64,
+        "series_direct": 30,
         "series_regional": 34,
-        "observations": 701,
+        "observations": 1160,
         "year_min": 1977,
         "year_max": 2025,
         "sources": [
@@ -1904,7 +1911,7 @@
         "series": 32,
         "series_direct": 0,
         "series_regional": 32,
-        "observations": 1029,
+        "observations": 1041,
         "year_min": 1971,
         "year_max": 2025,
         "sources": [
@@ -2134,11 +2141,11 @@
         "sources": []
       },
       "prices": {
-        "evidence": "regional-only",
-        "series": 12,
-        "series_direct": 0,
+        "evidence": "state-series",
+        "series": 46,
+        "series_direct": 34,
         "series_regional": 12,
-        "observations": 305,
+        "observations": 870,
         "year_min": 1977,
         "year_max": 2025,
         "sources": [
@@ -2314,11 +2321,11 @@
         ]
       },
       "prices": {
-        "evidence": "regional-only",
-        "series": 43,
-        "series_direct": 0,
+        "evidence": "state-series",
+        "series": 71,
+        "series_direct": 28,
         "series_regional": 43,
-        "observations": 1249,
+        "observations": 1542,
         "year_min": 1977,
         "year_max": 2025,
         "sources": [
@@ -2381,7 +2388,7 @@
         "series": 34,
         "series_direct": 0,
         "series_regional": 34,
-        "observations": 701,
+        "observations": 700,
         "year_min": 1977,
         "year_max": 2025,
         "sources": [
@@ -2454,10 +2461,10 @@
       },
       "prices": {
         "evidence": "state-series",
-        "series": 90,
-        "series_direct": 45,
+        "series": 295,
+        "series_direct": 250,
         "series_regional": 45,
-        "observations": 2101,
+        "observations": 4794,
         "year_min": 1959,
         "year_max": 2026,
         "sources": [
@@ -2518,11 +2525,11 @@
         ]
       },
       "prices": {
-        "evidence": "regional-only",
-        "series": 43,
-        "series_direct": 0,
+        "evidence": "state-series",
+        "series": 73,
+        "series_direct": 30,
         "series_regional": 43,
-        "observations": 1249,
+        "observations": 1915,
         "year_min": 1977,
         "year_max": 2025,
         "sources": [
@@ -2644,11 +2651,11 @@
         ]
       },
       "prices": {
-        "evidence": "regional-only",
-        "series": 34,
-        "series_direct": 0,
+        "evidence": "state-series",
+        "series": 47,
+        "series_direct": 13,
         "series_regional": 34,
-        "observations": 701,
+        "observations": 847,
         "year_min": 1977,
         "year_max": 2025,
         "sources": [
@@ -2701,7 +2708,7 @@
         "series": 60,
         "series_direct": 0,
         "series_regional": 60,
-        "observations": 1468,
+        "observations": 1480,
         "year_min": 1971,
         "year_max": 2025,
         "sources": [
@@ -2763,11 +2770,11 @@
         ]
       },
       "prices": {
-        "evidence": "regional-only",
-        "series": 34,
-        "series_direct": 0,
+        "evidence": "state-series",
+        "series": 59,
+        "series_direct": 25,
         "series_regional": 34,
-        "observations": 701,
+        "observations": 1117,
         "year_min": 1977,
         "year_max": 2025,
         "sources": [
@@ -2826,17 +2833,20 @@
         ]
       },
       "prices": {
-        "evidence": "regional-only",
-        "series": 34,
-        "series_direct": 0,
+        "evidence": "state-series",
+        "series": 55,
+        "series_direct": 21,
         "series_regional": 34,
-        "observations": 701,
+        "observations": 1104,
         "year_min": 1977,
         "year_max": 2025,
         "sources": [
+          "tx_tfs",
           "usfs_cutsold"
         ],
         "products": [
+          "cns",
+          "pulpwood",
           "sawtimber"
         ],
         "markets": [
@@ -2880,11 +2890,11 @@
         "sources": []
       },
       "prices": {
-        "evidence": "regional-only",
-        "series": 41,
-        "series_direct": 0,
+        "evidence": "state-series",
+        "series": 124,
+        "series_direct": 83,
         "series_regional": 41,
-        "observations": 715,
+        "observations": 1628,
         "year_min": 1977,
         "year_max": 2025,
         "sources": [
@@ -2946,11 +2956,11 @@
         ]
       },
       "prices": {
-        "evidence": "regional-only",
-        "series": 34,
-        "series_direct": 0,
+        "evidence": "state-series",
+        "series": 59,
+        "series_direct": 25,
         "series_regional": 34,
-        "observations": 701,
+        "observations": 941,
         "year_min": 1977,
         "year_max": 2025,
         "sources": [
@@ -3009,11 +3019,11 @@
         ]
       },
       "prices": {
-        "evidence": "regional-only",
-        "series": 43,
-        "series_direct": 0,
+        "evidence": "state-series",
+        "series": 75,
+        "series_direct": 32,
         "series_regional": 43,
-        "observations": 1249,
+        "observations": 1753,
         "year_min": 1977,
         "year_max": 2025,
         "sources": [
@@ -3086,10 +3096,10 @@
       },
       "prices": {
         "evidence": "state-series",
-        "series": 53,
-        "series_direct": 8,
+        "series": 169,
+        "series_direct": 124,
         "series_regional": 45,
-        "observations": 1893,
+        "observations": 3502,
         "year_min": 1959,
         "year_max": 2025,
         "sources": [
@@ -3149,11 +3159,11 @@
         ]
       },
       "prices": {
-        "evidence": "regional-only",
-        "series": 43,
-        "series_direct": 0,
+        "evidence": "state-series",
+        "series": 126,
+        "series_direct": 83,
         "series_regional": 43,
-        "observations": 1249,
+        "observations": 1996,
         "year_min": 1977,
         "year_max": 2025,
         "sources": [
@@ -3212,11 +3222,11 @@
         ]
       },
       "prices": {
-        "evidence": "regional-only",
-        "series": 43,
-        "series_direct": 0,
+        "evidence": "state-series",
+        "series": 76,
+        "series_direct": 33,
         "series_regional": 43,
-        "observations": 1249,
+        "observations": 1898,
         "year_min": 1977,
         "year_max": 2025,
         "sources": [
@@ -3265,11 +3275,11 @@
         "sources": []
       },
       "prices": {
-        "evidence": "regional-only",
-        "series": 69,
-        "series_direct": 0,
+        "evidence": "state-series",
+        "series": 108,
+        "series_direct": 39,
         "series_regional": 69,
-        "observations": 1154,
+        "observations": 1642,
         "year_min": 1977,
         "year_max": 2025,
         "sources": [

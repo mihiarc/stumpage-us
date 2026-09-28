@@ -1,51 +1,51 @@
 state,state_name,searched,outcome,checked_count,directory_entries,live,stale,dead,paywalled,unverified,independent,tms,commercial,tax,derived,has_live_source,has_live_independent_source,last_verified,price_evidence,price_series,price_series_direct,price_series_regional,price_observations,price_year_min,price_year_max,price_sources
-AK,Alaska,2026-06-25,found,0,1,1,0,0,0,0,1,0,0,0,0,true,true,2026-06-25,state-series,27,4,23,583,1960,2025,pnw usfs_cutsold
-AL,Alabama,2026-06-25,found,0,1,1,0,0,0,0,0,1,0,0,0,true,false,2026-06-25,regional-only,34,0,34,701,1977,2025,usfs_cutsold
-AR,Arkansas,2026-06-25,found,0,1,1,0,0,0,0,0,1,0,0,0,true,false,2026-06-25,regional-only,34,0,34,701,1977,2025,usfs_cutsold
-AZ,Arizona,2026-08-30,none-known,3,0,0,0,0,0,0,0,0,0,0,0,false,false,,regional-only,12,0,12,305,1977,2025,usfs_cutsold
-CA,California,2026-06-25,found,0,1,1,0,0,0,0,0,0,0,1,0,true,false,2026-06-25,regional-only,34,0,34,842,1961,2025,pnw usfs_cutsold
-CO,Colorado,2026-08-30,none-known,4,0,0,0,0,0,0,0,0,0,0,0,false,false,,regional-only,22,0,22,419,1977,2025,usfs_cutsold
+AK,Alaska,2026-06-25,found,0,1,1,0,0,0,0,1,0,0,0,0,true,true,2026-06-25,state-series,69,46,23,990,1960,2025,pnw usfs_cutsold
+AL,Alabama,2026-06-25,found,0,1,1,0,0,0,0,0,1,0,0,0,true,false,2026-06-25,state-series,43,9,34,805,1977,2025,usfs_cutsold
+AR,Arkansas,2026-06-25,found,0,1,1,0,0,0,0,0,1,0,0,0,true,false,2026-06-25,state-series,55,21,34,1014,1977,2025,usfs_cutsold
+AZ,Arizona,2026-08-30,none-known,3,0,0,0,0,0,0,0,0,0,0,0,false,false,,state-series,59,47,12,900,1977,2025,usfs_cutsold
+CA,California,2026-06-25,found,0,1,1,0,0,0,0,0,0,0,1,0,true,false,2026-06-25,state-series,308,274,34,4535,1961,2025,pnw usfs_cutsold
+CO,Colorado,2026-08-30,none-known,4,0,0,0,0,0,0,0,0,0,0,0,false,false,,state-series,159,137,22,1946,1977,2025,usfs_cutsold
 CT,Connecticut,2026-06-25,found,0,1,1,0,0,0,0,1,0,0,0,0,true,true,2026-06-25,regional-only,43,0,43,1249,1977,2025,usfs_cutsold
 DE,Delaware,2026-08-30,found,0,1,0,0,1,0,0,1,0,0,0,0,false,false,2026-08-30,regional-only,43,0,43,1249,1977,2025,usfs_cutsold
-FL,Florida,2026-06-25,found,0,1,1,0,0,0,0,0,1,0,0,0,true,false,2026-06-25,regional-only,34,0,34,701,1977,2025,usfs_cutsold
-GA,Georgia,2026-06-25,found,0,1,1,0,0,0,0,1,0,0,0,0,true,true,2026-06-25,regional-only,34,0,34,701,1977,2025,usfs_cutsold
+FL,Florida,2026-06-25,found,0,1,1,0,0,0,0,0,1,0,0,0,true,false,2026-06-25,state-series,41,7,34,758,1977,2025,usfs_cutsold
+GA,Georgia,2026-06-25,found,0,1,1,0,0,0,0,1,0,0,0,0,true,true,2026-06-25,state-series,1498,1464,34,9646,1977,2026,ga_dor usfs_cutsold
 HI,Hawaii,2026-08-30,none-known,3,0,0,0,0,0,0,0,0,0,0,0,false,false,,none,0,0,0,0,,,
 IA,Iowa,2026-08-30,none-known,3,0,0,0,0,0,0,0,0,0,0,0,false,false,,regional-only,43,0,43,1249,1977,2025,usfs_cutsold
-ID,Idaho,2026-06-25,found,0,1,1,0,0,0,0,1,0,0,0,0,true,true,2026-06-25,state-series,77,4,73,1921,1967,2025,mt_bber pnw usfs_cutsold
-IL,Illinois,2026-06-25,found,0,1,1,0,0,0,0,1,0,0,0,0,true,true,2026-06-25,regional-only,43,0,43,1249,1977,2025,usfs_cutsold
-IN,Indiana,2026-08-30,found,0,2,1,1,0,0,0,2,0,0,0,0,true,true,2026-08-30,regional-only,43,0,43,1249,1977,2025,usfs_cutsold
+ID,Idaho,2026-06-25,found,0,1,1,0,0,0,0,1,0,0,0,0,true,true,2026-06-25,state-series,198,125,73,3635,1967,2025,mt_bber pnw usfs_cutsold
+IL,Illinois,2026-06-25,found,0,1,1,0,0,0,0,1,0,0,0,0,true,true,2026-06-25,state-series,64,21,43,1420,1977,2025,usfs_cutsold
+IN,Indiana,2026-08-30,found,0,2,1,1,0,0,0,2,0,0,0,0,true,true,2026-08-30,state-series,83,40,43,1484,1977,2025,usfs_cutsold
 KS,Kansas,2026-08-30,none-known,3,0,0,0,0,0,0,0,0,0,0,0,false,false,,regional-only,22,0,22,419,1977,2025,usfs_cutsold
-KY,Kentucky,2026-06-25,found,0,1,1,0,0,0,0,1,0,0,0,0,true,true,2026-06-25,regional-only,34,0,34,701,1977,2025,usfs_cutsold
-LA,Louisiana,2026-08-30,found,0,2,2,0,0,0,0,1,1,0,0,0,true,true,2026-08-30,regional-only,34,0,34,701,1977,2025,usfs_cutsold
+KY,Kentucky,2026-06-25,found,0,1,1,0,0,0,0,1,0,0,0,0,true,true,2026-06-25,state-series,59,25,34,1045,1977,2025,usfs_cutsold
+LA,Louisiana,2026-08-30,found,0,2,2,0,0,0,0,1,1,0,0,0,true,true,2026-08-30,state-series,41,7,34,795,1977,2025,usfs_cutsold
 MA,Massachusetts,2026-06-25,found,0,1,1,0,0,0,0,1,0,0,0,0,true,true,2026-06-25,regional-only,43,0,43,1249,1977,2025,usfs_cutsold
 MD,Maryland,2026-08-30,found,0,1,0,0,1,0,0,1,0,0,0,0,false,false,2026-08-30,regional-only,43,0,43,1249,1977,2025,usfs_cutsold
-ME,Maine,2026-06-25,found,0,1,1,0,0,0,0,1,0,0,0,0,true,true,2026-06-25,regional-only,43,0,43,1249,1977,2025,usfs_cutsold
-MI,Michigan,2026-06-25,found,0,2,1,0,0,1,0,1,0,1,0,0,true,true,2026-06-25,state-series,817,774,43,10437,1977,2026,mi_dnr usfs_cutsold
-MN,Minnesota,2026-08-30,found,0,1,0,1,0,0,0,1,0,0,0,0,false,false,2026-08-30,regional-only,43,0,43,1249,1977,2025,usfs_cutsold
-MO,Missouri,2026-06-25,found,0,1,1,0,0,0,0,1,0,0,0,0,true,true,2026-06-25,regional-only,43,0,43,1249,1977,2025,usfs_cutsold
-MS,Mississippi,2026-06-25,found,0,1,1,0,0,0,0,0,1,0,0,0,true,false,2026-06-25,regional-only,34,0,34,701,1977,2025,usfs_cutsold
-MT,Montana,2026-06-25,found,0,2,2,0,0,0,0,2,0,0,0,0,true,true,2026-06-25,state-series,91,47,44,3124,1967,2026,mt_bber mt_dnrc pnw usfs_cutsold
-NC,North Carolina,2026-06-25,found,0,1,1,0,0,0,0,0,1,0,0,0,true,false,2026-06-25,regional-only,34,0,34,701,1977,2025,usfs_cutsold
-ND,North Dakota,2026-08-30,none-known,3,0,0,0,0,0,0,0,0,0,0,0,false,false,,regional-only,32,0,32,1029,1971,2025,pnw usfs_cutsold
+ME,Maine,2026-06-25,found,0,1,1,0,0,0,0,1,0,0,0,0,true,true,2026-06-25,state-series,58,15,43,1278,1977,2025,usfs_cutsold
+MI,Michigan,2026-06-25,found,0,2,1,0,0,1,0,1,0,1,0,0,true,true,2026-06-25,state-series,925,882,43,12164,1977,2026,mi_dnr usfs_cutsold
+MN,Minnesota,2026-08-30,found,0,1,0,1,0,0,0,1,0,0,0,0,false,false,2026-08-30,state-series,93,50,43,1906,1977,2025,usfs_cutsold
+MO,Missouri,2026-06-25,found,0,1,1,0,0,0,0,1,0,0,0,0,true,true,2026-06-25,state-series,63,20,43,1492,1977,2025,usfs_cutsold
+MS,Mississippi,2026-06-25,found,0,1,1,0,0,0,0,0,1,0,0,0,true,false,2026-06-25,state-series,47,13,34,906,1977,2025,usfs_cutsold
+MT,Montana,2026-06-25,found,0,2,2,0,0,0,0,2,0,0,0,0,true,true,2026-06-25,state-series,210,166,44,4984,1967,2026,mt_bber mt_dnrc pnw usfs_cutsold
+NC,North Carolina,2026-06-25,found,0,1,1,0,0,0,0,0,1,0,0,0,true,false,2026-06-25,state-series,64,30,34,1160,1977,2025,usfs_cutsold
+ND,North Dakota,2026-08-30,none-known,3,0,0,0,0,0,0,0,0,0,0,0,false,false,,regional-only,32,0,32,1041,1971,2025,pnw usfs_cutsold
 NE,Nebraska,2026-08-30,found,0,1,0,1,0,0,0,1,0,0,0,0,false,false,2026-08-30,regional-only,28,0,28,439,1977,2025,mt_bber usfs_cutsold
 NH,New Hampshire,2026-06-25,found,0,1,1,0,0,0,0,0,0,0,1,0,true,false,2026-06-25,regional-only,43,0,43,1249,1977,2025,usfs_cutsold
 NJ,New Jersey,2026-08-30,none-known,3,0,0,0,0,0,0,0,0,0,0,0,false,false,,regional-only,43,0,43,1249,1977,2025,usfs_cutsold
-NM,New Mexico,2026-08-30,none-known,2,0,0,0,0,0,0,0,0,0,0,0,false,false,,regional-only,12,0,12,305,1977,2025,usfs_cutsold
+NM,New Mexico,2026-08-30,none-known,2,0,0,0,0,0,0,0,0,0,0,0,false,false,,state-series,46,34,12,870,1977,2025,usfs_cutsold
 NV,Nevada,2026-08-30,none-known,3,0,0,0,0,0,0,0,0,0,0,0,false,false,,regional-only,35,0,35,625,1977,2025,pnw usfs_cutsold
 NY,New York,2026-06-25,found,0,1,1,0,0,0,0,1,0,0,0,0,true,true,2026-06-25,regional-only,43,0,43,1249,1977,2025,usfs_cutsold
-OH,Ohio,2026-06-25,found,0,1,1,0,0,0,0,1,0,0,0,0,true,true,2026-06-25,regional-only,43,0,43,1249,1977,2025,usfs_cutsold
-OK,Oklahoma,2026-08-30,found,0,1,1,0,0,0,0,1,0,0,0,0,true,true,2026-08-30,regional-only,34,0,34,701,1977,2025,usfs_cutsold
-OR,Oregon,2026-06-25,found,0,2,1,1,0,0,0,2,0,0,0,0,true,true,2026-06-25,state-series,90,45,45,2101,1959,2026,or_odf pnw usfs_cutsold
-PA,Pennsylvania,2026-06-25,found,0,1,1,0,0,0,0,1,0,0,0,0,true,true,2026-06-25,regional-only,43,0,43,1249,1977,2025,usfs_cutsold
+OH,Ohio,2026-06-25,found,0,1,1,0,0,0,0,1,0,0,0,0,true,true,2026-06-25,state-series,71,28,43,1542,1977,2025,usfs_cutsold
+OK,Oklahoma,2026-08-30,found,0,1,1,0,0,0,0,1,0,0,0,0,true,true,2026-08-30,regional-only,34,0,34,700,1977,2025,usfs_cutsold
+OR,Oregon,2026-06-25,found,0,2,1,1,0,0,0,2,0,0,0,0,true,true,2026-06-25,state-series,295,250,45,4794,1959,2026,or_odf pnw usfs_cutsold
+PA,Pennsylvania,2026-06-25,found,0,1,1,0,0,0,0,1,0,0,0,0,true,true,2026-06-25,state-series,73,30,43,1915,1977,2025,usfs_cutsold
 RI,Rhode Island,2026-06-25,found,0,1,1,0,0,0,0,1,0,0,0,0,true,true,2026-06-25,regional-only,43,0,43,1249,1977,2025,usfs_cutsold
-SC,South Carolina,2026-06-25,found,0,1,1,0,0,0,0,0,1,0,0,0,true,false,2026-06-25,regional-only,34,0,34,701,1977,2025,usfs_cutsold
-SD,South Dakota,2026-08-30,none-known,3,0,0,0,0,0,0,0,0,0,0,0,false,false,,regional-only,60,0,60,1468,1971,2025,mt_bber pnw usfs_cutsold
-TN,Tennessee,2026-08-30,found,0,1,0,0,1,0,0,1,0,0,0,0,false,false,2026-08-30,regional-only,34,0,34,701,1977,2025,usfs_cutsold
-TX,Texas,2026-06-25,found,0,1,1,0,0,0,0,1,0,0,0,0,true,true,2026-06-25,regional-only,34,0,34,701,1977,2025,usfs_cutsold
-UT,Utah,2026-08-30,none-known,4,0,0,0,0,0,0,0,0,0,0,0,false,false,,regional-only,41,0,41,715,1977,2025,mt_bber pnw usfs_cutsold
-VA,Virginia,2026-08-30,found,0,1,1,0,0,0,0,0,1,0,0,0,true,false,2026-08-30,regional-only,34,0,34,701,1977,2025,usfs_cutsold
-VT,Vermont,2026-08-30,found,0,1,0,1,0,0,0,1,0,0,0,0,false,false,2026-08-30,regional-only,43,0,43,1249,1977,2025,usfs_cutsold
-WA,Washington,2026-06-25,found,0,2,2,0,0,0,0,1,0,0,1,0,true,true,2026-06-25,state-series,53,8,45,1893,1959,2025,pnw usfs_cutsold
-WI,Wisconsin,2026-06-25,found,0,1,1,0,0,0,0,0,0,0,1,0,true,false,2026-06-25,regional-only,43,0,43,1249,1977,2025,usfs_cutsold
-WV,West Virginia,2026-06-25,found,0,1,1,0,0,0,0,1,0,0,0,0,true,true,2026-06-25,regional-only,43,0,43,1249,1977,2025,usfs_cutsold
-WY,Wyoming,2026-08-30,none-known,3,0,0,0,0,0,0,0,0,0,0,0,false,false,,regional-only,69,0,69,1154,1977,2025,mt_bber pnw usfs_cutsold
+SC,South Carolina,2026-06-25,found,0,1,1,0,0,0,0,0,1,0,0,0,true,false,2026-06-25,state-series,47,13,34,847,1977,2025,usfs_cutsold
+SD,South Dakota,2026-08-30,none-known,3,0,0,0,0,0,0,0,0,0,0,0,false,false,,regional-only,60,0,60,1480,1971,2025,mt_bber pnw usfs_cutsold
+TN,Tennessee,2026-08-30,found,0,1,0,0,1,0,0,1,0,0,0,0,false,false,2026-08-30,state-series,59,25,34,1117,1977,2025,usfs_cutsold
+TX,Texas,2026-06-25,found,0,1,1,0,0,0,0,1,0,0,0,0,true,true,2026-06-25,state-series,55,21,34,1104,1977,2025,tx_tfs usfs_cutsold
+UT,Utah,2026-08-30,none-known,4,0,0,0,0,0,0,0,0,0,0,0,false,false,,state-series,124,83,41,1628,1977,2025,mt_bber pnw usfs_cutsold
+VA,Virginia,2026-08-30,found,0,1,1,0,0,0,0,0,1,0,0,0,true,false,2026-08-30,state-series,59,25,34,941,1977,2025,usfs_cutsold
+VT,Vermont,2026-08-30,found,0,1,0,1,0,0,0,1,0,0,0,0,false,false,2026-08-30,state-series,75,32,43,1753,1977,2025,usfs_cutsold
+WA,Washington,2026-06-25,found,0,2,2,0,0,0,0,1,0,0,1,0,true,true,2026-06-25,state-series,169,124,45,3502,1959,2025,pnw usfs_cutsold
+WI,Wisconsin,2026-06-25,found,0,1,1,0,0,0,0,0,0,0,1,0,true,false,2026-06-25,state-series,126,83,43,1996,1977,2025,usfs_cutsold
+WV,West Virginia,2026-06-25,found,0,1,1,0,0,0,0,1,0,0,0,0,true,true,2026-06-25,state-series,76,33,43,1898,1977,2025,usfs_cutsold
+WY,Wyoming,2026-08-30,none-known,3,0,0,0,0,0,0,0,0,0,0,0,false,false,,state-series,108,39,69,1642,1977,2025,mt_bber pnw usfs_cutsold
