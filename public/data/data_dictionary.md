@@ -32,9 +32,9 @@ timber-prices dbt-duckdb project.
 comparison: stumpage only, one region grain per source, `price_per_ton` only (no
 `original_price`/`original_unit`), GA DOR at the DOR's own `price_zone` grain. It adds `weighting`
 and the boolean flags `is_lower_bound` (usfs_cutsold R1/R6 from FY2019 Q3),
-`is_unstable_snapshot` (usfs_cutsold R10 single-quarter rows) and `no_volume_weights` (the row carries no volumes, so an aggregate that includes it cannot be volume-weighted).
-`candor.json` is a candor-blocks 0.1 document (CANDID core field names); each limitation
-names its enforcement (`applied`, `flagged` or `advisory`).
+`is_unstable_snapshot` (usfs_cutsold single-quarter rows) and `no_volume_weights` (the row carries no volumes, so an aggregate that includes it cannot be volume-weighted).
+`candor.json` is a candor-blocks 0.2 document (CANDID core field names); each block names its
+publisher, and each limitation names its enforcement (`applied`, `flagged` or `advisory`).
 
 ## Caveats worth repeating
 
