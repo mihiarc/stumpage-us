@@ -64,6 +64,10 @@ export default async function SourcePage({
   const m = getManifest().sources.find((s) => s.source_code === code);
   const series = getSeriesIndex().series.filter((s) => s.source === code);
   const candor = getCandor().blocks[code];
+  const limits = candor?.suitability_and_limitations;
+  const terms = Object.entries(
+    candor?.context_and_definitions?.key_term_definitions ?? {},
+  );
   const regionTypes = [...new Set(series.map((s) => s.region_type))];
   const speciesCount = new Set(series.map((s) => s.species)).size;
 
@@ -220,14 +224,19 @@ export default async function SourcePage({
             the caveat from becoming an error.
           </p>
           <p className="text-sm leading-relaxed text-muted-foreground">
-            {candor.suitability_and_limitations.suitability_summary}
+            {limits?.suitability_summary}
           </p>
           <div className="mt-3 space-y-3">
-            {candor.suitability_and_limitations.application_limitations.map(
+            {(limits?.application_limitations ?? []).map(
               (lim) => (
                 <div key={lim.id} className="rounded-lg border p-3 text-sm">
                   <div className="mb-1 font-mono text-xs text-muted-foreground">
                     {lim.id}
+                    {lim.enforcement && (
+                      <span className="ml-2 rounded border px-1.5 py-0.5 font-sans">
+                        {lim.enforcement}
+                      </span>
+                    )}
                   </div>
                   <p className="text-muted-foreground">{lim.statement}</p>
                   {lim.guard && (
@@ -240,24 +249,32 @@ export default async function SourcePage({
               ),
             )}
           </div>
-          {candor.suitability_and_limitations.known_gaps.length > 0 && (
+          {!!limits?.known_gaps?.length && (
             <div className="mt-4 text-sm">
               <h3 className="mb-1 font-semibold">Known gaps</h3>
               <ul className="list-disc space-y-1 pl-5 text-muted-foreground">
-                {candor.suitability_and_limitations.known_gaps.map((g) => (
+                {limits.known_gaps.map((g) => (
                   <li key={g}>{g}</li>
                 ))}
               </ul>
             </div>
           )}
-          {candor.use_cases_and_target_users?.discouraged_uses && (
+          {terms.length > 0 && (
             <div className="mt-4 text-sm">
-              <h3 className="mb-1 font-semibold">Discouraged uses</h3>
-              <ul className="list-disc space-y-1 pl-5 text-muted-foreground">
-                {candor.use_cases_and_target_users.discouraged_uses.map((u) => (
-                  <li key={u}>{u}</li>
+              <h3 className="mb-1 font-semibold">Key terms</h3>
+              <dl className="space-y-2 text-muted-foreground">
+                {terms.map(([term, t]) => (
+                  <div key={term}>
+                    <dt className="font-medium text-foreground">{term}</dt>
+                    <dd>
+                      {t.definition}
+                      {t.defined_by && (
+                        <span className="text-xs"> (defined by {t.defined_by})</span>
+                      )}
+                    </dd>
+                  </div>
                 ))}
-              </ul>
+              </dl>
             </div>
           )}
         </section>

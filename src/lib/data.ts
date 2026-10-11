@@ -19,28 +19,61 @@ import type { CoverageRecord } from "./coverage-record";
 // Candor blocks: machine-readable expert caveats per source (plus a
 // dataset-level block), following the five CANDID-core categories. Authored
 // as YAML in the private data repo; exported into candor.json.
+export type CandorEnforcement = "applied" | "flagged" | "advisory";
 export interface CandorLimitation {
   id: string;
   statement: string;
   guard?: string;
+  enforcement?: CandorEnforcement;
+  enforced_by?: string[];
+  tested_by?: string[];
+  flag_column?: string;
+}
+export interface CandorThreshold {
+  field: string;
+  op: string;
+  value: number | string | (number | string)[];
+  unit?: string;
+}
+export interface CandorTerm {
+  definition: string;
+  defined_by?: string;
+  thresholds?: CandorThreshold[];
 }
 export interface CandorBlock {
   schema: string;
   id: string;
   name: string;
-  suitability_and_limitations: {
-    suitability_summary: string;
-    application_limitations: CandorLimitation[];
-    data_quality_metrics: string[];
-    known_gaps: string[];
+  suitability_and_limitations?: {
+    suitability_summary?: string;
+    application_limitations?: CandorLimitation[];
+    data_quality_metrics?: string[];
+    known_gaps?: string[];
+  };
+  context_and_definitions?: {
+    key_term_definitions?: Record<string, CandorTerm>;
+    methodology_summary?: string;
+    ethics_bias?: string[];
+    vibes_social_context?: string;
   };
   use_cases_and_target_users?: {
+    target_audience?: string[];
+    recommended_expertise?: string;
     suggested_uses?: string[];
-    discouraged_uses?: string[];
+    key_instructions?: string[];
+  };
+  lifecycle_and_access?: {
+    support_status?: string;
+    curation_update_philosophy?: string;
+    changelog?: string[];
+    breaking_changes?: string[];
+    data_access_providers?: string[];
+    user_feedback_channel?: string;
   };
 }
 export interface CandorFile {
-  framework: string;
+  schema: string;
+  candid_core: string;
   blocks: Record<string, CandorBlock>;
 }
 

@@ -409,13 +409,16 @@ export default async function RegionPage({
               What this source can and cannot answer
             </h3>
             <p className="text-sm leading-relaxed text-muted-foreground">
-              {candor.suitability_and_limitations.suitability_summary}
+              {candor.suitability_and_limitations?.suitability_summary}
             </p>
             <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
-              {candor.suitability_and_limitations.application_limitations.map(
+              {(candor.suitability_and_limitations?.application_limitations ?? []).map(
                 (lim) => (
                   <li key={lim.id} className="rounded-lg border p-3">
                     <p>{lim.statement}</p>
+                    {lim.enforcement && (
+                      <p className="mt-1 text-xs">Enforcement: {lim.enforcement}</p>
+                    )}
                     {lim.guard && (
                       <p className="mt-1">
                         <span className="font-semibold text-foreground">Guard:</span>{" "}
@@ -427,7 +430,7 @@ export default async function RegionPage({
               )}
             </ul>
             <p className="mt-2 text-xs text-muted-foreground">
-              Known gaps and discouraged uses on the{" "}
+              Known gaps and key terms on the{" "}
               <Link
                 href={`/sources/${s0.source}`}
                 className="underline underline-offset-2"
