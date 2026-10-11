@@ -44,6 +44,7 @@ export interface CandorBlock {
   schema: string;
   id: string;
   name: string;
+  publisher?: string;
   suitability_and_limitations?: {
     suitability_summary?: string;
     application_limitations?: CandorLimitation[];

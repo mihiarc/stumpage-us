@@ -117,7 +117,8 @@ git add public/data && git commit -m "data: refresh public export"
 | `prices/{source}.json` | per-source record chunks, lazy-loaded for charts |
 | `latest_by_state.json`, `annual_by_state.json` | state-level pre-aggregates |
 | `dims.json`, `manifest.json`, `data_dictionary.md` | metadata & docs |
-| `candor.json` | machine-readable expert caveats per source (CANDID-core five-categories blocks), rendered on `/sources/*` |
+| `public_stumpage_comparable.parquet` | cross-source stumpage comparison: one region grain per source, `price_per_ton` only, with flag columns for the guards the data can't apply |
+| `candor.json` | machine-readable expert caveats per source (candor-blocks 0.2: CANDID core fields plus each source's publisher), rendered on `/sources/*` |
 
 `public/geo/us-states.json` is a slimmed Census 20m states GeoJSON (lon/lat,
 3-decimal coords) for the MapLibre map.
