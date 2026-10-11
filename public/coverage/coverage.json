@@ -2,10 +2,10 @@
   "name": "US timber price coverage record",
   "description": "Who publishes US timber prices, state by state, how current each report is and whose data it is — joined against the price series actually present in the stumpage.us dataset. Includes states searched with no source found, recorded as a positive finding.",
   "format_version": 1,
-  "version": "2026-08-30+data.2026-09-28",
+  "version": "2026-08-30+data.2026-10-11",
   "directory_as_of": "2026-08-30",
   "directory_floor_verified": "2026-06-25",
-  "prices_built_at": "2026-09-28T13:26:52+00:00",
+  "prices_built_at": "2026-10-11T16:51:37+00:00",
   "license": "CC-BY-4.0",
   "license_url": "https://creativecommons.org/licenses/by/4.0/",
   "cite_as": "Mihiar, C. US public timber stumpage & delivered price data (stumpage.us). CC BY 4.0. See CITATION.cff in mihiarc/stumpage-us.",
@@ -64,8 +64,8 @@
       "tax": 4,
       "derived": 0
     },
-    "price_series": 4776,
-    "price_observations": 56764,
+    "price_series": 4781,
+    "price_observations": 57843,
     "price_sources": 8
   },
   "national_and_international": [
@@ -204,9 +204,9 @@
         "series": 69,
         "series_direct": 46,
         "series_regional": 23,
-        "observations": 990,
+        "observations": 1024,
         "year_min": 1960,
-        "year_max": 2025,
+        "year_max": 2026,
         "sources": [
           "pnw",
           "usfs_cutsold"
@@ -268,9 +268,9 @@
         "series": 43,
         "series_direct": 9,
         "series_regional": 34,
-        "observations": 805,
+        "observations": 845,
         "year_min": 1977,
-        "year_max": 2025,
+        "year_max": 2026,
         "sources": [
           "usfs_cutsold"
         ],
@@ -331,9 +331,9 @@
         "series": 55,
         "series_direct": 21,
         "series_regional": 34,
-        "observations": 1014,
+        "observations": 1059,
         "year_min": 1977,
-        "year_max": 2025,
+        "year_max": 2026,
         "sources": [
           "usfs_cutsold"
         ],
@@ -384,9 +384,9 @@
         "series": 59,
         "series_direct": 47,
         "series_regional": 12,
-        "observations": 900,
+        "observations": 923,
         "year_min": 1977,
-        "year_max": 2025,
+        "year_max": 2026,
         "sources": [
           "usfs_cutsold"
         ],
@@ -444,12 +444,12 @@
       },
       "prices": {
         "evidence": "state-series",
-        "series": 308,
-        "series_direct": 274,
+        "series": 310,
+        "series_direct": 276,
         "series_regional": 34,
-        "observations": 4535,
+        "observations": 4663,
         "year_min": 1961,
-        "year_max": 2025,
+        "year_max": 2026,
         "sources": [
           "pnw",
           "usfs_cutsold"
@@ -499,12 +499,12 @@
       },
       "prices": {
         "evidence": "state-series",
-        "series": 159,
-        "series_direct": 137,
+        "series": 161,
+        "series_direct": 139,
         "series_regional": 22,
-        "observations": 1946,
+        "observations": 2038,
         "year_min": 1977,
-        "year_max": 2025,
+        "year_max": 2026,
         "sources": [
           "usfs_cutsold"
         ],
@@ -565,9 +565,9 @@
         "series": 43,
         "series_direct": 0,
         "series_regional": 43,
-        "observations": 1249,
+        "observations": 1349,
         "year_min": 1977,
-        "year_max": 2025,
+        "year_max": 2026,
         "sources": [
           "usfs_cutsold"
         ],
@@ -628,9 +628,9 @@
         "series": 43,
         "series_direct": 0,
         "series_regional": 43,
-        "observations": 1249,
+        "observations": 1349,
         "year_min": 1977,
-        "year_max": 2025,
+        "year_max": 2026,
         "sources": [
           "usfs_cutsold"
         ],
@@ -691,9 +691,9 @@
         "series": 41,
         "series_direct": 7,
         "series_regional": 34,
-        "observations": 758,
+        "observations": 796,
         "year_min": 1977,
-        "year_max": 2025,
+        "year_max": 2026,
         "sources": [
           "usfs_cutsold"
         ],
@@ -754,7 +754,7 @@
         "series": 1498,
         "series_direct": 1464,
         "series_regional": 34,
-        "observations": 9646,
+        "observations": 9688,
         "year_min": 1977,
         "year_max": 2026,
         "sources": [
@@ -861,9 +861,9 @@
         "series": 43,
         "series_direct": 0,
         "series_regional": 43,
-        "observations": 1249,
+        "observations": 1349,
         "year_min": 1977,
-        "year_max": 2025,
+        "year_max": 2026,
         "sources": [
           "usfs_cutsold"
         ],
@@ -924,9 +924,9 @@
         "series": 198,
         "series_direct": 125,
         "series_regional": 73,
-        "observations": 3635,
+        "observations": 3729,
         "year_min": 1967,
-        "year_max": 2025,
+        "year_max": 2026,
         "sources": [
           "mt_bber",
           "pnw",
@@ -987,12 +987,12 @@
       },
       "prices": {
         "evidence": "state-series",
-        "series": 64,
-        "series_direct": 21,
+        "series": 65,
+        "series_direct": 22,
         "series_regional": 43,
-        "observations": 1420,
+        "observations": 1537,
         "year_min": 1977,
-        "year_max": 2025,
+        "year_max": 2026,
         "sources": [
           "usfs_cutsold"
         ],
@@ -1066,9 +1066,9 @@
         "series": 83,
         "series_direct": 40,
         "series_regional": 43,
-        "observations": 1484,
+        "observations": 1595,
         "year_min": 1977,
-        "year_max": 2025,
+        "year_max": 2026,
         "sources": [
           "usfs_cutsold"
         ],
@@ -1119,9 +1119,9 @@
         "series": 22,
         "series_direct": 0,
         "series_regional": 22,
-        "observations": 419,
+        "observations": 452,
         "year_min": 1977,
-        "year_max": 2025,
+        "year_max": 2026,
         "sources": [
           "usfs_cutsold"
         ],
@@ -1182,9 +1182,9 @@
         "series": 59,
         "series_direct": 25,
         "series_regional": 34,
-        "observations": 1045,
+        "observations": 1092,
         "year_min": 1977,
-        "year_max": 2025,
+        "year_max": 2026,
         "sources": [
           "usfs_cutsold"
         ],
@@ -1258,9 +1258,9 @@
         "series": 41,
         "series_direct": 7,
         "series_regional": 34,
-        "observations": 795,
+        "observations": 836,
         "year_min": 1977,
-        "year_max": 2025,
+        "year_max": 2026,
         "sources": [
           "usfs_cutsold"
         ],
@@ -1321,9 +1321,9 @@
         "series": 43,
         "series_direct": 0,
         "series_regional": 43,
-        "observations": 1249,
+        "observations": 1349,
         "year_min": 1977,
-        "year_max": 2025,
+        "year_max": 2026,
         "sources": [
           "usfs_cutsold"
         ],
@@ -1384,9 +1384,9 @@
         "series": 43,
         "series_direct": 0,
         "series_regional": 43,
-        "observations": 1249,
+        "observations": 1349,
         "year_min": 1977,
-        "year_max": 2025,
+        "year_max": 2026,
         "sources": [
           "usfs_cutsold"
         ],
@@ -1447,9 +1447,9 @@
         "series": 58,
         "series_direct": 15,
         "series_regional": 43,
-        "observations": 1278,
+        "observations": 1378,
         "year_min": 1977,
-        "year_max": 2025,
+        "year_max": 2026,
         "sources": [
           "usfs_cutsold"
         ],
@@ -1523,7 +1523,7 @@
         "series": 925,
         "series_direct": 882,
         "series_regional": 43,
-        "observations": 12164,
+        "observations": 12319,
         "year_min": 1977,
         "year_max": 2026,
         "sources": [
@@ -1588,9 +1588,9 @@
         "series": 93,
         "series_direct": 50,
         "series_regional": 43,
-        "observations": 1906,
+        "observations": 2035,
         "year_min": 1977,
-        "year_max": 2025,
+        "year_max": 2026,
         "sources": [
           "usfs_cutsold"
         ],
@@ -1651,9 +1651,9 @@
         "series": 63,
         "series_direct": 20,
         "series_regional": 43,
-        "observations": 1492,
+        "observations": 1601,
         "year_min": 1977,
-        "year_max": 2025,
+        "year_max": 2026,
         "sources": [
           "usfs_cutsold"
         ],
@@ -1714,9 +1714,9 @@
         "series": 47,
         "series_direct": 13,
         "series_regional": 34,
-        "observations": 906,
+        "observations": 946,
         "year_min": 1977,
-        "year_max": 2025,
+        "year_max": 2026,
         "sources": [
           "usfs_cutsold"
         ],
@@ -1790,7 +1790,7 @@
         "series": 210,
         "series_direct": 166,
         "series_regional": 44,
-        "observations": 4984,
+        "observations": 5040,
         "year_min": 1967,
         "year_max": 2026,
         "sources": [
@@ -1858,9 +1858,9 @@
         "series": 64,
         "series_direct": 30,
         "series_regional": 34,
-        "observations": 1160,
+        "observations": 1206,
         "year_min": 1977,
-        "year_max": 2025,
+        "year_max": 2026,
         "sources": [
           "usfs_cutsold"
         ],
@@ -1911,9 +1911,9 @@
         "series": 32,
         "series_direct": 0,
         "series_regional": 32,
-        "observations": 1041,
+        "observations": 1068,
         "year_min": 1971,
-        "year_max": 2025,
+        "year_max": 2026,
         "sources": [
           "pnw",
           "usfs_cutsold"
@@ -1975,9 +1975,9 @@
         "series": 28,
         "series_direct": 0,
         "series_regional": 28,
-        "observations": 439,
+        "observations": 472,
         "year_min": 1977,
-        "year_max": 2025,
+        "year_max": 2026,
         "sources": [
           "mt_bber",
           "usfs_cutsold"
@@ -2040,9 +2040,9 @@
         "series": 43,
         "series_direct": 0,
         "series_regional": 43,
-        "observations": 1249,
+        "observations": 1349,
         "year_min": 1977,
-        "year_max": 2025,
+        "year_max": 2026,
         "sources": [
           "usfs_cutsold"
         ],
@@ -2093,9 +2093,9 @@
         "series": 43,
         "series_direct": 0,
         "series_regional": 43,
-        "observations": 1249,
+        "observations": 1349,
         "year_min": 1977,
-        "year_max": 2025,
+        "year_max": 2026,
         "sources": [
           "usfs_cutsold"
         ],
@@ -2145,9 +2145,9 @@
         "series": 46,
         "series_direct": 34,
         "series_regional": 12,
-        "observations": 870,
+        "observations": 893,
         "year_min": 1977,
-        "year_max": 2025,
+        "year_max": 2026,
         "sources": [
           "usfs_cutsold"
         ],
@@ -2198,9 +2198,9 @@
         "series": 35,
         "series_direct": 0,
         "series_regional": 35,
-        "observations": 625,
+        "observations": 659,
         "year_min": 1977,
-        "year_max": 2025,
+        "year_max": 2026,
         "sources": [
           "pnw",
           "usfs_cutsold"
@@ -2262,9 +2262,9 @@
         "series": 43,
         "series_direct": 0,
         "series_regional": 43,
-        "observations": 1249,
+        "observations": 1349,
         "year_min": 1977,
-        "year_max": 2025,
+        "year_max": 2026,
         "sources": [
           "usfs_cutsold"
         ],
@@ -2325,9 +2325,9 @@
         "series": 71,
         "series_direct": 28,
         "series_regional": 43,
-        "observations": 1542,
+        "observations": 1648,
         "year_min": 1977,
-        "year_max": 2025,
+        "year_max": 2026,
         "sources": [
           "usfs_cutsold"
         ],
@@ -2388,9 +2388,9 @@
         "series": 34,
         "series_direct": 0,
         "series_regional": 34,
-        "observations": 700,
+        "observations": 736,
         "year_min": 1977,
-        "year_max": 2025,
+        "year_max": 2026,
         "sources": [
           "usfs_cutsold"
         ],
@@ -2464,7 +2464,7 @@
         "series": 295,
         "series_direct": 250,
         "series_regional": 45,
-        "observations": 4794,
+        "observations": 4876,
         "year_min": 1959,
         "year_max": 2026,
         "sources": [
@@ -2529,9 +2529,9 @@
         "series": 73,
         "series_direct": 30,
         "series_regional": 43,
-        "observations": 1915,
+        "observations": 2040,
         "year_min": 1977,
-        "year_max": 2025,
+        "year_max": 2026,
         "sources": [
           "usfs_cutsold"
         ],
@@ -2592,9 +2592,9 @@
         "series": 43,
         "series_direct": 0,
         "series_regional": 43,
-        "observations": 1249,
+        "observations": 1349,
         "year_min": 1977,
-        "year_max": 2025,
+        "year_max": 2026,
         "sources": [
           "usfs_cutsold"
         ],
@@ -2655,9 +2655,9 @@
         "series": 47,
         "series_direct": 13,
         "series_regional": 34,
-        "observations": 847,
+        "observations": 891,
         "year_min": 1977,
-        "year_max": 2025,
+        "year_max": 2026,
         "sources": [
           "usfs_cutsold"
         ],
@@ -2708,9 +2708,9 @@
         "series": 60,
         "series_direct": 0,
         "series_regional": 60,
-        "observations": 1480,
+        "observations": 1540,
         "year_min": 1971,
-        "year_max": 2025,
+        "year_max": 2026,
         "sources": [
           "mt_bber",
           "pnw",
@@ -2774,9 +2774,9 @@
         "series": 59,
         "series_direct": 25,
         "series_regional": 34,
-        "observations": 1117,
+        "observations": 1166,
         "year_min": 1977,
-        "year_max": 2025,
+        "year_max": 2026,
         "sources": [
           "usfs_cutsold"
         ],
@@ -2837,9 +2837,9 @@
         "series": 55,
         "series_direct": 21,
         "series_regional": 34,
-        "observations": 1104,
+        "observations": 1144,
         "year_min": 1977,
-        "year_max": 2025,
+        "year_max": 2026,
         "sources": [
           "tx_tfs",
           "usfs_cutsold"
@@ -2894,9 +2894,9 @@
         "series": 124,
         "series_direct": 83,
         "series_regional": 41,
-        "observations": 1628,
+        "observations": 1688,
         "year_min": 1977,
-        "year_max": 2025,
+        "year_max": 2026,
         "sources": [
           "mt_bber",
           "pnw",
@@ -2960,9 +2960,9 @@
         "series": 59,
         "series_direct": 25,
         "series_regional": 34,
-        "observations": 941,
+        "observations": 977,
         "year_min": 1977,
-        "year_max": 2025,
+        "year_max": 2026,
         "sources": [
           "usfs_cutsold"
         ],
@@ -3023,9 +3023,9 @@
         "series": 75,
         "series_direct": 32,
         "series_regional": 43,
-        "observations": 1753,
+        "observations": 1875,
         "year_min": 1977,
-        "year_max": 2025,
+        "year_max": 2026,
         "sources": [
           "usfs_cutsold"
         ],
@@ -3099,9 +3099,9 @@
         "series": 169,
         "series_direct": 124,
         "series_regional": 45,
-        "observations": 3502,
+        "observations": 3569,
         "year_min": 1959,
-        "year_max": 2025,
+        "year_max": 2026,
         "sources": [
           "pnw",
           "usfs_cutsold"
@@ -3163,9 +3163,9 @@
         "series": 126,
         "series_direct": 83,
         "series_regional": 43,
-        "observations": 1996,
+        "observations": 2111,
         "year_min": 1977,
-        "year_max": 2025,
+        "year_max": 2026,
         "sources": [
           "usfs_cutsold"
         ],
@@ -3226,9 +3226,9 @@
         "series": 76,
         "series_direct": 33,
         "series_regional": 43,
-        "observations": 1898,
+        "observations": 2018,
         "year_min": 1977,
-        "year_max": 2025,
+        "year_max": 2026,
         "sources": [
           "usfs_cutsold"
         ],
@@ -3279,9 +3279,9 @@
         "series": 108,
         "series_direct": 39,
         "series_regional": 69,
-        "observations": 1642,
+        "observations": 1723,
         "year_min": 1977,
-        "year_max": 2025,
+        "year_max": 2026,
         "sources": [
           "mt_bber",
           "pnw",

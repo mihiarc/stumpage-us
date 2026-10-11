@@ -26,6 +26,16 @@ timber-prices dbt-duckdb project.
 | `source_code/_name/source_type` | Publishing dataset; `source_type='public'` for every row in this export. |
 | `ownership_basis` | Whose timber / how the price formed: `public_federal_sale`, `public_state_sale`, `public_tribal_sale`, `private_survey`. Public-land sale prices differ systematically from private-market prices (Munn & Rucker 1995, Forest Science 41(4)) — combine deliberately. |
 
+## Comparable stumpage and candor blocks
+
+`public_stumpage_comparable.parquet` is built from `v_public_prices` for cross-source
+comparison: stumpage only, one region grain per source, `price_per_ton` only (no
+`original_price`/`original_unit`), GA DOR at the DOR's own `price_zone` grain. It adds `weighting`
+and the boolean flags `is_lower_bound` (usfs_cutsold R1/R6 from FY2019 Q3),
+`is_unstable_snapshot` (usfs_cutsold R10 single-quarter rows) and `no_volume_weights` (the row carries no volumes, so an aggregate that includes it cannot be volume-weighted).
+`candor.json` is a candor-blocks 0.1 document (CANDID core field names); each limitation
+names its enforcement (`applied`, `flagged` or `advisory`).
+
 ## Caveats worth repeating
 
 - **Not volume-weighted everywhere:** OR ODF and MT BBER publish no per-species
